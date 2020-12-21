@@ -67,7 +67,7 @@ public class VooraadServiceImpl implements VoorraadService {
 
         // https://stackoverflow.com/questions/47052421/resttemplate-connectexception-unreachable
         try {
-            koelcellen = rest.getForObject("http://" + koelcellenAPIuri + "/" + "koelcellen", KoelcelRestModel[].class);
+            koelcellen = rest.getForObject("http://" + koelcellenAPIuri + "/api/" + "koelcellen", KoelcelRestModel[].class);
         } catch (ResourceAccessException e) {
             antwoordList.add(new Antwoord(Status.NIET_GELUKT, e.getMessage()));
         }

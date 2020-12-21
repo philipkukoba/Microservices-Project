@@ -69,7 +69,7 @@ const cellen = [
     { 'id': 4, 'doel': 12.5 } // 10 15
 ];
 
-app.get('/koelcellen', function (req, res) {
+app.get('api/koelcellen', function (req, res) {
 
     const responsedata = cellen.map(cel => {
         return { 'id': cel.id, 'min': (cel.doel - 2.5), 'max': (cel.doel + 2.5) }
