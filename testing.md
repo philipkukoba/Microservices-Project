@@ -40,7 +40,7 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
 			--> bestelling db aanpepast: **GELUKT** <br>
 			--> verzendingsdienst krijgt 1/2 events: **GELUKT** <br>
 				-->  verzendings dienst db bevat gelabeld pakket: **GELUKT** <br>
-	--> maak facuur
+	--> maak facuur (moet gebeuren op maak_factuur kanaal)
 		--> klant krijgt email: **MISLUKT** <br>
 
 ## verzenden
