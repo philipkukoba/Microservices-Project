@@ -22,13 +22,14 @@ Uitvoren al ticketdienstmedewerker: **Testing**
 <br>
 1. Klant
 (note: betaling lukt vaak niet)
+<br>
+--Geval wanneer betaling mislukt: **GELUKT**
+<br>
+Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
+<br>
+--Geval wanneer er niet genoeg voorraad is: Testing
   <br>
-  --Geval wanneer betaling mislukt: **GELUKT**
-  <br>
-    Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
-  <br>
-  --Geval wanneer er niet genoeg voorraad is: Testing
-  --Gavel wanneer alles zou moeten lukken: Testing
+  --Geval wanneer alles zou moeten lukken: Testing
   <br>
 	direct in bestellingen_db geplaatst 
 	--> command naar medicijnen 
