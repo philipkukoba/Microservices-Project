@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 
 @Transactional
 @Service
-public class AfvalServiceImpl implements AfvalService{
+public class AfvalServiceImpl implements AfvalService {
 
     @Autowired
     AfvalcontainerRepository afvalrepo;
@@ -33,18 +33,24 @@ public class AfvalServiceImpl implements AfvalService{
 
     @Override
     public Response plaatsBijAfval(Integer catalogusId, int aantal) {
+
         try {
             Thread.sleep(magazijnrepo.geefRekMedicijn(catalogusId));
-            Afvalcontainer a = afvalrepo.gooiMedicijnenWeg(aantal);
-            if( a.isVol()){
-                commandDispatcher.stuurHaalAfvalOpCommand(new HaalAfvalOpCommand(true));
+        } catch (MedicijnNietInMagazijn | InterruptedException e) {
+
+        } finally {
+            try {
+                Afvalcontainer a = afvalrepo.gooiMedicijnenWeg(aantal);
+
+                if (a.isVol()) {
+                    commandDispatcher.stuurHaalAfvalOpCommand(new HaalAfvalOpCommand(true));
+                }
+                return new Response("Er werden " + aantal + " medicijnen met catalogusId " + catalogusId + " weggegooid.", ResponseStatus.GELUKT);
+            } catch (GeenAfvalcontainerBeschikbaar geenAfvalcontainerBeschikbaar) {
+                return new Response(geenAfvalcontainerBeschikbaar.getMessage(), ResponseStatus.NIET_GELUKT);
+
             }
-        } catch (GeenAfvalcontainerBeschikbaar geenAfvalcontainerBeschikbaar ) {
-            return new Response(geenAfvalcontainerBeschikbaar.getMessage(), ResponseStatus.NIET_GELUKT);
-        } catch (MedicijnNietInMagazijn | InterruptedException e){
-            return new Response("Het medicijn wordt niet weggegooid want het is niet aanwezig in het magazijn.", ResponseStatus.GELUKT);
         }
-        return new Response("Er werden " + aantal + " medicijnen met catalogusId " + catalogusId + " weggegooid.", ResponseStatus.GELUKT);
     }
 
     @Override

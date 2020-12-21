@@ -4,7 +4,7 @@
 -- Afval ophalen via put op /api/order/afval/haalAfvalOp: **GELUKT** <br>
 --> zijn volle containers leeg & andere niet leeg: **GELUKT** <br>
 -- weggooien van medicijn dat overtijd is: **GELUKT** <br>
--- weggooien als reactie op ticketdienst: **MISLUKT** <br>
+-- weggooien als reactie op ticketdienst: **GELUKT** <br>
 
 ## Bestelling plaatsen
 
@@ -72,23 +72,22 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
 -- /api/ticket: **GELUKT** <br>
 
 --ticket aanmaken <br>: **GELUKT** <br>
---> staat nu bij get? <br>
+--> staat nu bij get? <br>: **GELUKT** <br>
 -- behandel: **GELUKT** <br>
 --> kleine kans retour bij afval: **GELUKT** <br>
---> check afval containers?? <br>: **MISLUKT** <br>
--- sluiten <br>
+--> check afval containers?? <br>: **GELUKT** <br>
+-- sluiten <br>: **GELUKT** <br>
 
 ## annuleren
 
 -- annuleren van een bestelling
-	kan gedaan worden door klant en tcketdienstmedewerker
-	-- komt binnen bij bestelilingen
-		status = nog niet op verzonden
-			nog in magazijn
-			nog bij verzending
+-- kan gedaan worden door klant en tcketdienstmedewerker: **GELUKT** <br>
+-- komt binnen bij bestelilingen
+	status = nog niet op verzonden
+		nog in magazijn
+		nog bij verzending: **GELUKT** <br>
 				medicijnen_db checken (terug open gezet)
 				boekhoud zal loggen 
-
-			toch al verzonden
+		toch al verzonden
 		status == verzonden
 			geeft direct antw dit het niet gaat 
