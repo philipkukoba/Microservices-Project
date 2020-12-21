@@ -1,10 +1,10 @@
 # sysdes6
 
-## Afval
--- Afval ophalen via put op /api/order/afval/haalAfvalOp 
---> zijn volle containers leeg & andere niet leeg
-<br>
--- weggooien van medicijn dat overtijd is: **GELUKT**
+## Afval (poort 8082)
+-- Afval ophalen via put op /api/order/afval/haalAfvalOp: **GELUKT** <br>
+--> zijn volle containers leeg & andere niet leeg: **GELUKT** <br>
+-- weggooien van medicijn dat overtijd is: **GELUKT** <br>
+-- weggooien als reactie op ticketdienst: **MISLUKT** <br>
 
 ## Bestelling plaatsen
 
@@ -43,19 +43,40 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
 	--> maak facuur (moet gebeuren op maak_factuur kanaal)
 		--> klant krijgt email: **MISLUKT** <br>
 
+2. TicketDienst
+--bestellen: **GELUKT** <br>
+
+
 ## verzenden
 
 --rolcontainer is opgehaald (via kafka command): **GELUKT** <br>
-	-- verzending stuurt orderverzonden uit: **MISLUKT** <br>
-	-- bestellings db aangepast
+	-- verzending stuurt orderverzonden uit: **GELUKT** <br>
+	-- bestellings db aangepast: **GELUKT** <br>
 	-- mail vertuurd: **MISLUKT** <br>
+	
+## statistieken
+
+-- gelukt: **GELUKT** <br>
+
+## gebruikers
+-- account aanmaken op /api/maakAccount: **GELUKT** <br>
+
+
+## medicijnen
+
+-- voeg medicijnen toe: **GELUKT** <br>
+--verwerk lading: **GELUKT** <br>
+--geef oevrzicht: **GELUKT** <br>
 
 ## tickets
+-- /api/ticket: **GELUKT** <br>
 
---ticket aanmaken <br>
-	--> staat nu bij get? <br>
-	-- behandel --> kleine kans retour bij afval --> check afval containers?? <br>
-	-- sluiten <br>
+--ticket aanmaken <br>: **GELUKT** <br>
+--> staat nu bij get? <br>
+-- behandel: **GELUKT** <br>
+--> kleine kans retour bij afval: **GELUKT** <br>
+--> check afval containers?? <br>: **MISLUKT** <br>
+-- sluiten <br>
 
 ## annuleren
 
