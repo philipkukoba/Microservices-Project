@@ -59,6 +59,7 @@ const data_push = function () {
     producer.send(data, function (error, data) {
 
     });
+    
 };
 
 const cellen = [
@@ -69,16 +70,6 @@ const cellen = [
     { 'id': 4, 'doel': 12.5 } // 10 15
 ];
 
-app.get('api/koelcellen', function (req, res) {
-
-    const responsedata = cellen.map(cel => {
-        return { 'id': cel.id, 'min': (cel.doel - 2.5), 'max': (cel.doel + 2.5) }
-    });
-
-    // https://stackoverflow.com/questions/51661744/how-to-set-content-type-when-doing-res-send/51661772
-    res.setHeader('content-type', 'application/json');
-    res.end(JSON.stringify(responsedata));
-});
 
 app.listen(port, function () {
 
@@ -88,6 +79,19 @@ let pushInterval;
 
 producer.on('ready', function () {
     console.log('Kafka bus is ready')
+});
+
+
+
+app.get('/api/koelcellen', function (req, res) {
+
+    const responsedata = cellen.map(cel => {
+        return { 'id': cel.id, 'min': (cel.doel - 2.5), 'max': (cel.doel + 2.5) }
+    });
+
+    // https://stackoverflow.com/questions/51661744/how-to-set-content-type-when-doing-res-send/51661772
+    res.setHeader('content-type', 'application/json');
+    res.end(JSON.stringify(responsedata));
 });
 
 app.get('/start', function (req, res) {

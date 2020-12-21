@@ -24,6 +24,8 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=admin
       - MONGO_INITDB_DATABASE=bestellingen
     restart: on-failure
+    ports:
+      - 27017:27017 # sluiten
   voorraad_db:
     image: postgres:13.1
     container_name: voorraad_db
@@ -34,6 +36,8 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
     restart: on-failure
+    ports:
+      - 5432:5432 # sluiten
   magazijn_db:
     image: mysql:5.7
     command: --default-authentication-plugin=mysql_native_password
@@ -42,6 +46,8 @@ services:
       - MYSQL_USER=root
       - MYSQL_DATABASE=Order
     restart: on-failure
+    ports:
+      - 3306:3306 # sluiten
   order_db:
     image: 'mongo:4.4'
     container_name: 'orderdb'
@@ -50,6 +56,8 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin
     restart: on-failure
+    ports:
+      - 27018:27017 # sluiten
   gebruikers_db:
     image: 'mongo:4.4'
     container_name: gebruikers_db
@@ -58,6 +66,8 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=admin
       - MONGO_INITDB_DATABASE=gebuikers
     restart: on-failure
+    ports:
+      - 27019:27017 # sluiten
   verzending_db:
     image: mysql:5.7
     command: --default-authentication-plugin=mysql_native_password
@@ -66,6 +76,8 @@ services:
       - MYSQL_USER=root
       - MYSQL_DATABASE=pakketten
     restart: on-failure
+    ports:
+      - 3307:3306 # sluiten
   # ----------------------------- SERVICES -----------------------------
   bestellingen:
     build: ./bestellingen

@@ -23,7 +23,8 @@ public class ReserveerBestellingAntwoord extends Antwoord {
         this.medicijnen = medicijnen.entrySet().stream().map(catalogusItemIntegerEntry -> {
             CatalogusItem item = catalogusItemIntegerEntry.getKey();
             return CatalogusItemAntwoordModel.builder().aantal(catalogusItemIntegerEntry.getValue()).naam(item.getNaam()).
-                    prijs(item.getPrijs()).voorschrift(item.isVoorschriftNoodzakelijk()).build();
+                    prijs(item.getPrijs()).voorschrift(item.isVoorschriftNoodzakelijk()).
+                    id(catalogusItemIntegerEntry.getKey().getId()).build();
         }).collect(Collectors.toList());
 
         this.id = id;
