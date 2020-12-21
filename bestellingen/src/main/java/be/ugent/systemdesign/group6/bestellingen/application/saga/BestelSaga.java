@@ -45,7 +45,7 @@ public class BestelSaga {
             //indien status 'BESTELD_DOOR_TICKET' is, wordt de bestelling geplaatst zonder betaling
             if(bestelling.getStatus() == Status.BESTELD_DOOR_KLANT){
                 log.info("$SAGA - betaling wordt gesimuleerd voor bestelling " + bestelling.getId());
-                betalingGelukt = (r.nextInt(100) < 30);
+                betalingGelukt = (r.nextInt(100) > 30);
             }
             if(betalingGelukt){
                 log.info("$SAGA - betaling gelukt voor bestelling " + bestelling.getId());

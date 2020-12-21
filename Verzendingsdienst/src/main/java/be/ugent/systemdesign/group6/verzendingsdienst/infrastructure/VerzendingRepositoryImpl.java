@@ -29,14 +29,14 @@ public class VerzendingRepositoryImpl implements VerzendingRepository {
         return mapNaarPakket(pakketDataModel);
     }
 
-    /*
+
     @Override
     public List<Pakket> geefAlleNietVerzondenPakketten() {
-        return pakketDMRepo.findByAlVerstuurdFalse()
+        return pakketDMRepo.findAllByStatus(PakketStatus.KLAAR_VOOR_VERZENDING.name())
                 .stream()
                 .map(elt -> mapNaarPakket(elt))
                 .collect(Collectors.toList());
-    } */
+    }
 
 
     @Override

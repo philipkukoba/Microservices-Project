@@ -32,7 +32,7 @@ const Gebruiker = mongoose.model('Gebruiker', GebruikerSchema);
 // om JSON van POST body te verwerken
 app.use(express.json());
 
-app.post('api/maakaccount', function (req, res) {
+app.post('/api/maakaccount', function (req, res) {
     const body = req.body;
 /*
     mongoose.connect(args['db'], {
@@ -54,7 +54,7 @@ app.post('api/maakaccount', function (req, res) {
     });
 });
 
-app.get('api/gebruikers/:id', function (req, res) {
+app.get('/api/gebruikers/:id', function (req, res) {
     const id = req.params.id;
 /*
     mongoose.connect(args['db'], {
@@ -66,7 +66,7 @@ app.get('api/gebruikers/:id', function (req, res) {
 */
     Gebruiker.findById(id)
         .then(g => {
-            res.send({'mail': g.email});
+            res.send({'mail': g.email, 'naam':g.naam});
         }).catch(e => {
             res.status(404);
             res.end();
@@ -92,7 +92,7 @@ const mail = nodemailer.createTransport(
 );
 
 
-app.post('api/nieuwsbrief', function (req, res) {
+app.post('/api/nieuwsbrief', function (req, res) {
     const body = req.body;
 /*
     mongoose.connect(args['db'], {

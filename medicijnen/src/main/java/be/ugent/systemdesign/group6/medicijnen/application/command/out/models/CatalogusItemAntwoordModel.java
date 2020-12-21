@@ -14,4 +14,5 @@ public class CatalogusItemAntwoordModel {
     private String naam;
     private boolean voorschrift;
     private double prijs;
+    private int id;
 }

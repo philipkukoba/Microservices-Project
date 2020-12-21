@@ -23,11 +23,8 @@ public class CommandHandler {
     }
 
     public void haalRolcontainerOpCommand(){
-
-        //testing
-        Rolcontainer rolcontainer = new Rolcontainer();
-
-        rolcontainerOnderhoud.haalRolcontainerOp(rolcontainer);
+        
+        rolcontainerOnderhoud.haalRolcontainerOp();
     }
 
 }

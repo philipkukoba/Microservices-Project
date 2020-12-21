@@ -25,6 +25,8 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-gateway</artifactId>
+<<<<<<< HEAD
+=======
 		</dependency>
 
 		<dependency>
@@ -37,8 +39,8 @@
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
+>>>>>>> 0cc76be3e745b87738ff122031092a27fd9c800f
 		</dependency>
-
 	</dependencies>
 
 	<dependencyManagement>
