@@ -37,28 +37,32 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
 	--> maak order op maak_order channel
 		--> order_db aangepast: **GELUKT** <br>
 		--> order compleet sturen: **GELUKT** <br>
-			--> bestelling db aanpepast
-			--> verzendingsdienst krijgt 1/2 events 
-				-->  verzendings dienst db bevat gelabeld pakket
-	--> maak facuur: **GELUKT** <br>
+			--> bestelling db aanpepast: **GELUKT** <br>
+			--> verzendingsdienst krijgt 1/2 events: **GELUKT** <br>
+				-->  verzendings dienst db bevat gelabeld pakket: **GELUKT** <br>
+	--> maak facuur
 		--> klant krijgt email
 
---rolcontainer is opgehaald (via kafka command)
-	-- verzending stuurt orderverzonden uit
+## verzenden
+
+--rolcontainer is opgehaald (via kafka command): **GELUKT** <br>
+	-- verzending stuurt orderverzonden uit: **MISLUKT** <br>
 	-- bestellings db aangepast
 	-- mail vertuurd 
+
+## tickets
 
 --ticket aanmaken
 	--> staat nu bij get?
 	-- behandel --> kleine kans retour bij afval --> check afval containers??
 	-- sluiten
 
-
+## annuleren
 
 -- annuleren van een bestelling
 	kan gedaan worden door klant en tcketdienstmedewerker
 	-- komt binnen bij bestelilingen
-		status == nog niet op verzonden
+		status = nog niet op verzonden
 			nog in magazijn
 			nog bij verzending
 				medicijnen_db checken (terug open gezet)
