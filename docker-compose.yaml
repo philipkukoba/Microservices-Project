@@ -4,6 +4,7 @@ services:
     image: confluentinc/cp-zookeeper
     environment:
       - ZOOKEEPER_CLIENT_PORT=2181
+    restart: always
   kafka:
     image: confluentinc/cp-kafka
     depends_on:
@@ -13,6 +14,7 @@ services:
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+    restart: always
   # ---------------------------- DATABANKEN ----------------------------
   bestellingen_db:
     image: mongo:4.4
@@ -21,8 +23,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin
       - MONGO_INITDB_DATABASE=bestellingen
-    ports:
-      - 27017:27017 # nog sluiten
+    restart: on-failure
   voorraad_db:
     image: postgres:13.1
     container_name: voorraad_db
@@ -32,8 +33,7 @@ services:
       - POSTGRES_DB=medicijnen
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
-    ports:
-      - 5432:5432 # nog sluiten
+    restart: on-failure
   magazijn_db:
     image: mysql:5.7
     command: --default-authentication-plugin=mysql_native_password
@@ -41,6 +41,7 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=root
       - MYSQL_DATABASE=Order
+    restart: on-failure
   order_db:
     image: 'mongo:4.4'
     container_name: 'orderdb'
@@ -48,6 +49,7 @@ services:
       - MONGO_INITDB_DATABASE=orders
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin
+    restart: on-failure
   gebruikers_db:
     image: 'mongo:4.4'
     container_name: gebruikers_db
@@ -55,6 +57,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin
       - MONGO_INITDB_DATABASE=gebuikers
+    restart: on-failure
   verzending_db:
     image: mysql:5.7
     command: --default-authentication-plugin=mysql_native_password
@@ -62,6 +65,7 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=root
       - MYSQL_DATABASE=pakketten
+    restart: on-failure
   # ----------------------------- SERVICES -----------------------------
   bestellingen:
     build: ./bestellingen
@@ -78,6 +82,7 @@ services:
       - SPRING_DATA_MONGODB_URI=mongodb://admin:admin@bestellingen_db/bestellingen?authSource=admin
     ports:
       - 8081:8080
+    restart: on-failure
   koelcelmonitor:
     build: ./koelcelMonitor # vervangen door images
     container_name: koelcelmonitor
@@ -86,6 +91,7 @@ services:
       - kafka
     ports:
       - 8000:8000
+    restart: on-failure
   medicijnen:
     build: ./medicijnen
     container_name: medicijnen
@@ -107,6 +113,7 @@ services:
       - EXTERNAL_API_KOELCEL_URI=koelcelmonitor:8000
     ports:
       - 8080:8080
+    restart: on-failure
   order:
     build: ./orderservice
     links:
@@ -125,6 +132,7 @@ services:
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     ports:
       - 8082:2222
+    restart: on-failure
   gebruikers:
     build: ./gebruikers
     command: --db mongodb://admin:admin@gebruikers_db:27017/gebruikers
@@ -134,6 +142,7 @@ services:
       - gebruikers_db
     ports:
       - 3000:3000
+    restart: on-failure
   boekhoudsdienst:
     build: ./boekhoudsdienst
     command: --broker kafka:9092 --gebruikersAPI gebruikers:3000/api/gebruikers
@@ -145,6 +154,7 @@ services:
       - kafka
     ports:
       - 3001:3000
+    restart: on-failure
   ticketdienst:
     build: ./ticketdienst
     command: --broker kafka:9092
@@ -154,6 +164,7 @@ services:
       - kafka
     ports:
       - 3002:3000
+    restart: on-failure
   verzendingsdienst:
     build: ./verzendingsdienst
     links:
@@ -167,3 +178,4 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://verzending_db:3306/pakketten
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
+    restart: on-failure
