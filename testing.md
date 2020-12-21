@@ -81,14 +81,13 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
 ## annuleren
 
 -- annuleren van een bestelling
-	kan gedaan worden door klant en tcketdienstmedewerker
-	-- komt binnen bij bestelilingen
-		status = nog niet op verzonden
-			nog in magazijn
-			nog bij verzending
+-- kan gedaan worden door klant en tcketdienstmedewerker: **GELUKT** <br>
+-- komt binnen bij bestelilingen
+	status = nog niet op verzonden
+		nog in magazijn
+		nog bij verzending: **GELUKT** <br>
 				medicijnen_db checken (terug open gezet)
 				boekhoud zal loggen 
-
-			toch al verzonden
+		toch al verzonden
 		status == verzonden
 			geeft direct antw dit het niet gaat 
