@@ -3,7 +3,6 @@
 ## Afval (poort 8082)
 -- Afval ophalen via put op /api/order/afval/haalAfvalOp: **GELUKT** <br>
 --> zijn volle containers leeg & andere niet leeg: **GELUKT** <br>
-<br>
 -- weggooien van medicijn dat overtijd is: **GELUKT**
 
 ## Bestelling plaatsen
@@ -54,18 +53,23 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
 
 -- gelukt: **GELUKT** <br>
 
+## gebruikers
+-- account aanmaken op /api/maakAccount: **GELUKT** <br>
+
 
 ## medicijnen
 
 -- voeg medicijnen toe: **GELUKT** <br>
 --verwerk lading: **GELUKT** <br>
+--geef oevrzicht: **GELUKT** <br>
 
 ## tickets
+-- /api/ticket: **GELUKT** <br>
 
 --ticket aanmaken <br>
-	--> staat nu bij get? <br>
-	-- behandel --> kleine kans retour bij afval --> check afval containers?? <br>
-	-- sluiten <br>
+--> staat nu bij get? <br>
+-- behandel --> kleine kans retour bij afval --> check afval containers?? <br>
+-- sluiten <br>
 
 ## annuleren
 
