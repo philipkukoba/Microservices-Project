@@ -1,8 +1,8 @@
 # sysdes6
 
-## Afval
--- Afval ophalen via put op /api/order/afval/haalAfvalOp 
---> zijn volle containers leeg & andere niet leeg
+## Afval (poort 8082)
+-- Afval ophalen via put op /api/order/afval/haalAfvalOp: **GELUKT** <br>
+--> zijn volle containers leeg & andere niet leeg: **GELUKT** <br>
 <br>
 -- weggooien van medicijn dat overtijd is: **GELUKT**
 
@@ -46,9 +46,19 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
 ## verzenden
 
 --rolcontainer is opgehaald (via kafka command): **GELUKT** <br>
-	-- verzending stuurt orderverzonden uit: **MISLUKT** <br>
+	-- verzending stuurt orderverzonden uit: **GELUKT** <br>
 	-- bestellings db aangepast
 	-- mail vertuurd: **MISLUKT** <br>
+	
+## statistieken
+
+-- gelukt: **GELUKT** <br>
+
+
+## medicijnen
+
+-- voeg medicijnen toe: **GELUKT** <br>
+--verwerk lading: **GELUKT** <br>
 
 ## tickets
 
