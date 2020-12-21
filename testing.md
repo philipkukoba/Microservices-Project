@@ -31,17 +31,17 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
   <br>
   --Geval wanneer alles zou moeten lukken: Testing
   <br>
-	direct in bestellingen_db geplaatst 
-	--> command naar medicijnen 
-	--> verandring in medicijnen_db, 'GERESERVEERD'
-	--> veranderingeng in bestellingendb
+	direct in bestellingen_db geplaatst: **GELUKT** <br>
+	--> command naar medicijnen: **GELUKT** <br>
+	--> verandring in medicijnen_db, 'GERESERVEERD': **GELUKT** <br>
+	--> veranderingeng in bestellingendb: **GELUKT** <br>
 	--> maak order op maak_order channel
-		--> order_db aangepast 
-		--> order compleet sturen
+		--> order_db aangepast: **GELUKT** <br>
+		--> order compleet sturen: **GELUKT** <br>
 			--> bestelling db aanpepast
 			--> verzendingsdienst krijgt 1/2 events 
 				-->  verzendings dienst db bevat gelabeld pakket
-	--> maak facuur
+	--> maak facuur: **GELUKT** <br>
 		--> klant krijgt email
 
 --rolcontainer is opgehaald (via kafka command)
