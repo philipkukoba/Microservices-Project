@@ -76,7 +76,7 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
 -- behandel: **GELUKT** <br>
 --> kleine kans retour bij afval: **GELUKT** <br>
 --> check afval containers?? <br>: **GELUKT** <br>
--- sluiten <br>
+-- sluiten <br>: **GELUKT** <br>
 
 ## annuleren
 
