@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bestellingen-deployment
+  labels:
+    app: bestellingen
+spec:
+  replicas: 1 # aantal instanties van pod
+    matchLabels:
+      app: bestellingen
+    template:
+      metadata:
+        labels:
+          app: bestellingen
+        spec:
+          containers:
+            - name: bestellingen-container
+              image: bestellingen
+              env:
+                - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+                  value: "kafka:9092"
+                - name: SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE
+                  value: "admin"
+                - name: SPRING_DATA_MONGODB_URI
+                  value: "mongodb://admin:admin@bestellingen_db-service/bestellingen?authSource=admin"
+          ports: 
+            - containerPort: 8080

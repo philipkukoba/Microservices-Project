@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: bestellingen_db-service
+spec:
+  selector:
+    app: bestellingen_db-service
+  ports:
+    - port: 27017
+      targetPort: 27017

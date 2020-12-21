@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bestellingen_db-deployment
+  labels:
+    app: bestellingen_db
+spec:
+  replicas: 1 # aantal instanties van pod
+    matchLabels:
+      app: bestellingen_db
+    template:
+      metadata:
+        labels:
+          app: bestellingen_db
+        spec:
+          containers:
+            - name: bestellingen_db-container
+              image: mongo:4.4
+              env:
+                - name: MONGO_INITDB_ROOT_USERNAME
+                  value: "admin"
+                - name: MONGO_INITDB_ROOT_PASSWORD
+                  value: "admin"
+                - name: MONGO_INITDB_DATABASE
+                  value: "bestellingen"
+          ports:
+            - containerPort: 27017
