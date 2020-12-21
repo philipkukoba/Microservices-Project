@@ -42,7 +42,7 @@ public class Voorraad extends AggregateRoot {
 
     public boolean reserveer(String bestellingsId, int aantal) {
         // nagaan of er nog genoeg producten vrij zijn om te reserveren
-        int aantalVrijeProducten = (int) medicijnen.stream().
+        int aantalVrijeProducten = (int) getNietVerkochteMedicijnen().stream().
                 filter(productMedicijn -> productMedicijn.getBestellingsId() == null).count();
 
         if (aantalVrijeProducten < aantal) {
