@@ -94,12 +94,12 @@ app.get('/api/koelcellen', function (req, res) {
     res.end(JSON.stringify(responsedata));
 });
 
-app.get('/start', function (req, res) {
+app.get('/api/koelcellen/start', function (req, res) {
     pushInterval = setInterval(data_push, interval);
     res.end();
 });
 
-app.get('/stop', function (req, res) {
+app.get('/api/koelcellen/stop', function (req, res) {
     clearInterval(pushInterval);
     res.end();
 });
