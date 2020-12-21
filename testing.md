@@ -4,7 +4,7 @@
 -- Afval ophalen via put op /api/order/afval/haalAfvalOp 
 --> zijn volle containers leeg & andere niet leeg
 <br>
-weggooien van medicijn dat overtijd was: **GELUKT**
+-- weggooien van medicijn dat overtijd is: **GELUKT**
 
 ## Bestelling plaatsen
 
