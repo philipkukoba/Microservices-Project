@@ -26,7 +26,7 @@ public class Order extends AggregateRoot {
     public void orderCompleetEventAanmaken(){
         //Voor elk pakket in het order moet er een event uitgestuurd worden
         for(Pakket p:pakketten){
-            if(p != null){
+            if(p != null && p.getMedicijnen() != null && p.getMedicijnen().size() != 0){
                 addDomainEvent(new OrderCompleetEvent(id));
             }
         }
