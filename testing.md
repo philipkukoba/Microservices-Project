@@ -72,7 +72,7 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
 -- /api/ticket: **GELUKT** <br>
 
 --ticket aanmaken <br>: **GELUKT** <br>
---> staat nu bij get? <br>
+--> staat nu bij get? <br>: **GELUKT** <br>
 -- behandel: **GELUKT** <br>
 --> kleine kans retour bij afval: **GELUKT** <br>
 --> check afval containers?? <br>: **GELUKT** <br>
