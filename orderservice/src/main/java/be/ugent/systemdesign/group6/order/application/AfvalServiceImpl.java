@@ -37,7 +37,7 @@ public class AfvalServiceImpl implements AfvalService {
         try {
             Thread.sleep(magazijnrepo.geefRekMedicijn(catalogusId));
         } catch (MedicijnNietInMagazijn | InterruptedException e) {
-            
+
         } finally {
             try {
                 Afvalcontainer a = afvalrepo.gooiMedicijnenWeg(aantal);
@@ -45,12 +45,11 @@ public class AfvalServiceImpl implements AfvalService {
                 if (a.isVol()) {
                     commandDispatcher.stuurHaalAfvalOpCommand(new HaalAfvalOpCommand(true));
                 }
-                return new Response("Er werden " + aantal + " medicijnen met catalogusId " + catalogusId + " weggegooid.", ResponseStatus.SUCCESS);
+                return new Response("Er werden " + aantal + " medicijnen met catalogusId " + catalogusId + " weggegooid.", ResponseStatus.GELUKT);
             } catch (GeenAfvalcontainerBeschikbaar geenAfvalcontainerBeschikbaar) {
-                return new Response(geenAfvalcontainerBeschikbaar.getMessage(), ResponseStatus.FAIL);
+                return new Response(geenAfvalcontainerBeschikbaar.getMessage(), ResponseStatus.NIET_GELUKT);
 
             }
-            return new Response("Er werden " + aantal + " medicijnen met catalogusId " + catalogusId + " weggegooid.", ResponseStatus.GELUKT);
         }
     }
 
