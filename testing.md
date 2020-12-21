@@ -68,7 +68,9 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
 
 --ticket aanmaken <br>
 --> staat nu bij get? <br>
--- behandel --> kleine kans retour bij afval --> check afval containers?? <br>
+-- behandel 
+--> kleine kans retour bij afval 
+--> check afval containers?? <br>
 -- sluiten <br>
 
 ## annuleren
