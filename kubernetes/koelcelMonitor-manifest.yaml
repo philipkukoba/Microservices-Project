@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: koelcel_monitor-deployment
+  labels:
+    app: koelcel_monitor
+spec:
+  replicas: 1
+  matchLabels:
+    app: koelcel_monitor
+    template:
+      metadata:
+        labels:
+          app: koelcel_monitor
+      spec:
+        containers:
+	  - name: koelcel_monitor
+            image: koelcel_monitor
+            ports:
+              - containerPort: 8080
