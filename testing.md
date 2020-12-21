@@ -4,7 +4,7 @@
 -- Afval ophalen via put op /api/order/afval/haalAfvalOp: **GELUKT** <br>
 --> zijn volle containers leeg & andere niet leeg: **GELUKT** <br>
 -- weggooien van medicijn dat overtijd is: **GELUKT** <br>
--- weggooien als reactie op ticketdienst: **MISLUKT** <br>
+-- weggooien als reactie op ticketdienst: **GELUKT** <br>
 
 ## Bestelling plaatsen
 
@@ -75,7 +75,7 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
 --> staat nu bij get? <br>
 -- behandel: **GELUKT** <br>
 --> kleine kans retour bij afval: **GELUKT** <br>
---> check afval containers?? <br>: **MISLUKT** <br>
+--> check afval containers?? <br>: **GELUKT** <br>
 -- sluiten <br>
 
 ## annuleren
