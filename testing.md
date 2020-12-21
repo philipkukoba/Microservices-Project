@@ -18,7 +18,7 @@ Hiervoor eerst medicijnen aan catalogus toevoegen, lading verwerken en klant moe
 <br> 
 Uitvoeren als klant: **Testing**
 <br> 
-Uitvoren al ticketdienstmedewerker: **Testing**
+Uitvoeren al ticketdienstmedewerker: **Testing**
 <br>
 1. Klant
 <br>
@@ -26,7 +26,7 @@ Uitvoren al ticketdienstmedewerker: **Testing**
 <br>
 Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
 <br>
---Geval wanneer er niet genoeg voorraad is: Testing
+--Geval wanneer er niet genoeg voorraad is: **GELUKT**
   <br>
   --Geval wanneer alles zou moeten lukken: Testing
   <br>
