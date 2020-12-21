@@ -5,6 +5,8 @@ services:
     environment:
       - ZOOKEEPER_CLIENT_PORT=2181
     restart: always
+    logging:
+      driver: none 
   kafka:
     image: confluentinc/cp-kafka
     depends_on:
@@ -15,6 +17,8 @@ services:
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
     restart: always
+    logging:
+      driver: none 
   # ---------------------------- DATABANKEN ----------------------------
   bestellingen_db:
     image: mongo:4.4

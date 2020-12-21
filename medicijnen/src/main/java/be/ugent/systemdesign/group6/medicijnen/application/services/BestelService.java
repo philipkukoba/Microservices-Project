@@ -1,5 +1,6 @@
 package be.ugent.systemdesign.group6.medicijnen.application.services;
 
+import be.ugent.systemdesign.group6.medicijnen.application.Antwoord;
 import be.ugent.systemdesign.group6.medicijnen.application.command.out.ReserveerBestellingAntwoord;
 
 import java.util.HashMap;
@@ -7,9 +8,9 @@ import java.util.HashMap;
 public interface BestelService {
     ReserveerBestellingAntwoord reserveer(String bestellingsId, HashMap<Integer, Integer> medicijnenIds);
 
-    void geefVrij(String bestellingsId);
+    Antwoord geefVrij(String bestellingsId);
 
-    void bevestig(String bestellingsId);
+    Antwoord bevestig(String bestellingsId);
 
-    void annuleerBestelling(String bestellingsId);
+    Antwoord annuleerBestelling(String bestellingsId);
 }

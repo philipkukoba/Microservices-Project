@@ -6,7 +6,7 @@ public interface MonitorService {
     /* Deze methode wordt gebruikt bij de scheduled task om te controleren
     of er geen vervallen producten in de voorraad zitten
     */
-    void checkVervalData();
+    Antwoord checkVervalData();
 
     Antwoord verwijderTeHogeTemperatuur(int koelCelId, double temperatuur);
 }

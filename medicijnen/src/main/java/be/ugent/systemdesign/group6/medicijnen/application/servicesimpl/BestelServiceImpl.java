@@ -1,5 +1,6 @@
 package be.ugent.systemdesign.group6.medicijnen.application.servicesimpl;
 
+import be.ugent.systemdesign.group6.medicijnen.application.Antwoord;
 import be.ugent.systemdesign.group6.medicijnen.application.Status;
 import be.ugent.systemdesign.group6.medicijnen.application.command.out.CommandDispatcher;
 import be.ugent.systemdesign.group6.medicijnen.application.command.out.PlaatsBijAfvalCommand;
@@ -137,7 +138,7 @@ public class BestelServiceImpl implements BestelService {
     }
 
     @Override
-    public void geefVrij(String bestellingsId) {
+    public Antwoord geefVrij(String bestellingsId) {
         Optional<Bestelling> bestellingOptional = bestellingsRepo.geefBestelling(bestellingsId);
         if (bestellingOptional.isPresent()) {
             Bestelling bestelling = bestellingOptional.get();
@@ -148,24 +149,22 @@ public class BestelServiceImpl implements BestelService {
             bestellingsRepo.slaOp(bestelling);
 
             checkNaToevoegen(medicijnen);
+            return new Antwoord(Status.GELUKT, "Deze bestelling werd vrijgegeven");
         }
+        return new Antwoord(Status.NIET_GELUKT, "Deze bestelling bestaat niet");
     }
 
     @Override
-    public void bevestig(String bestellingsId) {
+    public Antwoord bevestig(String bestellingsId) {
         Optional<Bestelling> bestellingOptional = bestellingsRepo.geefBestelling(bestellingsId);
 
         if (bestellingOptional.isPresent()) {
             Bestelling bestelling = bestellingOptional.get();
             bestelling.bevestig();
             bestellingsRepo.slaOp(bestelling);
-        }
 
-        if (bestellingOptional.isPresent()) {
             // voorraad object per medicijn uit catalogus bijhouden
             HashMap<Integer, Voorraad> voorraadPerMedicijn = new HashMap<>();
-
-            Bestelling bestelling = bestellingOptional.get();
 
             List<Integer> catalogusItemIds = bestelling.getMedicijnen().stream().
                     map(MedicijnProduct::getCatalogusItemId).collect(Collectors.toList());
@@ -188,11 +187,13 @@ public class BestelServiceImpl implements BestelService {
                 voorraad.bevestig(bestellingsId);
                 voorraadRepo.slaOp(voorraad);
             });
+            return new Antwoord(Status.GELUKT, "Deze bestelling werd bevestigd");
         }
+        return new Antwoord(Status.NIET_GELUKT, "Deze bestelling bestaat niet");
     }
 
     @Override
-    public void annuleerBestelling(String bestellingsId) {
+    public Antwoord annuleerBestelling(String bestellingsId) {
         Optional<Bestelling> bestellingOptional = bestellingsRepo.geefBestelling(bestellingsId);
         if (bestellingOptional.isPresent()) {
             Bestelling bestelling = bestellingOptional.get();
@@ -201,6 +202,8 @@ public class BestelServiceImpl implements BestelService {
             bestellingsRepo.slaOp(bestelling);
 
             checkNaToevoegen(medicijnen);
+            return new Antwoord(Status.GELUKT, "Deze bestelling werd geannuleerd");
         }
+        return new Antwoord(Status.NIET_GELUKT, "Deze bestelling bestaat niet");
     }
 }
