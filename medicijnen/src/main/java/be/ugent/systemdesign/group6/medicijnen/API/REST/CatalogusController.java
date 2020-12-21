@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/api/catalogus")
+@CrossOrigin(origins="*")
 public class CatalogusController {
 
     @Autowired

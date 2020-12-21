@@ -18,7 +18,7 @@ services:
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
     restart: always
     logging:
-      driver: none 
+      driver: none
   # ---------------------------- DATABANKEN ----------------------------
   bestellingen_db:
     image: mongo:4.4
