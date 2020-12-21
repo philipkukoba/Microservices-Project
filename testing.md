@@ -30,7 +30,7 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
   <br>
   --Geval wanneer alles zou moeten lukken: Testing
   <br>
-	direct in bestellingen_db geplaatst: **GELUKT** <br>
+	--> direct in bestellingen_db geplaatst: **GELUKT** <br>
 	--> command naar medicijnen: **GELUKT** <br>
 	--> verandring in medicijnen_db, 'GERESERVEERD': **GELUKT** <br>
 	--> veranderingeng in bestellingendb: **GELUKT** <br>
