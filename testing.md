@@ -71,8 +71,8 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
 ## tickets
 -- /api/ticket: **GELUKT** <br>
 
---ticket aanmaken <br>: **GELUKT** <br>
---> staat nu bij get? <br>: **GELUKT** <br>
+--ticket aanmaken: **GELUKT** <br>
+--> staat nu bij get? : **GELUKT** <br>
 -- behandel: **GELUKT** <br>
 --> kleine kans retour bij afval: **GELUKT** <br>
 --> check afval containers?? <br>: **GELUKT** <br>
@@ -84,7 +84,7 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
 -- kan gedaan worden door klant en tcketdienstmedewerker: **GELUKT** <br>
 -- komt binnen bij bestelilingen
 	status = nog niet op verzonden
-		nog in magazijn
+		nog in magazijn: **GELUKT** <br>
 		nog bij verzending: **GELUKT** <br>
 				medicijnen_db checken (terug open gezet)
 				boekhoud zal loggen 
