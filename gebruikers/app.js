@@ -66,7 +66,7 @@ app.get('/api/gebruikers/:id', function (req, res) {
 */
     Gebruiker.findById(id)
         .then(g => {
-            res.send({'mail': g.email});
+            res.send({'mail': g.email, 'naam':g.naam});
         }).catch(e => {
             res.status(404);
             res.end();
