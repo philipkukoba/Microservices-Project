@@ -48,14 +48,14 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
 --rolcontainer is opgehaald (via kafka command): **GELUKT** <br>
 	-- verzending stuurt orderverzonden uit: **MISLUKT** <br>
 	-- bestellings db aangepast
-	-- mail vertuurd 
+	-- mail vertuurd: **MISLUKT** <br>
 
 ## tickets
 
---ticket aanmaken
-	--> staat nu bij get?
-	-- behandel --> kleine kans retour bij afval --> check afval containers??
-	-- sluiten
+--ticket aanmaken <br>
+	--> staat nu bij get? <br>
+	-- behandel --> kleine kans retour bij afval --> check afval containers?? <br>
+	-- sluiten <br>
 
 ## annuleren
 
