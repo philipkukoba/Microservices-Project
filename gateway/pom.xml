@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.3.4.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>be.ugent.sysdes6</groupId>
 	<artifactId>gateway</artifactId>
@@ -25,8 +25,6 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-gateway</artifactId>
-<<<<<<< HEAD
-=======
 		</dependency>
 
 		<dependency>
@@ -39,7 +37,6 @@
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
->>>>>>> 0cc76be3e745b87738ff122031092a27fd9c800f
 		</dependency>
 	</dependencies>
 

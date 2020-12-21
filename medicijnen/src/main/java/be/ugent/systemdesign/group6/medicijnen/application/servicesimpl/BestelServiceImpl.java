@@ -46,11 +46,12 @@ public class BestelServiceImpl implements BestelService {
 
         // Voorraad object van alle verschillende medicijnen ophalen
         // Vervolgens proberen te reserveren, indien dat niet lukt -> aangeven dat het fout liep
-        medicijnenIds.forEach((key, value) -> {
+        medicijnenIds.keySet().stream().distinct().forEach(key -> {
             int medicijnId = key;
-            int aantal = value;
+            int aantal = medicijnenIds.get(key);
 
             Optional<Voorraad> voorraadOptional = voorraadRepo.geef(medicijnId);
+
             voorraadOptional.ifPresentOrElse(voorraad -> {
                 boolean succes = voorraad.reserveer(bestellingsId, aantal);
                 if (!succes) {
@@ -75,7 +76,7 @@ public class BestelServiceImpl implements BestelService {
                     new HashMap<>(), "Voorraad is ontoereikend");
         }
         // Indien reservatie gelukt is, opslaan in de databank
-        voorraadList.forEach(voorraad -> voorraadRepo.slaOp(voorraad));
+        voorraadList.stream().distinct().forEach(voorraad -> voorraadRepo.slaOp(voorraad));
 
         return new ReserveerBestellingAntwoord(bestellingsId, Status.GELUKT, aantalPerMedicijn, "");
     }

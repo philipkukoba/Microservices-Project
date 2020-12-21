@@ -32,7 +32,7 @@ const Gebruiker = mongoose.model('Gebruiker', GebruikerSchema);
 // om JSON van POST body te verwerken
 app.use(express.json());
 
-app.post('/api/maakaccount', function (req, res) {
+app.post('/api/gebruikers/maakaccount', function (req, res) {
     const body = req.body;
 /*
     mongoose.connect(args['db'], {
@@ -92,7 +92,7 @@ const mail = nodemailer.createTransport(
 );
 
 
-app.post('/api/nieuwsbrief', function (req, res) {
+app.post('/api/gebruikers/nieuwsbrief', function (req, res) {
     const body = req.body;
 /*
     mongoose.connect(args['db'], {

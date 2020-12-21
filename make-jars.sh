@@ -12,4 +12,5 @@ make_jar bestellingen
 make_jar medicijnen
 make_jar orderservice
 make_jar Verzendingsdienst
+make_jar gateway
 

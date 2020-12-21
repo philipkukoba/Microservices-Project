@@ -18,7 +18,7 @@ services:
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
     restart: always
     logging:
-      driver: none 
+      driver: none
   # ---------------------------- DATABANKEN ----------------------------
   bestellingen_db:
     image: mongo:4.4
@@ -30,8 +30,6 @@ services:
     restart: on-failure
     logging:
       driver: none 
-    ports:
-      - 27017:27017 # sluiten
   voorraad_db:
     image: postgres:13.1
     container_name: voorraad_db
@@ -44,8 +42,6 @@ services:
     restart: on-failure
     logging:
       driver: none 
-    ports:
-      - 5432:5432 # sluiten
   magazijn_db:
     image: mysql:5.7
     command: --default-authentication-plugin=mysql_native_password
@@ -56,8 +52,6 @@ services:
     restart: on-failure
     logging:
       driver: none 
-    ports:
-      - 3306:3306 # sluiten
   order_db:
     image: 'mongo:4.4'
     container_name: 'orderdb'
@@ -68,8 +62,6 @@ services:
     restart: on-failure
     logging:
       driver: none 
-    ports:
-      - 27018:27017 # sluiten
   gebruikers_db:
     image: 'mongo:4.4'
     container_name: gebruikers_db
@@ -80,8 +72,6 @@ services:
     restart: on-failure
     logging:
       driver: none 
-    ports:
-      - 27019:27017 # sluiten
   verzending_db:
     image: mysql:5.7
     command: --default-authentication-plugin=mysql_native_password
@@ -92,8 +82,6 @@ services:
     restart: on-failure
     logging:
       driver: none 
-    ports:
-      - 3307:3306 # sluiten
   # ----------------------------- SERVICES -----------------------------
   bestellingen:
     build: ./bestellingen
@@ -108,8 +96,6 @@ services:
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE=admin
       - SPRING_DATA_MONGODB_URI=mongodb://admin:admin@bestellingen_db/bestellingen?authSource=admin
-    ports:
-      - 8081:8080
     restart: on-failure
   koelcelmonitor:
     build: ./koelcelMonitor # vervangen door images
@@ -117,8 +103,6 @@ services:
     command: --broker kafka:9092
     depends_on:
       - kafka
-    ports:
-      - 8000:8000
     restart: on-failure
   medicijnen:
     build: ./medicijnen
@@ -139,8 +123,6 @@ services:
       - SPRING_DATASOURCE_PASSWORD=admin
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - EXTERNAL_API_KOELCEL_URI=koelcelmonitor:8000
-    ports:
-      - 8080:8080
     restart: on-failure
   order:
     build: ./orderservice
@@ -158,8 +140,6 @@ services:
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_DATA_MONGODB_URI=mongodb://admin:admin@order_db/orders?authSource=admin
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
-    ports:
-      - 8082:2222
     restart: on-failure
   gebruikers:
     build: ./gebruikers
@@ -168,8 +148,6 @@ services:
       - gebruikers_db
     depends_on:
       - gebruikers_db
-    ports:
-      - 3000:3000
     restart: on-failure
   boekhoudsdienst:
     build: ./boekhoudsdienst
@@ -180,8 +158,6 @@ services:
     depends_on:
       - gebruikers
       - kafka
-    ports:
-      - 3001:3000
     restart: on-failure
   ticketdienst:
     build: ./ticketdienst
@@ -190,8 +166,6 @@ services:
       - kafka
     depends_on:
       - kafka
-    ports:
-      - 3002:3000
     restart: on-failure
   verzendingsdienst:
     build: ./verzendingsdienst
@@ -207,3 +181,23 @@ services:
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
     restart: on-failure
+  gateway:
+    build: ./gateway
+    links:
+      - bestellingen
+      - medicijnen
+      - order
+      - gebruikers
+      - koelcelmonitor
+      - ticketdienst
+      - boekhoudsdienst
+    depends_on:
+      - bestellingen
+      - medicijnen
+      - order
+      - gebruikers
+      - koelcelmonitor
+      - ticketdienst
+      - boekhoudsdienst
+    ports:
+      - 8089:8089

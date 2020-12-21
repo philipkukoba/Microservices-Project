@@ -35,7 +35,7 @@ public class MedicijnProduct {
     }
 
     public boolean isGereserveerd() {
-        return this.bestellingsId != null && !this.verkocht;
+        return this.bestellingsId != null;
     }
 
     public void bevestig() {

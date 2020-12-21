@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/voorraad")
+@CrossOrigin(origins="*")
 public class VoorraadController {
 
     @Autowired
