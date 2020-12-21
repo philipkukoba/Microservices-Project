@@ -30,7 +30,7 @@ public class MonitorServiceImpl implements MonitorService {
     // 60 * 60
     @Scheduled(fixedRate = 5 * 1000) // elk uur
     @Override
-    public void checkVervalData() {
+    public Antwoord checkVervalData() {
 
         List<Voorraad> voorraaden = voorraadRepo.geefAlles();
         voorraaden.forEach(voorraad -> {
@@ -53,6 +53,8 @@ public class MonitorServiceImpl implements MonitorService {
 
             voorraadRepo.slaOp(voorraad);
         });
+
+        return new Antwoord(Status.GELUKT, "De voorraad zijn vervaldata werden gecontroleerd");
     }
 
     @Override

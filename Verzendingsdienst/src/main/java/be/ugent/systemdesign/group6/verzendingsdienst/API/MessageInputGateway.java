@@ -39,7 +39,7 @@ public class MessageInputGateway {
     public void receiveAnnuleerBestellingCommand(AnnuleerBestellingCommand command) throws InterruptedException {
         logger.info("net voor commandHandler.handleAnnuleerBestelling");
         AnnuleerBestellingResponse r = commandHandler.handleAnnuleerBestelling(command);
-        if (r.status == ResponseStatus.SUCCESS){
+        if (r.status == ResponseStatus.GELUKT){
             channels.annuleerBestellingResponse().send(
                             MessageBuilder
                             .withPayload(r)

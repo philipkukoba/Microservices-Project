@@ -23,7 +23,7 @@ public class CommandHandler {
     }
 
     public void haalRolcontainerOpCommand(){
-        
+
         rolcontainerOnderhoud.haalRolcontainerOp();
     }
 

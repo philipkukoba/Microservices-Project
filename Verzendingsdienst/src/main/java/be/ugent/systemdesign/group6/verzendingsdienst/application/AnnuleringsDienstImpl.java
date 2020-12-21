@@ -43,11 +43,11 @@ public class AnnuleringsDienstImpl implements AnnuleringsDienst {
         }
         catch (Exception ex) {
             logger.info(ex.getMessage());
-            AnnuleerBestellingResponse r = new AnnuleerBestellingResponse("Fout bij het annuleren van de bestelling", ResponseStatus.FAIL, bestellingId);
+            AnnuleerBestellingResponse r = new AnnuleerBestellingResponse("Fout bij het annuleren van de bestelling", ResponseStatus.NIET_GELUKT, bestellingId);
             logger.info(r.message);
             return r;
         }
-        AnnuleerBestellingResponse r = new AnnuleerBestellingResponse("Bestelling werd succesvol geannuleerd.", ResponseStatus.SUCCESS,  bestellingId);
+        AnnuleerBestellingResponse r = new AnnuleerBestellingResponse("Bestelling werd succesvol geannuleerd.", ResponseStatus.GELUKT,  bestellingId);
         logger.info(r.message);
         return r;
     }
@@ -61,12 +61,12 @@ public class AnnuleringsDienstImpl implements AnnuleringsDienst {
             commandDispatcher.plaatsGeannuleerdeBestellingTerugCommand(command);
         }
         catch (Exception ex){
-            Response r = new Response("Error bij het uitsturen van de command plaatsGeannuleerdeBestellingTerug", ResponseStatus.FAIL);
+            Response r = new Response("Error bij het uitsturen van de command plaatsGeannuleerdeBestellingTerug", ResponseStatus.NIET_GELUKT);
             logger.info(r.message);
             return r;
         }
 
-        Response r = new Response("Succesvol command plaatsGeannuleerdeBestellingTerug uitgestuurd", ResponseStatus.SUCCESS);
+        Response r = new Response("Succesvol command plaatsGeannuleerdeBestellingTerug uitgestuurd", ResponseStatus.GELUKT);
         logger.info(r.message);
         return r;
     }
@@ -78,11 +78,11 @@ public class AnnuleringsDienstImpl implements AnnuleringsDienst {
             commandDispatcher.bestellingGeannuleerdCommand(command);
         }
         catch (Exception ex){
-            Response r = new Response("Error bij het uitsturen van de command plaatsGeannuleerdeBestellingTerug", ResponseStatus.FAIL);
+            Response r = new Response("Error bij het uitsturen van de command plaatsGeannuleerdeBestellingTerug", ResponseStatus.NIET_GELUKT);
             logger.info(r.message);
             return r;
         }
-        Response r = new Response("Succesvol command plaatsGeannuleerdeBestellingTerug uitgestuurd", ResponseStatus.SUCCESS);
+        Response r = new Response("Succesvol command plaatsGeannuleerdeBestellingTerug uitgestuurd", ResponseStatus.GELUKT);
         logger.info(r.message);
         return r;
     }

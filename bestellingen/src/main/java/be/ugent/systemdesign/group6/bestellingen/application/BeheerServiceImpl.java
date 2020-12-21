@@ -27,7 +27,7 @@ public class BeheerServiceImpl implements BeheerService {
         } catch(RuntimeException e){
             return new Response(ResponseStatus.NIET_GELUKT, "Fout opgetreden bij aanpassen status");
         }
-        return new Response(ResponseStatus.NIET_GELUKT, "Status van bestelling met id " + id + " geüpdatet naar " + status.name());
+        return new Response(ResponseStatus.GELUKT, "Status van bestelling met id " + id + " geüpdatet naar " + status.name());
     }
 
     @Override

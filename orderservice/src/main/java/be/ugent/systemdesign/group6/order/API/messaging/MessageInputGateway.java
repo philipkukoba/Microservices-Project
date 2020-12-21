@@ -45,7 +45,7 @@ public class MessageInputGateway {
     @StreamListener(Channels.ANNULEER_BESTELLING_REQUEST)
     public void annuleerBestellingCommand(AnnuleerBestellingCommand command){
         AnnuleerBestellingResponse r = commandhandler.annuleerBestelling(command);
-        if( r.status == ResponseStatus.SUCCESS){
+        if( r.status == ResponseStatus.GELUKT){
             channels.annuleerBestellingResponse().send(
                     MessageBuilder
                     .withPayload(r)

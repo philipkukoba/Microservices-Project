@@ -19,9 +19,9 @@ public class MagazijnServiceImpl implements MagazijnService {
     public Response geefRekVanMedicijn(Integer medicijnId) {
         try {
             int rek = magazijnRepo.geefRekMedicijn(medicijnId);
-            return new MagazijnRekResponse("medicijn gevonden in magazijn", ResponseStatus.SUCCESS, rek);
+            return new MagazijnRekResponse("medicijn gevonden in magazijn", ResponseStatus.GELUKT, rek);
         } catch (MedicijnNietInMagazijn medicijnNietInMagazijn) {
-            return new Response("medicijn niet in magazijn", ResponseStatus.FAIL);
+            return new Response("medicijn niet in magazijn", ResponseStatus.NIET_GELUKT);
         }
     }
 
@@ -29,9 +29,9 @@ public class MagazijnServiceImpl implements MagazijnService {
     public Response verwijderMedicijnUitMagazijn(Integer medicijnId) {
         try{
             int rek = magazijnRepo.geefRekVrij(medicijnId);
-            return new Response("Rek " + rek + " is vrijgemaakt.", ResponseStatus.SUCCESS);
+            return new Response("Rek " + rek + " is vrijgemaakt.", ResponseStatus.GELUKT);
         } catch (MedicijnNietInMagazijn medicijnNietInMagazijn) {
-            return new Response("Het medicijn met id " + medicijnId + " lag niet meer in het magazijn.", ResponseStatus.FAIL);
+            return new Response("Het medicijn met id " + medicijnId + " lag niet meer in het magazijn.", ResponseStatus.NIET_GELUKT);
         }
     }
 
@@ -39,9 +39,9 @@ public class MagazijnServiceImpl implements MagazijnService {
     public Response voegMedicijnToeAanMagazijn(Integer medicijnId)  {
         try{
             int rek = magazijnRepo.slaNieuwMedicijnOp(medicijnId);
-            return new Response("Nieuw medicijn zal gestockeerd worden in rek "+ rek, ResponseStatus.SUCCESS);
+            return new Response("Nieuw medicijn zal gestockeerd worden in rek "+ rek, ResponseStatus.GELUKT);
         } catch (GeenPlaatsInMagazijn geenPlaatsInMagazijn) {
-            return new Response(geenPlaatsInMagazijn.getMessage(), ResponseStatus.FAIL);
+            return new Response(geenPlaatsInMagazijn.getMessage(), ResponseStatus.NIET_GELUKT);
         }
     }
 }

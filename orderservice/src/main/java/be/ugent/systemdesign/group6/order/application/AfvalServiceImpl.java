@@ -28,43 +28,31 @@ public class AfvalServiceImpl implements AfvalService {
     @Override
     public Response afvalcontainersOpgehaald() {
         afvalrepo.haalAfvalOp();
-        return new Response("Afval werd opgehaald", ResponseStatus.SUCCESS);
+        return new Response("Afval werd opgehaald", ResponseStatus.GELUKT);
     }
 
     @Override
-    public Response plaatsBijAfval(Integer catalogusId, int aantal) {/*
-        try {
-            Thread.sleep(magazijnrepo.geefRekMedicijn(catalogusId));
-            Afvalcontainer a = afvalrepo.gooiMedicijnenWeg(aantal);
-            if( a.isVol()){
-                commandDispatcher.stuurHaalAfvalOpCommand(new HaalAfvalOpCommand(true));
-            }
-        } catch (GeenAfvalcontainerBeschikbaar geenAfvalcontainerBeschikbaar ) {
-            return new Response(geenAfvalcontainerBeschikbaar.getMessage(), ResponseStatus.FAIL);
-        } catch (MedicijnNietInMagazijn | InterruptedException e){
-            return new Response("Het medicijn wordt niet weggegooid want het is niet aanwezig in het magazijn.", ResponseStatus.SUCCESS);
-        }
-        return new Response("Er werden " + aantal + " medicijnen met catalogusId " + catalogusId + " weggegooid.", ResponseStatus.SUCCESS);*/
+    public Response plaatsBijAfval(Integer catalogusId, int aantal) {
+
         try {
             Thread.sleep(magazijnrepo.geefRekMedicijn(catalogusId));
         } catch (MedicijnNietInMagazijn | InterruptedException e) {
-            return new Response("Het medicijn wordt niet weggegooid want het is niet aanwezig in het magazijn.", ResponseStatus.SUCCESS);
+            
         } finally {
-            try{
+            try {
                 Afvalcontainer a = afvalrepo.gooiMedicijnenWeg(aantal);
 
                 if (a.isVol()) {
                     commandDispatcher.stuurHaalAfvalOpCommand(new HaalAfvalOpCommand(true));
                 }
                 return new Response("Er werden " + aantal + " medicijnen met catalogusId " + catalogusId + " weggegooid.", ResponseStatus.SUCCESS);
-            } catch(GeenAfvalcontainerBeschikbaar geenAfvalcontainerBeschikbaar ){
+            } catch (GeenAfvalcontainerBeschikbaar geenAfvalcontainerBeschikbaar) {
                 return new Response(geenAfvalcontainerBeschikbaar.getMessage(), ResponseStatus.FAIL);
 
             }
+            return new Response("Er werden " + aantal + " medicijnen met catalogusId " + catalogusId + " weggegooid.", ResponseStatus.GELUKT);
+        }
     }
-
-
-
 
     @Override
     public Response retourBijAfval(int aantal) {
@@ -74,8 +62,8 @@ public class AfvalServiceImpl implements AfvalService {
                 commandDispatcher.stuurHaalAfvalOpCommand(new HaalAfvalOpCommand(true));
             }
         } catch (GeenAfvalcontainerBeschikbaar geenAfvalcontainerBeschikbaar) {
-            return new Response(geenAfvalcontainerBeschikbaar.getMessage(), ResponseStatus.FAIL);
+            return new Response(geenAfvalcontainerBeschikbaar.getMessage(), ResponseStatus.NIET_GELUKT);
         }
-        return new Response("Er werden " + aantal + " medicijnen weggegooid.", ResponseStatus.SUCCESS);
+        return new Response("Er werden " + aantal + " medicijnen weggegooid.", ResponseStatus.GELUKT);
     }
 }

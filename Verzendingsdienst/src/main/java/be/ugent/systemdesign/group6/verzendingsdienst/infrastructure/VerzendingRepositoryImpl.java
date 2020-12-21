@@ -32,7 +32,7 @@ public class VerzendingRepositoryImpl implements VerzendingRepository {
 
     @Override
     public List<Pakket> geefAlleNietVerzondenPakketten() {
-        return pakketDMRepo.findAllByStatus(PakketStatus.KLAAR_VOOR_VERZENDING.name())
+        return pakketDMRepo.findAllByStatus(PakketStatus.GELABELD.name())
                 .stream()
                 .map(elt -> mapNaarPakket(elt))
                 .collect(Collectors.toList());

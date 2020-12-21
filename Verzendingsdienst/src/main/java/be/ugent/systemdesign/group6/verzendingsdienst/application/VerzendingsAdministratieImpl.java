@@ -42,17 +42,17 @@ public class VerzendingsAdministratieImpl implements VerzendingsAdministratie {
                 verzendingRepo.updateVerstuurdPakket(p.getId(), p.getStatus().name(), p.getVerzendDatum());
             }
             catch (PakketNogNietGelabeld e1) {
-                Response r = new Response("Pakket kon niet verzonden worden want het pakket heeft geen label", ResponseStatus.FAIL);
+                Response r = new Response("Pakket kon niet verzonden worden want het pakket heeft geen label", ResponseStatus.NIET_GELUKT);
                 logger.info(r.message);
                 return r;
             }
             catch (RuntimeException e2) {
-                Response r = new Response("Pakket kon niet opgeslagen worden als verzonden", ResponseStatus.FAIL);
+                Response r = new Response("Pakket kon niet opgeslagen worden als verzonden", ResponseStatus.NIET_GELUKT);
                 logger.info(r.message);
                 return r;
             }
         }
-        Response r = new Response("Rolcontainer werd succesvol opgehaald", ResponseStatus.SUCCESS);
+        Response r = new Response("Rolcontainer werd succesvol opgehaald", ResponseStatus.GELUKT);
         logger.info(r.message);
         return r;
     }
@@ -78,11 +78,11 @@ public class VerzendingsAdministratieImpl implements VerzendingsAdministratie {
         }
         catch (RuntimeException ex){
             logger.info(ex.getMessage());
-            Response r = new Response("Nieuw pakket kon niet aangemaakt of opgeslagen worden", ResponseStatus.FAIL);;
+            Response r = new Response("Nieuw pakket kon niet aangemaakt of opgeslagen worden", ResponseStatus.NIET_GELUKT);;
             logger.info(r.message);
             return r;
         }
-        Response r = new Response("Nieuwe order werd succesvol geregistreerd.", ResponseStatus.SUCCESS);;
+        Response r = new Response("Nieuwe order werd succesvol geregistreerd.", ResponseStatus.GELUKT);;
         logger.info(r.message);
         return r;
     }
