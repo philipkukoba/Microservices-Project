@@ -14,6 +14,7 @@ public interface PakketDataModelJpaRepository extends JpaRepository<PakketDataMo
 
     Optional<PakketDataModel> findById(int id);
     List<PakketDataModel> findAllByOrderID(String orderID);
+    List<PakketDataModel> findAllByStatus(String status);
 
     @Modifying
     @Query(value = "update pakket_data_model set status=?2 where id=?1", nativeQuery = true)

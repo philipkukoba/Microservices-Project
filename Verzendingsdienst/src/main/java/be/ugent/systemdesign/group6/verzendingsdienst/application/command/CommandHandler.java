@@ -27,7 +27,7 @@ public class CommandHandler {
         //testing
         Rolcontainer rolcontainer = new Rolcontainer();
 
-        rolcontainerOnderhoud.haalRolcontainerOp(rolcontainer);
+        rolcontainerOnderhoud.haalRolcontainerOp();
     }
 
 }

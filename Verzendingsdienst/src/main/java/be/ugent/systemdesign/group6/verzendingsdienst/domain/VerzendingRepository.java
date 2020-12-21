@@ -10,7 +10,7 @@ import java.util.UUID;
 public interface VerzendingRepository {
 
     Pakket geefPakket(int verzendingID);
-    //List<Pakket> geefAlleNietVerzondenPakketten();
+    List<Pakket> geefAlleNietVerzondenPakketten();
     List<Pakket> geefAllePakkettenVaneenOrder(String orderId);
     void slaOp(Pakket p);
 
