@@ -25,7 +25,7 @@ public class CommandHandler {
     }
 
     public void plaatsRetourBijAfval(PlaatsRetourBijAfvalCommand command){
-        Response r = afvalService.plaatsBijAfval(command.id, command.aantal);
+        Response r = afvalService.retourBijAfval( command.aantal);
         log.info("status {}, message {}", r.status, r.message);
     }
 
