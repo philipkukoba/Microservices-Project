@@ -41,7 +41,7 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
 			--> verzendingsdienst krijgt 1/2 events: **GELUKT** <br>
 				-->  verzendings dienst db bevat gelabeld pakket: **GELUKT** <br>
 	--> maak facuur
-		--> klant krijgt email
+		--> klant krijgt email: **MISLUKT** <br>
 
 ## verzenden
 
