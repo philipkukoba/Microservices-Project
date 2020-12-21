@@ -21,7 +21,6 @@ Uitvoeren als klant: **Testing**
 Uitvoren al ticketdienstmedewerker: **Testing**
 <br>
 1. Klant
-(note: betaling lukt vaak niet)
 <br>
 --Geval wanneer betaling mislukt: **GELUKT**
 <br>
