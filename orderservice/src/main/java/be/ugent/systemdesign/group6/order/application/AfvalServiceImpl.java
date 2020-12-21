@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 
 @Transactional
 @Service
-public class AfvalServiceImpl implements AfvalService{
+public class AfvalServiceImpl implements AfvalService {
 
     @Autowired
     AfvalcontainerRepository afvalrepo;
@@ -32,7 +32,7 @@ public class AfvalServiceImpl implements AfvalService{
     }
 
     @Override
-    public Response plaatsBijAfval(Integer catalogusId, int aantal) {
+    public Response plaatsBijAfval(Integer catalogusId, int aantal) {/*
         try {
             Thread.sleep(magazijnrepo.geefRekMedicijn(catalogusId));
             Afvalcontainer a = afvalrepo.gooiMedicijnenWeg(aantal);
@@ -44,8 +44,27 @@ public class AfvalServiceImpl implements AfvalService{
         } catch (MedicijnNietInMagazijn | InterruptedException e){
             return new Response("Het medicijn wordt niet weggegooid want het is niet aanwezig in het magazijn.", ResponseStatus.SUCCESS);
         }
-        return new Response("Er werden " + aantal + " medicijnen met catalogusId " + catalogusId + " weggegooid.", ResponseStatus.SUCCESS);
+        return new Response("Er werden " + aantal + " medicijnen met catalogusId " + catalogusId + " weggegooid.", ResponseStatus.SUCCESS);*/
+        try {
+            Thread.sleep(magazijnrepo.geefRekMedicijn(catalogusId));
+        } catch (MedicijnNietInMagazijn | InterruptedException e) {
+            return new Response("Het medicijn wordt niet weggegooid want het is niet aanwezig in het magazijn.", ResponseStatus.SUCCESS);
+        } finally {
+            try{
+                Afvalcontainer a = afvalrepo.gooiMedicijnenWeg(aantal);
+
+                if (a.isVol()) {
+                    commandDispatcher.stuurHaalAfvalOpCommand(new HaalAfvalOpCommand(true));
+                }
+                return new Response("Er werden " + aantal + " medicijnen met catalogusId " + catalogusId + " weggegooid.", ResponseStatus.SUCCESS);
+            } catch(GeenAfvalcontainerBeschikbaar geenAfvalcontainerBeschikbaar ){
+                return new Response(geenAfvalcontainerBeschikbaar.getMessage(), ResponseStatus.FAIL);
+
+            }
     }
+
+
+
 
     @Override
     public Response retourBijAfval(int aantal) {
