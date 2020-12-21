@@ -1,0 +1,22 @@
+{
+  "name": "gebruikers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "minimist": "^1.2.5",
+    "mongoose": "^5.11.8",
+    "nodemailer": "^6.4.17"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.ugent.be/Gpveeckh/gebruikers.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

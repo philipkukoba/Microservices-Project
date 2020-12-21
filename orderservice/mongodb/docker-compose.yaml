@@ -1,0 +1,11 @@
+version: "3"
+services:
+  orderdb:
+    image: 'mongo:4.4'
+    container_name: 'orderdb'
+    environment:
+      - MONGO_INITDB_DATABASE=orders
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    ports:
+      - 27017:27017

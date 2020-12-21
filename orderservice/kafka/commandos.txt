@@ -1,0 +1,2 @@
+docker run -it --net=host confluentinc/cp-kafka /bin/bash
+./kafka-console-producer --bootstrap-server localhost:9092 --topic

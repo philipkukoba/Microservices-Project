@@ -1,0 +1,169 @@
+version: "3"
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper
+    environment:
+      - ZOOKEEPER_CLIENT_PORT=2181
+  kafka:
+    image: confluentinc/cp-kafka
+    depends_on:
+      - zookeeper
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+  # ---------------------------- DATABANKEN ----------------------------
+  bestellingen_db:
+    image: mongo:4.4
+    container_name: bestellingen_db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+      - MONGO_INITDB_DATABASE=bestellingen
+    ports:
+      - 27017:27017 # nog sluiten
+  voorraad_db:
+    image: postgres:13.1
+    container_name: voorraad_db
+    # https://hub.docker.com/_/postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=medicijnen
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+    ports:
+      - 5432:5432 # nog sluiten
+  magazijn_db:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=root
+      - MYSQL_DATABASE=Order
+  order_db:
+    image: 'mongo:4.4'
+    container_name: 'orderdb'
+    environment:
+      - MONGO_INITDB_DATABASE=orders
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+  gebruikers_db:
+    image: 'mongo:4.4'
+    container_name: gebruikers_db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+      - MONGO_INITDB_DATABASE=gebuikers
+  verzending_db:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=root
+      - MYSQL_DATABASE=pakketten
+  # ----------------------------- SERVICES -----------------------------
+  bestellingen:
+    build: ./bestellingen
+    container_name: bestellingen
+    links:
+      - bestellingen_db
+      - kafka
+    depends_on:
+      - bestellingen_db
+      - kafka
+    environment:
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE=admin
+      - SPRING_DATA_MONGODB_URI=mongodb://admin:admin@bestellingen_db/bestellingen?authSource=admin
+    ports:
+      - 8081:8080
+  koelcelmonitor:
+    build: ./koelcelMonitor # vervangen door images
+    container_name: koelcelmonitor
+    command: --broker kafka:9092
+    depends_on:
+      - kafka
+    ports:
+      - 8000:8000
+  medicijnen:
+    build: ./medicijnen
+    container_name: medicijnen
+    # https://docs.docker.com/compose/compose-file/#links
+    # volgens de documentatie overbodig en deprecated
+    links:
+      - kafka
+      - voorraad_db
+      - koelcelmonitor
+    depends_on:
+      - kafka
+      - voorraad_db
+      - koelcelmonitor
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://voorraad_db:5432/medicijnen
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - EXTERNAL_API_KOELCEL_URI=koelcelmonitor:8000
+    ports:
+      - 8080:8080
+  order:
+    build: ./orderservice
+    links:
+      - kafka
+      - order_db
+      - magazijn_db
+    depends_on:
+      - kafka
+      - order_db
+      - magazijn_db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://magazijn_db:3306/Order
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATA_MONGODB_URI=mongodb://admin:admin@order_db/orders?authSource=admin
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    ports:
+      - 8082:2222
+  gebruikers:
+    build: ./gebruikers
+    command: --db mongodb://admin:admin@gebruikers_db:27017/gebruikers
+    links:
+      - gebruikers_db
+    depends_on:
+      - gebruikers_db
+    ports:
+      - 3000:3000
+  boekhoudsdienst:
+    build: ./boekhoudsdienst
+    command: --broker kafka:9092 --gebruikersAPI gebruikers:3000/api/gebruikers
+    links:
+      - gebruikers
+      - kafka
+    depends_on:
+      - gebruikers
+      - kafka
+    ports:
+      - 3001:3000
+  ticketdienst:
+    build: ./ticketdienst
+    command: --broker kafka:9092
+    links:
+      - kafka
+    depends_on:
+      - kafka
+    ports:
+      - 3002:3000
+  verzendingsdienst:
+    build: ./verzendingsdienst
+    links:
+      - kafka
+      - verzending_db
+    depends_on:
+      - kafka
+      - verzending_db
+    environment:
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - SPRING_DATASOURCE_URL=jdbc:mysql://verzending_db:3306/pakketten
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root

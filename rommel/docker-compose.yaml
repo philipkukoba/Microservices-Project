@@ -1,0 +1,62 @@
+version: "3"
+services:
+  voorraad_db:
+    image: postgres:13.1
+    container_name: voorraad_db
+    # https://hub.docker.com/_/postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=medicijnen
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+  zookeeper:
+    image: confluentinc/cp-zookeeper
+    environment:
+      - ZOOKEEPER_CLIENT_PORT=2181
+  kafka:
+    image: confluentinc/cp-kafka
+    depends_on:
+      - zookeeper
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      # noodzakelijk voor protocol, die geeft aan waar zijn broker zich bevindt
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+  koelcelmonitor:
+    build: ./koelcelMonitor # vervangen door images
+    container_name: koelcelmonitor
+    depends_on:
+      - kafka
+    ports:
+      - 8000:8000
+  medicijnen:
+    build: ./medicijnen
+    container_name: medicijnen
+    # https://docs.docker.com/compose/compose-file/#links
+    # volgens de documentatie overbodig en deprecated
+    links:
+      - kafka
+      - voorraad_db
+      - koelcelmonitor
+    depends_on:
+      - kafka
+      - voorraad_db
+      - koelcelmonitor
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://voorraad_db:5432/medicijnen
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - SPRING_CLOUD_STREAM_BINDINGS_MEDICIJN_KRITISCHE_WAARDE_DESTINATION=medicijn_kritische_waarde
+      - SPRING_CLOUD_STREAM_BINDINGS_PLAATS_BIJ_AFVAL_DESTINATION=plaats_bij_afval
+      - SPRING_CLOUD_STREAM_BINDINGS_AFWIJKENDE_TEMPERATUUR_DESTINATION=afwijkende_temperatuur
+      - SPRING_CLOUD_STREAM_BINDINGS_RESERVEER_BESTELLING_DESTINATION=reserveer_bestelling
+      - SPRING_CLOUD_STREAM_BINDINGS_BEVESTIG_BESTELLING_DESTINATION=bevestig_bestelling
+      - SPRING_CLOUD_STREAM_BINDINGS_GEEF_VRIJ_BESTELLING_DESTINATION=geef_vrij_bestelling
+      - SPRING_CLOUD_STREAM_BINDINGS_BESTELLING_ANNULEREN_VOLTOOID_DESTINATION=bestelling_annuleren_voltooid
+      - SPRING_CLOUD_STREAM_BINDINGS_MEDICIJN_CATALOGUS_VERWIJDERD_DESTINATION=medicijn_catalogus_verwijderd
+      - EXTERNAL_API_KOELCEL_URI=koelcelmonitor:8000
+    ports:
+      - 8080:8080
+
