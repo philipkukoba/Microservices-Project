@@ -43,11 +43,15 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
 	--> maak facuur (moet gebeuren op maak_factuur kanaal)
 		--> klant krijgt email: **MISLUKT** <br>
 
+2. TicketDienst
+--bestellen: **GELUKT** <br>
+
+
 ## verzenden
 
 --rolcontainer is opgehaald (via kafka command): **GELUKT** <br>
 	-- verzending stuurt orderverzonden uit: **GELUKT** <br>
-	-- bestellings db aangepast
+	-- bestellings db aangepast: **GELUKT** <br>
 	-- mail vertuurd: **MISLUKT** <br>
 	
 ## statistieken
