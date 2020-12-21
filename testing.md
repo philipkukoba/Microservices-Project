@@ -67,26 +67,26 @@ Gevolg : er is niet gereserveerd en er is niets te zien in de bestelling_db
 -- voeg medicijnen toe: **GELUKT** <br>
 --verwerk lading: **GELUKT** <br>
 --geef oevrzicht: **GELUKT** <br>
+-- kritische waarden : **MISLUKT** <br>
 
 ## tickets
 -- /api/ticket: **GELUKT** <br>
-
---ticket aanmaken <br>: **GELUKT** <br>
---> staat nu bij get? <br>: **GELUKT** <br>
+--ticket aanmaken: **GELUKT** <br>
+--> staat nu bij get? : **GELUKT** <br>
 -- behandel: **GELUKT** <br>
 --> kleine kans retour bij afval: **GELUKT** <br>
---> check afval containers?? <br>: **GELUKT** <br>
--- sluiten <br>: **GELUKT** <br>
+--> check afval containers??: **GELUKT** <br>
+-- sluiten: **GELUKT** <br>
 
 ## annuleren
 
 -- annuleren van een bestelling
 -- kan gedaan worden door klant en tcketdienstmedewerker: **GELUKT** <br>
 -- komt binnen bij bestelilingen
-	status = nog niet op verzonden
-		nog in magazijn
+	status = nog niet op verzonden: **GELUKT** <br>
+		nog in magazijn: **GELUKT** <br>
 		nog bij verzending: **GELUKT** <br>
-				medicijnen_db checken (terug open gezet)
+				medicijnen_db checken (terug open gezet): **GELUKT** <br>
 				boekhoud zal loggen 
 		toch al verzonden
 		status == verzonden
