@@ -28,7 +28,7 @@ public class AfvalServiceImpl implements AfvalService{
     @Override
     public Response afvalcontainersOpgehaald() {
         afvalrepo.haalAfvalOp();
-        return new Response("Afval werd opgehaald", ResponseStatus.SUCCESS);
+        return new Response("Afval werd opgehaald", ResponseStatus.GELUKT);
     }
 
     @Override
@@ -40,11 +40,11 @@ public class AfvalServiceImpl implements AfvalService{
                 commandDispatcher.stuurHaalAfvalOpCommand(new HaalAfvalOpCommand(true));
             }
         } catch (GeenAfvalcontainerBeschikbaar geenAfvalcontainerBeschikbaar ) {
-            return new Response(geenAfvalcontainerBeschikbaar.getMessage(), ResponseStatus.FAIL);
+            return new Response(geenAfvalcontainerBeschikbaar.getMessage(), ResponseStatus.NIET_GELUKT);
         } catch (MedicijnNietInMagazijn | InterruptedException e){
-            return new Response("Het medicijn wordt niet weggegooid want het is niet aanwezig in het magazijn.", ResponseStatus.SUCCESS);
+            return new Response("Het medicijn wordt niet weggegooid want het is niet aanwezig in het magazijn.", ResponseStatus.GELUKT);
         }
-        return new Response("Er werden " + aantal + " medicijnen met catalogusId " + catalogusId + " weggegooid.", ResponseStatus.SUCCESS);
+        return new Response("Er werden " + aantal + " medicijnen met catalogusId " + catalogusId + " weggegooid.", ResponseStatus.GELUKT);
     }
 
     @Override
@@ -55,8 +55,8 @@ public class AfvalServiceImpl implements AfvalService{
                 commandDispatcher.stuurHaalAfvalOpCommand(new HaalAfvalOpCommand(true));
             }
         } catch (GeenAfvalcontainerBeschikbaar geenAfvalcontainerBeschikbaar) {
-            return new Response(geenAfvalcontainerBeschikbaar.getMessage(), ResponseStatus.FAIL);
+            return new Response(geenAfvalcontainerBeschikbaar.getMessage(), ResponseStatus.NIET_GELUKT);
         }
-        return new Response("Er werden " + aantal + " medicijnen weggegooid.", ResponseStatus.SUCCESS);
+        return new Response("Er werden " + aantal + " medicijnen weggegooid.", ResponseStatus.GELUKT);
     }
 }

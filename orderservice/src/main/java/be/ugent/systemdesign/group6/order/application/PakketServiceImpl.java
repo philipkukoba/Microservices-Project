@@ -63,7 +63,7 @@ public class PakketServiceImpl implements PakketService{
         try{
             for (Medicijn m : maakOrderCommand.getMedicijnen()) {
                 Response response = magazijnService.geefRekVanMedicijn(m.getId());
-                if( response.status == ResponseStatus.FAIL){
+                if( response.status == ResponseStatus.NIET_GELUKT){
                     magazijnService.voegMedicijnToeAanMagazijn(m.getId());
 
                 } else {
@@ -91,18 +91,18 @@ public class PakketServiceImpl implements PakketService{
 
             repo.orderIsVerwerkt(o);
 
-            return new Response("Pakket is samengesteld in een werktijd van " + werkTijd + " en is nu klaar voor verzending.", ResponseStatus.SUCCESS);
+            return new Response("Pakket is samengesteld in een werktijd van " + werkTijd + " en is nu klaar voor verzending.", ResponseStatus.GELUKT);
       }catch (GeenPlaatsInMagazijn | InterruptedException e ){
-          return new Response("Magazijn is te klein.", ResponseStatus.FAIL);
+          return new Response("Magazijn is te klein.", ResponseStatus.NIET_GELUKT);
       }
     }
 
     @Override
     public AnnuleerBestellingResponse probeerBestellingTeAnnuleren(String orderId) {
         if(repo.annuleerOrder(orderId)){
-            return new AnnuleerBestellingResponse("Pakket was nog niet samengesteld kan nog succesvol geannuleerd worden.", ResponseStatus.SUCCESS, orderId);
+            return new AnnuleerBestellingResponse("Pakket was nog niet samengesteld kan nog succesvol geannuleerd worden.", ResponseStatus.GELUKT, orderId);
         }
-        return new AnnuleerBestellingResponse("Pakket is al bij de verzendingsdienst en kan niet meer geannuleerd worden.", ResponseStatus.FAIL, null);
+        return new AnnuleerBestellingResponse("Pakket is al bij de verzendingsdienst en kan niet meer geannuleerd worden.", ResponseStatus.NIET_GELUKT, null);
     }
 
 
