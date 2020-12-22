@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: medicijnen-container
-          image: gpveeckh/medicijnen:v2
+          image: gpveeckh/medicijnen:v3
           imagePullPolicy: Always
           env:
             - name: SPRING_DATASOURCE_URL
@@ -31,3 +31,18 @@ spec:
               value: "koelcelmonitor.default.svc.cluster.local:8000"
           ports:
             - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: medicijnen
+spec:
+  selector:
+    app: medicijnen
+  ports:
+    - port: 8081
+      targetPort: 8080
+  externalIPs:
+    - 10.2.0.179

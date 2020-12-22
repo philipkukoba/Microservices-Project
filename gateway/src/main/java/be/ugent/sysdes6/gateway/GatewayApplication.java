@@ -48,15 +48,7 @@ public class GatewayApplication {
 				route(r->r.host("*").and().path("/api/koelcellen/**").uri("koelcelmonitor.default.svc.cluster.local:8000/api/koelcellen/")).
 				route(r->r.host("*").and().path("/api/ticket/**").uri("ticketdienst.default.svc.cluster.local:3000/api/ticket/")).
 				route(r->r.host("*").and().path("/api/boekhoud/**").uri("boekhoudsdienst.default.svc.cluster.local:3000/api/boekhoud/")).
-				/*route(r->r.host("*").and().path("/api/voorraad/**").uri("http://"+medicijnen+"/api/voorraad/")).
-				route(r->r.host("*").and().path("/api/catalogus/**").uri("http://"+medicijnen+"/api/catalogus/")).
-				route(r->r.host("*").and().path("/api/order/afval/**").uri("http://"+order+"/api/order/afval/")).
-				route(r->r.host("*").and().path("/api/gebruikers/**").uri("http://"+gebruikers+"/api/gebruikers/")).
-				route(r->r.host("*").and().path("/api/bestellingen/**").uri("http://"+bestellingen+"/api/bestellingen/")).
-				route(r->r.host("*").and().path("/api/statistieken/**").uri("http://"+bestellingen+"/api/statistieken/")).
-				route(r->r.host("*").and().path("/api/koelcellen/**").uri("http://"+koelcelmonitor+"/api/koelcellen/")).
-				route(r->r.host("*").and().path("/api/ticket/**").uri("http://"+ticketdienst+"/api/ticket/")).
-				route(r->r.host("*").and().path("/api/boekhoud/**").uri("http://"+boekhoudsdienst+"/api/boekhoud/")).*/
+				route(r->r.host("*").and().path("/api/bpost/**").uri("verzendingsdienst.default.svc.cluster.local:8080/api/bpost/")).
 				build();
 	}
 }
