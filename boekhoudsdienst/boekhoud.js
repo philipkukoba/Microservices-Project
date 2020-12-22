@@ -112,14 +112,13 @@ function orderVerzonden(id) {
         if (rows[0].klantenId != undefined) {
             //email opvragen van deze klant en email sturen
             console.log('Order verzonden ontvangen bij de boekhoudsdienst');
-            /*
+            
             request('http://' + args['gebruikersAPI'] +'/'+ rows[0].klantenId, function (error, response, body) {
                 console.error('error:', error); // Print the error if one occurred
                 console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
                 console.log('body:', body); // Print the HTML for the Google homepage.
                 //Email uit body halen en email sturen
-                console.log(body, body.mail, body.json.mail);
-                email = body.mail;
+                email = body.email;
                 naam = body.naam;
                 let info = transporteur.sendMail({
                     from: "sysdes6@gmail.com",
@@ -129,7 +128,6 @@ function orderVerzonden(id) {
                 }).catch(e=>console.log(e));
 
             });
-            */
         }
     });
 }
@@ -148,13 +146,12 @@ function maakFactuur(bestellingsId, klantenId, medicijnen) {
 
     console.log('Maak factuur ontvangen bij de boekhoudsdienst');
 
-    /*
     request('http://' +args['gebruikersAPI'] + '/' + klantenId, function (error, response, body) {
         console.error('error:', error); // Print the error if one occurred
         console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
         console.log('body:', body); // Print the HTML for the Google homepage.
         //Email uit body halen en email sturen
-        let email = body.mail;
+        let email = body.email;
         let info = transporteur.sendMail({
             from: "sysdes6@gmail.com",
             to: email,
@@ -163,7 +160,6 @@ function maakFactuur(bestellingsId, klantenId, medicijnen) {
         }).catch();
 
     });
-    */
 }
 
 function betaalTerug(bestellingsId) {
