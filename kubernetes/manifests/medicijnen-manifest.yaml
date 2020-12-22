@@ -5,7 +5,7 @@ metadata:
   labels:
     app: medicijnen
 spec:
-  replicas: 1 # aantal instanties van pod
+  replicas: 
   selector:
     matchLabels:
       app: medicijnen
@@ -16,11 +16,11 @@ spec:
     spec:
       containers:
         - name: medicijnen-container
-          image: gpveeckh/medicijnen:latest
+          image: gpveeckh/medicijnen:v1
           imagePullPolicy: Always
           env:
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://voorraad_db:5432/medicijnen"
+              value: "jdbc:postgresql://medicijnen-db.default.svc.cluster.local:5432/medicijnen"
             - name: SPRING_DATASOURCE_USERNAME
               value: "admin"
             - name: SPRING_DATASOURCE_PASSWORD
@@ -31,4 +31,3 @@ spec:
               value: "http://koelcelmonitor.default.svc.cluster.local:8000/koelcellen"
           ports:
             - containerPort: 8080
-
