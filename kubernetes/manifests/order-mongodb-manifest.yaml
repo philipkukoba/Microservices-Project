@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orderdb
+  labels:
+    app: orderdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orderdb
+  template:
+    metadata:
+      labels:
+        app: orderdb
+    spec:
+      containers:
+        - name: orderdb
+          image: 'mongo:4.4'
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: "admin"
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: "admin"
+            - name: MONGO_INITDB_DATABASE
+              value: "orders"
+          ports:
+          - containerPort: 27017
