@@ -1,26 +1,22 @@
-// gebaseerd op https://www.callicoder.com/node-js-express-mongodb-restful-crud-api-tutorial/
 const express = require('express');
 const app = express();
+const nSQL = require("@nano-sql/core").nSQL;
 
-const mongoose = require('mongoose');
 
-const url=process.env.URL || 'mongodb://localhost:27017/gebruikers';
-
-setTimeout(()=>{
-    mongoose.connect(url, {
-        "auth": { "authSource": "admin", "authdb":"admin" },
-        "user": "admin",
-        "pass": "admin"
-    }).then(() => {
-    }).catch(e=>console.log(e));
-},10*1000);
-    
-const GebruikerSchema = mongoose.Schema({
-    email: { type: String, unique: true },
-    naam: String
+nSQL().createDatabase({
+    id: "gebruikers",
+    mode: "PERM",
+    tables: [
+        {
+            name: "gebruikers",
+            model: {
+                "id:int": { pk: true, ai: true },
+                "email:string": {},
+                "naam:string": {},
+            }
+        }
+    ]
 });
-
-const Gebruiker = mongoose.model('Gebruiker', GebruikerSchema);   
 
 // https://stackoverflow.com/questions/4295782/how-to-process-post-data-in-node-js
 // om JSON van POST body te verwerken
@@ -28,47 +24,28 @@ app.use(express.json());
 
 app.post('/api/gebruikers/maakaccount', function (req, res) {
     const body = req.body;
-/*
-    mongoose.connect(args['db'], {
-        "auth": { "authSource": "admin" },
-        "user": "admin",
-        "pass": "admin"
-    }).then(() => {
-    });
-*/
-    const gebruiker = new Gebruiker({
-        email: body.email,
-        naam: body.naam
-    });
 
-    gebruiker.save().then(g => {
-        res.send(g);
-    }).catch(e => {
-        res.status(404).send('Mogelijks duplicaat');
-    });
+    nSQL("gebruikers").query("upsert", { "email": body.email, "naam": body.naam }).exec().then(r => {
+        let antwoord = r[0];
+        antwoord.id="z"+antwoord.id+"";
+        res.send(antwoord);
+        res.end();
+    }).catch(e => res.status(404).send('mogelijks duplicaat').end());
 });
+
 
 app.get('/api/gebruikers/:id', function (req, res) {
-    const id = req.params.id;
-/*
-    mongoose.connect(args['db'], {
-        "auth": { "authSource": "admin" },
-        "user": "admin",
-        "pass": "admin"
-    }).then(() => {
-    }); 
-*/
-    Gebruiker.findById(id)
-        .then(g => {
-            res.send({'mail': g.email, 'naam':g.naam});
-        }).catch(e => {
-            res.status(404);
-            res.end();
-        });
-});
+    const id = req.params.id.substr(1);
 
-
-app.listen(3000, function () {
+    nSQL("gebruikers").query("select", ["id","email","naam"]).where(["id", "=", parseInt(id)]).exec().then(r => {
+        let antwoord = r[0];
+        antwoord.id="z"+antwoord.id+"";
+        res.send(antwoord);
+        res.end();
+    }).catch(e => {
+        res.status(404);
+        res.end();
+    });
 });
 
 // mails sturen
@@ -85,27 +62,25 @@ const mail = nodemailer.createTransport(
     }
 );
 
-
 app.post('/api/gebruikers/nieuwsbrief', function (req, res) {
-    const body = req.body;
-/*
-    mongoose.connect(args['db'], {
-        "auth": { "authSource": "admin" },
-        "user": "admin",
-        "pass": "admin"
-    }).then(() => {
-    });
-*/
-    Gebruiker.find().then(gebruikers => {
-        const mails = gebruikers.map(g => g.email);
-    
+    const inhoud = req.body.content;
+
+    nSQL("gebruikers").query("select").exec().then(r => {
+        r=r.map(r=>r.email).join(', ');
+        
         mail.sendMail({
             from: 'sysdes6@gmail.com',
-            to: mails.join(", "),
+            to: r,
             subject: 'Nieuwsbrief',
-            text: body.text
+            text: inhoud
         });
 
+        res.send(r).end();
+    }).catch(e => {
         res.end();
     });
+
+});
+
+app.listen(3000, function () {
 });

@@ -21,7 +21,7 @@ public class GatewayApplication {
 	private String order = "order:2222";
 
 	@Value("${gebruikers}")
-	private String gebruikers = "gebruikers:8080";
+	private String gebruikers = "gebruikers:3000";
 
 	@Value("${bestellingen}")
 	private String bestellingen = "bestellingen:8080";
@@ -43,11 +43,10 @@ public class GatewayApplication {
 				route(r->r.host("*").and().path("/api/order/afval/**").uri("http://"+order+"/api/order/afval/")).
 				route(r->r.host("*").and().path("/api/gebruikers/**").uri("http://"+gebruikers+"/api/gebruikers/")).
 				route(r->r.host("*").and().path("/api/bestellingen/**").uri("http://"+bestellingen+"/api/bestellingen/")).
-				route(r->r.host("*").and().path("/api/statistieken/**").uri("http://"+"10.102.47.143:8080"+"/api/statistieken/")).
+				route(r->r.host("*").and().path("/api/statistieken/**").uri("http://"+bestellingen+"/api/statistieken/")).
 				route(r->r.host("*").and().path("/api/koelcellen/**").uri("http://"+koelcelmonitor+"/api/koelcellen/")).
 				route(r->r.host("*").and().path("/api/ticket/**").uri("http://"+ticketdienst+"/api/ticket/")).
 				route(r->r.host("*").and().path("/api/boekhoud/**").uri("http://"+boekhoudsdienst+"/api/boekhoud/")).
-				route(r->r.host("*").and().path("/statistieken").uri("http://10.102.47.143:8080/statistieken")).
 				build();
 	}
 }
