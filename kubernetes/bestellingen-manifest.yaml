@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bestellingen-deployment
+  name: bestellingen
   labels:
     app: bestellingen
 spec:
@@ -15,13 +15,14 @@ spec:
         spec:
           containers:
             - name: bestellingen-container
-              image: bestellingen
+              image: brechtdbaer/bestellingen:latest
+              imagePullPolicy: Always
               env:
                 - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
                   value: "kafka:9092"
                 - name: SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE
                   value: "admin"
                 - name: SPRING_DATA_MONGODB_URI
-                  value: "mongodb://admin:admin@bestellingen_db-service/bestellingen?authSource=admin"
+                  value: "mongodb://admin:admin@bestellingen-db.default.svc.cluster.local/bestellingen?authSource=admin"
           ports: 
             - containerPort: 8080

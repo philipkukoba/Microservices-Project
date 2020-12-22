@@ -1,10 +1,10 @@
-apiVersion: apps/v1
+apiVersion: v1
 kind: Service
 metadata:
-  name: bestellingen_db-service
+  name: bestellingen-db
 spec:
   selector:
-    app: bestellingen_db-service
+    app: bestellingen-db
   ports:
     - port: 27017
       targetPort: 27017

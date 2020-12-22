@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bestellingen_db-deployment
+  name: bestellingen-db
   labels:
-    app: bestellingen_db
+    app: bestellingen-db
 spec:
   replicas: 1 # aantal instanties van pod
     matchLabels:
-      app: bestellingen_db
+      app: bestellingen-db
     template:
       metadata:
         labels:
-          app: bestellingen_db
+          app: bestellingen-db
         spec:
           containers:
-            - name: bestellingen_db-container
+            - name: bestellingen-db
               image: mongo:4.4
               env:
                 - name: MONGO_INITDB_ROOT_USERNAME
