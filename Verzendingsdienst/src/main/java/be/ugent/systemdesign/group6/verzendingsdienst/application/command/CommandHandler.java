@@ -15,16 +15,17 @@ public class CommandHandler {
     @Autowired
     AnnuleringsDienst annuleringsDienst;
 
-    @Autowired
-    RolcontainerOnderhoud rolcontainerOnderhoud;
+    //@Autowired
+    //RolcontainerOnderhoud rolcontainerOnderhoud;
 
     public AnnuleerBestellingResponse handleAnnuleerBestelling(AnnuleerBestellingCommand command){
         return annuleringsDienst.annuleerBestelling(command.getId());
     }
 
+    /*
     public void haalRolcontainerOpCommand(){
 
         rolcontainerOnderhoud.haalRolcontainerOp();
-    }
+    } */
 
 }
