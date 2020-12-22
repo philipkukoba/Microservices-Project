@@ -6,6 +6,7 @@ metadata:
     app: bestellingen-db
 spec:
   replicas: 1 # aantal instanties van pod
+  selector:
     matchLabels:
       app: bestellingen-db
     template:

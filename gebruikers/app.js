@@ -4,21 +4,15 @@ const app = express();
 
 const mongoose = require('mongoose');
 
-// https://stackabuse.com/command-line-arguments-in-node-js/
-const minimist = require('minimist');
-const args=minimist(process.argv.slice(2), {
-    default:{
-        db: 'mongodb://admin:admin@localhost:27017/gebruikers'
-    }
-});
+const url=process.env.URL || 'mongodb://localhost:27017/gebruikers';
 
 setTimeout(()=>{
-    mongoose.connect(args['db'], {
-        "auth": { "authSource": "admin" },
+    mongoose.connect(url, {
+        "auth": { "authSource": "admin", "authdb":"admin" },
         "user": "admin",
         "pass": "admin"
     }).then(() => {
-    });
+    }).catch(e=>console.log(e));
 },10*1000);
     
 const GebruikerSchema = mongoose.Schema({

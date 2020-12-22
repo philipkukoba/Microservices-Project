@@ -1,20 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: koelcel_monitor-deployment
+  name: koelcelmonitor-deployment
   labels:
-    app: koelcel_monitor
+    app: koelcelmonitor
 spec:
   replicas: 1
   matchLabels:
-    app: koelcel_monitor
+    app: koelcelmonitor
     template:
       metadata:
         labels:
-          app: koelcel_monitor
+          app: koelcelmonitor
       spec:
         containers:
-	  - name: koelcel_monitor
-            image: koelcel_monitor
+          - name: koelcelmonitor
+            image: koelcelmonitor
+            args: ["--broker","kafka:9092"]
             ports:
-              - containerPort: 8080
+              - containerPort: 8000
