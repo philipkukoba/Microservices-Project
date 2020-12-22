@@ -27,3 +27,4 @@ spec:
               value: "Order"
           ports:
           - containerPort: 3306
+            targetPort: 3306
