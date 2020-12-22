@@ -13,16 +13,16 @@ spec:
     metadata:
       labels:
         app: verzendingsdienst
-      spec:
-        containers: 
-          - name: verzendingsdienst
-            image: pkukoba/verzendingsdienst:latest
-            env: 
-              - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
-                value: "kafka:9092"
-              - name: SPRING_DATASOURCE_URL
-                value: "jdbc:mysql://pakketten.default.svc.cluster.local:3306/pakketten"
-              - name: SPRING_DATASOURCE_USERNAME
-                value: "root"
-              - name: SPRING_DATASOURCE_PASSWORD
-                value: "root"
+    spec:
+      containers: 
+        - name: verzendingsdienst
+          image: pkukoba/verzendingsdienst:latest
+          env: 
+            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+              value: "kafka:9092"
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:mysql://pakketten.default.svc.cluster.local:3306/pakketten"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "root"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "root"
