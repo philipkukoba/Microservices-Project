@@ -165,7 +165,7 @@ app.post('/api/ticket/stuurBestellingTerug', function (req, res) {
     res.end();
 });
 
-app.listen(3000);
+app.listen(3000, (x)=>{console.log("test");});
 
 /////////////////// consumers aanmaken ///////////////////////////
 

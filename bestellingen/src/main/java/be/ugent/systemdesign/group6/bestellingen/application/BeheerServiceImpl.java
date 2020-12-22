@@ -53,6 +53,6 @@ public class BeheerServiceImpl implements BeheerService {
         } catch(RuntimeException e){
             return new Response(ResponseStatus.NIET_GELUKT, "Fout opgetreden bij annuleren bestelling");
         }
-        return new Response(ResponseStatus.NIET_GELUKT, "Bestelling " + id + " geannuleerd");
+        return new Response(ResponseStatus.GELUKT, "Bestelling " + id + " geannuleerd");
     }
 }

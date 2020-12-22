@@ -26,7 +26,7 @@ public class OrderApplication {
 		SpringApplication.run(OrderApplication.class, args);
 	}
 
-	@Bean
+	//@Bean
 	CommandLineRunner testAfvalcontainerRepository(AfvalcontainerRepository repo) {
 		return(args)->{
 			log.info("Testing het afval management.");
@@ -38,7 +38,7 @@ public class OrderApplication {
 		};
 	}
 
-	@Bean
+	//@Bean
 	CommandLineRunner testOrderRepository(OrderRepository repo) {
 		return(args)->{
 			log.info("Testing het order management.");

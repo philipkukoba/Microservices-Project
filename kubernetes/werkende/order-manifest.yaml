@@ -30,7 +30,7 @@ spec:
             - name: SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE
               value: "admin"
             - name: SPRING_DATA_MONGODB_URI
-              value: "mongodb://admin:admin@orderdb.default.svc.cluster.loca/orders?authSource=admin"  
+              value: "mongodb://admin:admin@orderdb.default.svc.cluster.local/orders?authSource=admin"  
           ports: 
             - containerPort: 2222
 
