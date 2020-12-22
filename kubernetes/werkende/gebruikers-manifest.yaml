@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gebruikers
+  labels:
+    app: gebruikers
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gebruikers
+  template:
+    metadata:
+      labels:
+        app: gebruikers
+    spec:
+      containers:
+        - name: gebruikers-container
+          image: gpveeckh/gebruikers:latest
+          imagePullPolicy: Always
+          env:
+            - name: URL
+              value: "mongodb://gebruikers-db.default.svc.cluster.local/gebruikers"
+          ports:
+            - containerPort: 3000

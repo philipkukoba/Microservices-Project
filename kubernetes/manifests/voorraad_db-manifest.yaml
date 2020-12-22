@@ -25,4 +25,6 @@ spec:
                 - name: POSTGRES_PASSWORD
                   value: "admin"
           ports:
-            - 5432:5432
+            - containerPort: 5432
+              name: voorraad_db
+            

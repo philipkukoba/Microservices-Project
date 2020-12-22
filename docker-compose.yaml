@@ -143,11 +143,12 @@ services:
     restart: on-failure
   gebruikers:
     build: ./gebruikers
-    command: --db mongodb://admin:admin@gebruikers_db:27017/gebruikers
     links:
       - gebruikers_db
     depends_on:
       - gebruikers_db
+    environment:
+      - URL=mongodb://admin:admin@gebruikers_db:27017/gebruikers
     restart: on-failure
   boekhoudsdienst:
     build: ./boekhoudsdienst

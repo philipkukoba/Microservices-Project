@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gebruikers-db
+spec:
+  selector:
+    app: gebruikers-db
+  ports:
+    - port: 27017
+      targetPort: 27017

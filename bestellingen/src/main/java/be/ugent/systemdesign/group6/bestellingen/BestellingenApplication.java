@@ -38,7 +38,7 @@ public class BestellingenApplication {
 		SpringApplication.run(BestellingenApplication.class, args);
 	}
 
-	@Bean
+	//@Bean
 	CommandLineRunner testRandomBetaling(BestelSaga bestelSaga, BestellingenRepository repo){
 		return (args) -> {
 			List<Medicijn> meds = new ArrayList<>();
