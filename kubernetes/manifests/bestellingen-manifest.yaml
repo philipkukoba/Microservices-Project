@@ -5,24 +5,25 @@ metadata:
   labels:
     app: bestellingen
 spec:
-  replicas: 1 # aantal instanties van pod
+  replicas: 1
+  selector:
     matchLabels:
       app: bestellingen
-    template:
-      metadata:
-        labels:
-          app: bestellingen
-        spec:
-          containers:
-            - name: bestellingen-container
-              image: brechtdbaer/bestellingen:latest
-              imagePullPolicy: Always
-              env:
-                - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
-                  value: "kafka:9092"
-                - name: SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE
-                  value: "admin"
-                - name: SPRING_DATA_MONGODB_URI
-                  value: "mongodb://admin:admin@bestellingen-db.default.svc.cluster.local/bestellingen?authSource=admin"
+  template:
+    metadata:
+      labels:
+        app: bestellingen
+    spec:
+      containers:
+        - name: bestellingen-container
+          image: brechtdbaer/bestellingen:latest
+          imagePullPolicy: Always
+          env:
+            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+              value: "bus.default.svc.cluster.local:9092"
+            - name: SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE
+              value: "admin"
+            - name: SPRING_DATA_MONGODB_URI
+              value: "mongodb://admin:admin@bestellingen-db.default.svc.cluster.local/bestellingen?authSource=admin"
           ports: 
             - containerPort: 8080

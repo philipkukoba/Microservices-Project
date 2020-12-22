@@ -5,24 +5,24 @@ metadata:
   labels:
     app: bestellingen-db
 spec:
-  replicas: 1 # aantal instanties van pod
+  replicas: 1
   selector:
     matchLabels:
       app: bestellingen-db
-    template:
-      metadata:
-        labels:
-          app: bestellingen-db
-        spec:
-          containers:
-            - name: bestellingen-db
-              image: mongo:4.4
-              env:
-                - name: MONGO_INITDB_ROOT_USERNAME
-                  value: "admin"
-                - name: MONGO_INITDB_ROOT_PASSWORD
-                  value: "admin"
-                - name: MONGO_INITDB_DATABASE
-                  value: "bestellingen"
+  template:
+    metadata:
+      labels:
+        app: bestellingen-db
+    spec:
+      containers:
+        - name: bestellingen-db
+          image: mongo:4.4
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: "admin"
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: "admin"
+            - name: MONGO_INITDB_DATABASE
+              value: "bestellingen"
           ports:
             - containerPort: 27017
