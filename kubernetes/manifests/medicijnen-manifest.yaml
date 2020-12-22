@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: medicijnen-container
-          image: gpveeckh/medicijnen:v1
+          image: gpveeckh/medicijnen:v2
           imagePullPolicy: Always
           env:
             - name: SPRING_DATASOURCE_URL
@@ -28,6 +28,6 @@ spec:
             - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
               value: "bus.default.svc.cluster.local:9092"
             - name: EXTERNAL_API_KOELCEL_URI
-              value: "http://koelcelmonitor.default.svc.cluster.local:8000/koelcellen"
+              value: "koelcelmonitor.default.svc.cluster.local:8000"
           ports:
             - containerPort: 8080

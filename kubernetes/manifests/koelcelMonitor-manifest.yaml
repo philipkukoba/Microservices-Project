@@ -1,21 +1,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: koelcelmonitor-deployment
+  name: koelcelmonitor
   labels:
     app: koelcelmonitor
 spec:
   replicas: 1
-  matchLabels:
+  selector:
+    matchLabels:
+      app: koelcelmonitor
+  template:
+    metadata:
+      labels:
+        app: koelcelmonitor
+    spec:
+      containers:
+        - name: koelcelmonitor
+          image: gpveeckh/koelcelmonitor:v1
+          args: ["--broker","bus.default.svc.cluster.local:9092"]
+          ports:
+            - containerPort: 8000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: koelcelmonitor
+spec:
+  selector:
     app: koelcelmonitor
-    template:
-      metadata:
-        labels:
-          app: koelcelmonitor
-      spec:
-        containers:
-          - name: koelcelmonitor
-            image: koelcelmonitor
-            args: ["--broker","kafka:9092"]
-            ports:
-              - containerPort: 8000
+  ports:
+    - port: 8000
+      targetPort: 8000
+  externalIPs:
+    - 10.2.0.179
