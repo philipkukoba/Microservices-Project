@@ -12,3 +12,6 @@ Via REST medicijn toevoegen/ verwijderen aan catalogus en lading tovoegen en ove
 ### 4. Order
 Afval ophalen via put op /api/order/afval/haalAfvalOp
 </br> Heel eventueel luisteren naar de commandbus
+### 5. Ticket
+via REST ticket openen, behandelen en sluiten
+### 6. Boekhoud
