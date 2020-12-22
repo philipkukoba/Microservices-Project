@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path="api/bpost/")
+@RequestMapping(path="api/bpost")
 @CrossOrigin(origins="*")
 public class BpostController {
 
