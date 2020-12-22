@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pakketten
+  labels:
+    app: pakketten
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pakketten
+  template:
+    metadata:
+      labels:
+        app: pakketten
+    spec:
+      containers:
+        - name: pakketten
+          image: 'mysql:5.7'
+          args: ["--default-authentication-plugin=mysql_native_password"]
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "root"
+            - name: MYSQL_USER
+              value: "root"
+            - name: MYSQL_DATABASE
+              value: "pakketten"
+          ports:
+          - containerPort: 3306
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: pakketten
+spec:
+  selector:
+    app: pakketten
+  ports:
+    - port: 3306
+      targetPort: 3306
