@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway
+spec:
+  selector:
+    app: gateway
+  ports:
+    - port: 8089
+      targetPort: 8089
+  externalIPs:
+    - 10.2.0.179
