@@ -4,9 +4,9 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
+    "@nano-sql/core": "^2.3.7",
     "express": "^4.17.1",
     "minimist": "^1.2.5",
-    "mongoose": "^5.11.8",
     "nodemailer": "^6.4.17"
   },
   "devDependencies": {},

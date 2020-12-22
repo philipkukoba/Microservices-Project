@@ -27,8 +27,7 @@ public class MonitorServiceImpl implements MonitorService {
     private CommandDispatcher dispatcher;
 
     // https://spring.io/guides/gs/scheduling-tasks/
-    // 60 * 60
-    @Scheduled(fixedRate = 5 * 1000) // elk uur
+    @Scheduled(fixedRate = 5 * 1000) // elke 5s
     @Override
     public Antwoord checkVervalData() {
 
@@ -80,60 +79,6 @@ public class MonitorServiceImpl implements MonitorService {
             }
         });
 
-        /*
-        List<MedicijnProduct> inhoud = voorraadRepo.geefInhoudKoelcel(koelCelId);
-        // https://stackoverflow.com/questions/10637369/compact-way-to-create-guava-multimaps
-
-        // vervallen producten per catalogus id opslaan
-        Multimap<Integer, MedicijnProduct> productPerCatalogusItemId = HashMultimap.create();
-
-        inhoud.forEach(medicijnProduct ->
-                productPerCatalogusItemId.put(medicijnProduct.getCatalogusItemId(), medicijnProduct));
-
-        // catalogus id vertalen naar een catalogus item
-        Multimap<CatalogusItem, MedicijnProduct> productPerCatalogusItem = HashMultimap.create();
-
-        productPerCatalogusItemId.keys().stream().distinct().forEach(id -> {
-            Collection<MedicijnProduct> producten = productPerCatalogusItemId.get(id);
-            Optional<CatalogusItem> catalogusItemOptional = catalogusItemRepo.zoekOpId(id);
-            if (catalogusItemOptional.isPresent()) {
-                CatalogusItem item = catalogusItemOptional.get();
-                productPerCatalogusItem.putAll(item, producten);
-            }
-        });
-
-        // afval per catalogus id bijhouden
-        Multimap<Integer, MedicijnProduct> afval = HashMultimap.create();
-
-        productPerCatalogusItem.keys().forEach(catalogusItem -> {
-            double gewensteTemperatuur = catalogusItem.getGewensteTemperatuur();
-            if (gewensteTemperatuur + TOEGELATEN_TEMPERATUUR_AFWIJKING < temperatuur) {
-                // product is slecht
-                afval.putAll(catalogusItem.getId(), productPerCatalogusItem.get(catalogusItem));
-            }
-        });
-
-        List<Integer> uniekeKeys = afval.keys().stream().distinct().collect(Collectors.toList());
-
-        // bij afval plaatsen en doorvoeren naar de databank
-        uniekeKeys.forEach(catalogusItemId -> {
-            List<MedicijnProduct> producten = afval.get(catalogusItemId).stream().
-                    filter(medicijnProduct -> !medicijnProduct.isGereserveerd() && !medicijnProduct.isVerkocht()).collect(Collectors.toList());
-
-            Optional<Voorraad> voorraadOptional = voorraadRepo.geef(catalogusItemId);
-
-            if (voorraadOptional.isPresent()) {
-                Voorraad voorraad = voorraadOptional.get();
-                voorraad.verwijder(producten);
-                voorraadRepo.slaOp(voorraad);
-
-                if (producten.size() > 0) {
-                    PlaatsBijAfvalCommand afvalCommand = new PlaatsBijAfvalCommand(catalogusItemId, producten.size());
-                    dispatcher.stuurPlaatsBijAfval(afvalCommand);
-                }
-            }
-        });
-*/
         return new Antwoord(Status.GELUKT, "");
     }
 }

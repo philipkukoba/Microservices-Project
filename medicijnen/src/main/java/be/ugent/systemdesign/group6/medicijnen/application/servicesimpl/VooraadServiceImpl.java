@@ -69,7 +69,7 @@ public class VooraadServiceImpl implements VoorraadService {
         try {
             koelcellen = rest.getForObject("http://" + koelcellenAPIuri + "/api/" + "koelcellen", KoelcelRestModel[].class);
         } catch (ResourceAccessException e) {
-            antwoordList.add(new Antwoord(Status.NIET_GELUKT, e.getMessage()));
+            antwoordList.add(new Antwoord(Status.NIET_GELUKT, "Items zullen worden toegoegd maar niet in een koelcel want"+e.getMessage()));
         }
 
         ///////////////////////////////////////////////////////////////////

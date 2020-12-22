@@ -62,16 +62,6 @@ services:
     restart: on-failure
     logging:
       driver: none 
-  gebruikers_db:
-    image: 'mongo:4.4'
-    container_name: gebruikers_db
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=admin
-      - MONGO_INITDB_DATABASE=gebuikers
-    restart: on-failure
-    logging:
-      driver: none 
   verzending_db:
     image: mysql:5.7
     command: --default-authentication-plugin=mysql_native_password
@@ -143,12 +133,6 @@ services:
     restart: on-failure
   gebruikers:
     build: ./gebruikers
-    links:
-      - gebruikers_db
-    depends_on:
-      - gebruikers_db
-    environment:
-      - URL=mongodb://admin:admin@gebruikers_db:27017/gebruikers
     restart: on-failure
   boekhoudsdienst:
     build: ./boekhoudsdienst
