@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: magazijn_db
+  name: magazijn-db
   labels:
-    app: magazijn_db
+    app: magazijn-db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: magazijn_db
+      app: magazijn-db
   template:
     metadata:
       labels:
-        app: magazijn_db
+        app: magazijn-db
     spec:
       containers:
-        - name: magazijn_db
+        - name: magazijn-db
           image: 'mysql:5.7'
           args: ["--default-authentication-plugin=mysql_native_password"]
           env:
@@ -28,3 +28,16 @@ spec:
           ports:
           - containerPort: 3306
             targetPort: 3306
+
+---
+
+apiVersion: v1
+kind: Service 
+metadata:
+  name: magazijn-db
+spec: 
+  selector:
+    app: magazijn-db
+  ports:
+    - port: 3306
+      targetPort: 3306
