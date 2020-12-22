@@ -109,7 +109,6 @@ app.get('/api/ticket', function (req, res) {
     });
 });
 
-
 app.post('/api/ticket/open', function (req, res) {
     //bij openen ticket wordt klantenId, bestellingId en probleem gegeven
     console.log(req.body.klantenId, req.body.bestellingsId, req.body.probleem);

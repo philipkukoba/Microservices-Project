@@ -1,5 +1,6 @@
-package be.ugent.systemdesign.group6.verzendingsdienst.API;
+package be.ugent.systemdesign.group6.verzendingsdienst.API.messaging;
 
+import be.ugent.systemdesign.group6.verzendingsdienst.API.messaging.Channels;
 import be.ugent.systemdesign.group6.verzendingsdienst.application.ResponseStatus;
 import be.ugent.systemdesign.group6.verzendingsdienst.application.command.AnnuleerBestellingCommand;
 import be.ugent.systemdesign.group6.verzendingsdienst.application.command.AnnuleerBestellingResponse;
@@ -50,9 +51,10 @@ public class MessageInputGateway {
     }
 
     //testing haalrolcontainerop
+    /*
     @StreamListener(Channels.HAAL_ROLCONTAINER_OP_COMMAND)
     public void haalRolContainerOpCommand(HaalRolContainerOpCommand command){
         commandHandler.haalRolcontainerOpCommand();
-    }
+    } */
 
 }
