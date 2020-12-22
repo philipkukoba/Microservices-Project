@@ -1,6 +1,6 @@
 package be.ugent.systemdesign.group6.medicijnen.infrastructure;
 
-import be.ugent.systemdesign.group6.medicijnen.application.query.ProductVoorraadReadModel;
+import be.ugent.systemdesign.group6.medicijnen.application.query.VoorraadReadModel;
 import be.ugent.systemdesign.group6.medicijnen.domain.CatalogusItem;
 import be.ugent.systemdesign.group6.medicijnen.domain.MedicijnProduct;
 import be.ugent.systemdesign.group6.medicijnen.infrastructure.datamodel.CatalogusItemDataModel;
@@ -34,7 +34,7 @@ public class Mapper {
                 voorschriftNoodzakelijk(domain.isVoorschriftNoodzakelijk()).build();
     }
 
-    public static ProductVoorraadReadModel mapToReadModel(int catalogusMedicijnId, int aantal) {
-        return ProductVoorraadReadModel.builder().medicijnId(catalogusMedicijnId).aantal(aantal).build();
+    public static VoorraadReadModel mapToReadModel(int catalogusMedicijnId, int aantal) {
+        return VoorraadReadModel.builder().medicijnId(catalogusMedicijnId).aantal(aantal).build();
     }
 }

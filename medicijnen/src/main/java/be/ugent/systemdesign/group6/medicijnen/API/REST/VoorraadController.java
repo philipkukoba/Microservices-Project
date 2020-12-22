@@ -3,8 +3,8 @@ package be.ugent.systemdesign.group6.medicijnen.API.REST;
 import be.ugent.systemdesign.group6.medicijnen.application.Antwoord;
 import be.ugent.systemdesign.group6.medicijnen.application.AntwoordMetData;
 import be.ugent.systemdesign.group6.medicijnen.application.Status;
-import be.ugent.systemdesign.group6.medicijnen.application.query.ProductVoorraadQuery;
-import be.ugent.systemdesign.group6.medicijnen.application.query.ProductVoorraadReadModel;
+import be.ugent.systemdesign.group6.medicijnen.application.query.VoorraadQuery;
+import be.ugent.systemdesign.group6.medicijnen.application.query.VoorraadReadModel;
 import be.ugent.systemdesign.group6.medicijnen.application.services.VoorraadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +23,11 @@ public class VoorraadController {
     private VoorraadService voorraadService;
 
     @Autowired
-    private ProductVoorraadQuery query;
+    private VoorraadQuery query;
 
     @GetMapping("/overzicht")
     public ResponseEntity geefOverzicht() {
-        List<ProductVoorraadReadModel> completeVoorraad = query.geefCompleteVoorraad();
+        List<VoorraadReadModel> completeVoorraad = query.geefCompleteVoorraad();
         // Dit lukt altijd
         AntwoordMetData antwoord = new AntwoordMetData(Status.GELUKT, "", completeVoorraad);
         return ResponseEntityBuilder.maakBoodschapMetData(antwoord);

@@ -34,7 +34,7 @@ public class MedicijnProduct {
         this.bestellingsId = bestellingsId;
     }
 
-    public boolean isGereserveerd() {
+    public boolean isBeschikbaar() {
         return this.bestellingsId != null;
     }
 

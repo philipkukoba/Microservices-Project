@@ -161,8 +161,6 @@ public class BestelServiceImpl implements BestelService {
 
         if (bestellingOptional.isPresent()) {
             Bestelling bestelling = bestellingOptional.get();
-            bestelling.bevestig();
-            bestellingsRepo.slaOp(bestelling);
 
             // voorraad object per medicijn uit catalogus bijhouden
             HashMap<Integer, Voorraad> voorraadPerMedicijn = new HashMap<>();

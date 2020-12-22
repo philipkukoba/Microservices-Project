@@ -34,7 +34,7 @@ public class MonitorServiceImpl implements MonitorService {
         List<Voorraad> voorraaden = voorraadRepo.geefAlles();
         voorraaden.forEach(voorraad -> {
             List<MedicijnProduct> medicijnen = voorraad.getNietVerkochteMedicijnen().stream().filter(medicijnProduct ->
-                    !medicijnProduct.isGereserveerd()).collect(Collectors.toList());
+                    !medicijnProduct.isBeschikbaar()).collect(Collectors.toList());
 
             // deel van de voorraad die vervallen is
             List<MedicijnProduct> medicijnenVervalDatumOverschreden = medicijnen.stream().
@@ -63,7 +63,7 @@ public class MonitorServiceImpl implements MonitorService {
         voorraaden.forEach(voorraad -> {
             if (!voorraad.isHetNogGoed(temperatuur)) {
                 List<MedicijnProduct> nietVerkochteMedicijnen = voorraad.getNietVerkochteMedicijnen().stream().
-                        filter(medicijnProduct -> !medicijnProduct.isGereserveerd()).collect(Collectors.toList());
+                        filter(medicijnProduct -> !medicijnProduct.isBeschikbaar()).collect(Collectors.toList());
 
                 List<MedicijnProduct> afval = nietVerkochteMedicijnen.stream().
                         filter(medicijnProduct -> medicijnProduct.getKoelCelId() != null &&

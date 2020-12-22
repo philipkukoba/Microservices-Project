@@ -40,7 +40,7 @@ public class CatalogusServiceImpl implements CatalogusService {
 
         // verwijderen van resterende voorraad
         int aantal = (int) voorraad.getNietVerkochteMedicijnen().stream().
-                filter(medicijnProduct -> !medicijnProduct.isGereserveerd()).count();
+                filter(medicijnProduct -> !medicijnProduct.isBeschikbaar()).count();
         if (aantal > 0) {
             PlaatsBijAfvalCommand afvalCommand = new PlaatsBijAfvalCommand(catalogusId, aantal);
             dispatcher.stuurPlaatsBijAfval(afvalCommand);

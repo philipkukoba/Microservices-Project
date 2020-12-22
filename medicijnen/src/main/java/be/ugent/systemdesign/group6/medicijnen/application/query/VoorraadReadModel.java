@@ -8,7 +8,7 @@ import lombok.Getter;
 @Builder
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class ProductVoorraadReadModel {
+public class VoorraadReadModel {
     // ReadModel om voor een CatalogusItem, het aantal items in de voorraad weer te geven
     private int medicijnId, aantal;
 }
