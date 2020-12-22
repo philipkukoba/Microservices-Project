@@ -10,6 +10,3 @@ spec:
       targetPort: 3000
   externalIPs:
     - 10.2.0.179
-
-
-    .default.svc.cluser.local

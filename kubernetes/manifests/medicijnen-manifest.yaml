@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: medicijnen-deployment
+  name: medicijnen
   labels:
     app: medicijnen
 spec:
@@ -15,7 +15,7 @@ spec:
           app: medicijnen
         spec:
           containers:
-            - name: medicijnen-container
+            - name: medicijnen
               image: medicijnen
               # args [""]
               env: # wijzigen
@@ -28,8 +28,7 @@ spec:
                 - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
                   value: "kafka:9092"
                 - name: EXTERNAL_API_KOELCEL_URI
-                  value: "http://koelcelmonitor:8000/koelcellen"
+                  value: "http://koelcelmonitor:8000/koelcellen" # adres nog aanpassen
           ports:
             - containerPort: 8080
-              name: medicijnen
 

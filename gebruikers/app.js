@@ -4,17 +4,6 @@ const app = express();
 
 const mongoose = require('mongoose');
 
-// https://stackabuse.com/command-line-arguments-in-node-js/
-const minimist = require('minimist');
-
-/*
-const args=minimist(process.argv.slice(2), {
-    default:{
-        db: 'mongodb://admin:admin@localhost:27017/gebruikers'
-    }
-});
-*/
-
 const url=process.env.URL || 'mongodb://localhost:27017/gebruikers';
 
 setTimeout(()=>{

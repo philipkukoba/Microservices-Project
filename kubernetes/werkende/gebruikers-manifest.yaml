@@ -15,8 +15,11 @@ spec:
         app: gebruikers
     spec:
       containers:
-        - name: gebruikers
-          image: gpveeckh/gebruikers
-          args: ["--db","mongodb://admin:admin@gebruikers-db-container:27017/gebruikers"]
+        - name: gebruikers-container
+          image: gpveeckh/gebruikers:latest
+          imagePullPolicy: Always
+          env:
+            - name: URL
+              value: "mongodb://gebruikers-db.default.svc.cluster.local/gebruikers"
           ports:
             - containerPort: 3000
