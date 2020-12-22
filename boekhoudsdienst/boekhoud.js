@@ -118,8 +118,8 @@ function orderVerzonden(id) {
                 console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
                 console.log('body:', body); // Print the HTML for the Google homepage.
                 //Email uit body halen en email sturen
-                email = body.email;
-                naam = body.naam;
+                email = JSON.parse(body).email;
+                naam = JSON.parse(body).naam;
                 let info = transporteur.sendMail({
                     from: "sysdes6@gmail.com",
                     to: email,
@@ -151,7 +151,7 @@ function maakFactuur(bestellingsId, klantenId, medicijnen) {
         console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
         console.log('body:', body); // Print the HTML for the Google homepage.
         //Email uit body halen en email sturen
-        let email = body.email;
+        let email = JSON.parse(body).email;
         let info = transporteur.sendMail({
             from: "sysdes6@gmail.com",
             to: email,
