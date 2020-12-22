@@ -27,3 +27,16 @@ spec:
               value: "mongodb://admin:admin@bestellingen-db.default.svc.cluster.local/bestellingen?authSource=admin"
           ports: 
             - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: bestellingen
+spec:
+  selector:
+    app: bestellingen
+  ports:
+    - port: 8080
+      targetPort: 8080
