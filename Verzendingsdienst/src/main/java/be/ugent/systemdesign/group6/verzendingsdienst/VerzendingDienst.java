@@ -6,7 +6,7 @@ import be.ugent.systemdesign.group6.verzendingsdienst.application.command.Comman
 import be.ugent.systemdesign.group6.verzendingsdienst.application.command.PlaatsGeannuleerdeBestellingTerugCommand;
 import be.ugent.systemdesign.group6.verzendingsdienst.application.event.EventDispatcher;
 import be.ugent.systemdesign.group6.verzendingsdienst.application.event.OrderVerzondenEvent;
-import org.springframework.boot.CommandLineRunner;
+//import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -23,6 +23,7 @@ public class VerzendingDienst {
 		SpringApplication.run(VerzendingDienst.class, args);
 	}
 
+	/*
 	//testing
 	@Bean
 	CommandLineRunner makeCommandLineRunner1(CommandDispatcher commandDispatcher){
@@ -40,6 +41,6 @@ public class VerzendingDienst {
 	CommandLineRunner makeCommandLineRunner3(EventDispatcher eventDispatcher){
 		return (args) ->
 		{ eventDispatcher.publishOrderVerzondenEvent(new OrderVerzondenEvent("a3")); };
-	}
+	} */
 
 }
