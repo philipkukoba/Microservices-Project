@@ -15,7 +15,7 @@ spec:
         app: gebruikers
     spec:
       containers:
-        - name: gebruikers-container
+        - name: gebruikers
           image: gpveeckh/gebruikers:latest
           imagePullPolicy: Always
           env:
