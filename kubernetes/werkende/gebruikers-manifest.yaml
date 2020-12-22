@@ -18,9 +18,6 @@ spec:
         - name: gebruikers
           image: gpveeckh/gebruikers:latest
           imagePullPolicy: Always
-          env:
-            - name: URL
-              value: "mongodb://gebruikers-db.default.svc.cluster.local/gebruikers"
           ports:
             - containerPort: 3000
 

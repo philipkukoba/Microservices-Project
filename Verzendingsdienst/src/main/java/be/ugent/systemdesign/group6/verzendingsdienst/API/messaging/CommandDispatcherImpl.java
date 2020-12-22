@@ -1,4 +1,4 @@
-package be.ugent.systemdesign.group6.verzendingsdienst.API;
+package be.ugent.systemdesign.group6.verzendingsdienst.API.messaging;
 
 import be.ugent.systemdesign.group6.verzendingsdienst.application.command.BestellingGeannuleerdCommand;
 import be.ugent.systemdesign.group6.verzendingsdienst.application.command.CommandDispatcher;

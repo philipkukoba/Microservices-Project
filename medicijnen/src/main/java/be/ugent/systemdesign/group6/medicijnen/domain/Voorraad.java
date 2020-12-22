@@ -54,7 +54,7 @@ public class Voorraad extends AggregateRoot {
         int i = 0;
 
         while (nogTeReserveren > 0 && i < medicijnen.size()) {
-            if (!medicijnen.get(i).isGereserveerd()) {
+            if (!medicijnen.get(i).isBeschikbaar()) {
                 medicijnen.get(i).reserveer(bestellingsId);
                 nogTeReserveren--;
             }
@@ -71,7 +71,7 @@ public class Voorraad extends AggregateRoot {
         boolean bovenKritischeWaarde = catalogusItem != null && getNietVerkochteMedicijnen().size() >= catalogusItem.getKritischeWaarde();
 
         medicijnen.forEach(medicijnProduct -> {
-            if (!medicijnProduct.isVerkocht() && medicijnProduct.isGereserveerd() &&
+            if (!medicijnProduct.isVerkocht() && medicijnProduct.isBeschikbaar() &&
                     medicijnProduct.getBestellingsId() != null &&
                     medicijnProduct.getBestellingsId().equals(bestellingsId)) {
                 medicijnProduct.bevestig();
@@ -95,7 +95,7 @@ public class Voorraad extends AggregateRoot {
 
     public void verwijderUitCatalogus() {
         List<MedicijnProduct> teVerwijderen = getNietVerkochteMedicijnen().stream().
-                filter(medicijnProduct -> !medicijnProduct.isGereserveerd()).collect(Collectors.toList());
+                filter(medicijnProduct -> !medicijnProduct.isBeschikbaar()).collect(Collectors.toList());
         medicijnen.removeAll(teVerwijderen);
         voegDomainEventToe(new MedicijnCatalogusVerwijderdEvent(catalogusItem.getId()));
     }

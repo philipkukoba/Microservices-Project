@@ -39,16 +39,16 @@ public class GatewayApplication {
 	@Bean
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder){
 		return builder.routes().
-				route(r->r.host("*").and().path("/api/voorraad/**").uri("http://medicijnen:8080/api/voorraad/")).
-				route(r->r.host("*").and().path("/api/catalogus/**").uri("http://medicijnen:8080/api/catalogus/")).
-				route(r->r.host("*").and().path("/api/order/afval/**").uri("http://order:2222/api/order/afval/")).
-				route(r->r.host("*").and().path("/api/gebruikers/**").uri("http://gebruikers:3000/api/gebruikers/")).
-				route(r->r.host("*").and().path("/api/bestellingen/**").uri("http://bestellingen:8080/api/bestellingen/")).
-				route(r->r.host("*").and().path("/api/statistieken/**").uri("http://bestellingen:8080/api/statistieken/")).
-				route(r->r.host("*").and().path("/api/koelcellen/**").uri("http://koelcelmonitor:8000/api/koelcellen/")).
-				route(r->r.host("*").and().path("/api/ticket/**").uri("http://ticketdienst:3000/api/ticket/")).
-				route(r->r.host("*").and().path("/api/boekhoud/**").uri("http://boekhoudsdienst:3000/api/boekhoud/")).
-				route(r->r.host("*").and().path("/api/verzending/**").uri("http://verzendingsdienst:8080/api/bpost/")).
+				route(r->r.host("*").and().path("/api/voorraad/**").uri("medicijnen.default.svc.cluster.local:8080/api/voorraad/")).
+				route(r->r.host("*").and().path("/api/catalogus/**").uri("medicijnen.default.svc.cluster.local:8080/api/catalogus/")).
+				route(r->r.host("*").and().path("/api/order/afval/**").uri("order.default.svc.cluster.local:2222/api/order/afval/")).
+				route(r->r.host("*").and().path("/api/gebruikers/**").uri("gebruikers.default.svc.cluster.local:3000/api/gebruikers/")).
+				route(r->r.host("*").and().path("/api/bestellingen/**").uri("bestellingen.default.svc.cluster.local:8080/api/bestellingen/")).
+				route(r->r.host("*").and().path("/api/statistieken/**").uri("bestellingen.default.svc.cluster.local:8080/api/statistieken/")).
+				route(r->r.host("*").and().path("/api/koelcellen/**").uri("koelcelmonitor.default.svc.cluster.local:8000/api/koelcellen/")).
+				route(r->r.host("*").and().path("/api/ticket/**").uri("ticketdienst.default.svc.cluster.local:3000/api/ticket/")).
+				route(r->r.host("*").and().path("/api/boekhoud/**").uri("boekhoudsdienst.default.svc.cluster.local:3000/api/boekhoud/")).
+				route(r->r.host("*").and().path("/api/bpost/**").uri("verzendingsdienst.default.svc.cluster.local:8080/api/bpost/")).
 				build();
 	}
 }

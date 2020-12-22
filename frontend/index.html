@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="javascript.js" type="text/javascript"></script>
+
+</head>
+
+<body style="padding:15px; background-color:LightGray;">
+    <h1>Webshop medicijnen - Groep 6</h1>
+    <p>Welkom op deze webshop voor pharmaceutische producten. Als klant kan u producten bestellen bij ons.
+        Medicijnen die een voorschrift vereisen kan u laten leveren bij een apotheker bij u in de buurt. Andere
+        producten leveren we aan huis.
+    </p>
+
+
+    <div STYLE="border-style: dotted;">
+        <h2><i class="glyphicon glyphicon-user"></i> Klant</h2>
+
+        <p><i class="glyphicon glyphicon-info-sign"></i><i> Bij het plaatsen van een bestelling is het mogelijk dat de
+                betaling mislukt. Voor u een bestelling plaatst, haalt u eerst best het overzicht van de voorraad op als
+                Magazijnbeheerder, om te weten welke medicijnen besteld kunnen worden. Als Marketingmedewerker kan u ook
+                eerst iets toevoegen aan de catalogus. </i></p>
+        <table style="margin:15px">
+            <col width="900px" />
+
+
+            <tr>
+                <td>
+                    <div>
+                        <h3>Account aanmaken</h3>
+                        <form id="accountAanmakenForm">
+                            <label for="naam">Naam:</label>
+                            <input type="text" id="naam" name="naam"><br>
+                            <label for="email">Email:</label>
+                            <input type="text" id="email" name="email">
+                            <input type="submit">
+                        </form>
+
+                    </div>
+                </td>
+                <td>
+                    Antwoord <br>
+                    <textarea disabled id="accountAanmakenResponse"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div>
+                        <h3>Bestelling plaatsen</h3>
+                        <form id="bestellingPlaatsenKlantForm">
+                            <i>Dit kan ingevuld worden met een dummy id (geen mail zal verzonden worden) of met de id
+                                die teruggegeven wordt bij het aanmaken van een account.</i> <br>
+                            <label for="klantenId">Id van de klant:</label>
+                            <input type="text" id="klantenId" name="klantenId"><br>
+                            <i>Vul dit in met een dummy adres.</i> <br>
+                            <label for="thuisadres">Thuisadres:</label>
+                            <input type="text" id="thuisadres" name="thuisadres"><br>
+                            <i>Vul dit in met een dummy adres.</i> <br>
+                            <label for="apotheekadres">Apotheekadres:</label>
+                            <input type="text" id="apotheekadres" name="apotheekadres"><br>
+                            <i>Geef hier de medicijnen als: id aantal id aantal ... (GEEN DUMMY zie
+                                Magazijnbeheerder)</i> <br>
+                            <label for="medicijnen">Medicijnen:</label>
+                            <input type="text" id="medicijnen" name="medicijnen">
+                            <input type="submit">
+                        </form>
+                    </div>
+
+                </td>
+
+                <td>
+                    Antwoord <br>
+                    <textarea disabled id="bestellingPlaatsenKlantResponse"></textarea>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>
+                    <h3>Bestelling annuleren</h3>
+                    <form id="bestellingAnnulerenKlantForm">
+                        <i>Geef hier het id van de bestelling die je wilt annuleren. Deze id krijgt men terug als
+                            response bij het plaatsen van de bestelling of kan men uit de databank van de
+                            bestellingsdienst halen. Indien een bestelling al verzonden is kan de klant deze niet meer
+                            annuleren en zal een gepaste foutboodschap getoond worden.</i><br>
+                        <label for="bestellingsIdAnnulerenKlant">Bestellings id:</label>
+                        <input type="text" id="bestellingsIdAnnulerenKlant" name="bestellingsIdAnnulerenKlant">
+                        <input type="submit">
+
+                    </form>
+                </td>
+
+                <td>
+                    Antwoord <br>
+                    <textarea disabled id="bestellingAnnulerenKlantResponse"></textarea>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>
+                    <div>
+                        <h3>Bestelling terugsturen</h3>
+                        <form id="bestellingTerugsturenKlantForm">
+                            <i>Geef hier het id van de bestelling die je wilt terugsturen. Dit mag een dummy
+                                zijn.</i><br>
+                            <label for="bestellingsIdTerugsturenKlant">Bestellings id:</label>
+                            <input type="text" id="bestellingsIdTerugsturenKlant" name="bestellingsIdTerugsturenKlant">
+                            <input type="submit">
+                        </form>
+                    </div>
+                </td>
+
+                <td>
+                    Antwoord <br>
+                    <textarea disabled id="bestellingTerugsturenKlantResponse"></textarea>
+                </td>
+
+            </tr>
+
+
+        </table>
+
+    </div>
+    <div STYLE="border-style: dotted;">
+        <h2><i class="glyphicon glyphicon-user"></i> Klantendienstmedewerker</h2>
+        <p><i class="glyphicon glyphicon-info-sign"></i><i> Deze kan de tickets openen, behandelen en sluiten. Bij het
+                behandelen van een ticket wordt er random bepaald wat er gebeurt: de enige actie die ook effectief
+                gebeurt is het plaatsen van een retour bij het afval. </i></p>
+
+        <table style="margin:15px">
+            <col width="900px" />
+
+
+            <tr>
+                <td>
+                    <div>
+                        <h3>Tickets opvragen</h3>
+                        Dit zal alle open tickets ophalen die nog niet behandeld worden door een medewerker.
+                        <br>
+                        <button id="haalTicketsOp">Toon tickets!</button>
+
+                    </div>
+                </td>
+                <td>
+                    Antwoord <br>
+                    <textarea disabled id="haalTicketsOpResponse"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+
+                    <h3>Ticket openen</h3>
+                    <form id="openTicketForm">
+                        Al deze data mag dummy zijn.<br>
+                        <label for="klantenIdOpenTicket">Id van de klant:</label>
+                        <input type="text" id="klantenIdOpenTicket" name="klantenIdOpenTicket"> <br>
+                        <label for="bestellingsIdOpenTicket">Bestellings id:</label>
+                        <input type="text" id="bestellingsIdOpenTicket" name="bestellingsIdOpenTicket"> <br>
+                        <label for="probleemOpenTicket">Probleem omschrijving:</label>
+                        <input type="text" id="probleemOpenTicket" name="probleemOpenTicket">
+                        <input type="submit" id="submitOpenTicket">
+                    </form>
+
+                </td>
+                <td>
+                    Antwoord <br>
+                    <textarea disabled id="openTicketResponse"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+
+                    <h3>Ticket behandelen</h3>
+                    <form id="behandelTicketForm">
+                        Op deze manier kan een medewerker aangeven dat hij een open ticket zal behandelen. Het ticket
+                        zal ook niet meer verschijnen bij het overzicht van open tickets. Bijgevolg zijn de andere
+                        medewerkers ook op de hoogte.<br>
+                        <br>
+                        <i>Deze id wordt teruggegeven bij het openen van een ticket.</i> <br>
+                        <label for="ticketId">Id van het ticket:</label>
+                        <input type="int" id="ticketId" name="ticketId">
+                        <input type="submit">
+                    </form>
+                </td>
+                <td>
+                    Antwoord <br>
+                    <textarea disabled id="behandelTicketResponse"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+
+                    <h3>Ticket sluiten</h3>
+                    <form id="sluitTicketForm">
+                        Op deze manier kan een medewerker aangeven dat een probleem van een bepaald ticket opgelost
+                        is.<br>
+                        <br>
+                        <i>Deze id wordt teruggegeven bij het openen van een ticket.</i> <br>
+                        <label for="id">Id van het ticket:</label>
+                        <input type="int" id="id" name="id">
+                        <input type="submit">
+                    </form>
+                </td>
+                <td>
+                    Antwoord <br>
+                    <textarea disabled id="sluitTicketResponse"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div>
+                        <h3>Bestelling plaatsen</h3>
+                        Het is voor een medewerker ook mogelijk om een bestelling te plaatsen in naam van een klant.
+                        <form id="bestellingPlaatsenMedewerkerForm">
+                            <i>Dit kan ingevuld worden met een dummy id (geen mail zal verzonden worden) of met de id
+                                die teruggegeven wordt bij het aanmaken van een account.</i> <br>
+                            <label for="klantenIdbestellingPlaatsenMedewerker">Id van de klant:</label>
+                            <input type="text" id="klantenIdbestellingPlaatsenMedewerker"
+                                name="klantenIdbestellingPlaatsenMedewerker"><br>
+                            <i>Vul dit in met een dummy adres.</i> <br>
+                            <label for="thuisadresbestellingPlaatsenMedewerker">Thuisadres:</label>
+                            <input type="text" id="thuisadresbestellingPlaatsenMedewerker"
+                                name="thuisadresbestellingPlaatsenMedewerker"><br>
+                            <i>Vul dit in met een dummy adres.</i> <br>
+                            <label for="apotheekadresbestellingPlaatsenMedewerker">Apotheekadres:</label>
+                            <input type="text" id="apotheekadresbestellingPlaatsenMedewerker"
+                                name="apotheekadresbestellingPlaatsenMedewerker"><br>
+                            <i>Geef hier de medicijnen als: id aantal id aantal ... (GEEN DUMMY zie
+                                Magazijnbeheerder)</i> <br>
+                            <label for="medicijnenbestellingPlaatsenMedewerker">Medicijnen:</label>
+                            <input type="text" id="medicijnenbestellingPlaatsenMedewerker"
+                                name="medicijnenbestellingPlaatsenMedewerker">
+                            <input type="submit">
+                        </form>
+                    </div>
+
+                </td>
+
+                <td>
+                    Antwoord <br>
+                    <textarea disabled id="bestellingPlaatsenMedewerkerResponse"></textarea>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>
+                    <div>
+                        <h3>Bestelling annuleren</h3>
+                        <form id="bestellingAnnulerenMedewerkerForm">
+                            <i>Geef hier het id van de bestelling die je wilt annuleren. Deze id krijgt men terug als
+                                response bij het plaatsen van de bestelling of kan men uit de databank van de
+                                bestellingsdienst halen. Indien een bestelling al verzonden is kan de klant deze niet
+                                meer annuleren en zal een gepaste foutboodschap getoond worden.</i><br>
+                            <label for="bestellingsId">Bestellings id:</label>
+                            <input type="text" id="bestellingsId" name="bestellingsId">
+                            <input type="submit">
+                        </form>
+                    </div>
+                </td>
+
+                <td>
+                    Antwoord <br>
+                    <textarea disabled id="bestellingAnnulerenMedewerkerResponse"></textarea>
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <div STYLE="border-style: dotted;">
+        <h2><i class="glyphicon glyphicon-user"></i> Marketingmedewerker</h2>
+        <p><i class="glyphicon glyphicon-info-sign"></i><i> Een marketing medewerker kan medicijnen toevoegen aan
+                en verwijderen uit de catalogus. Hij kan ook opdragen om de nieuwsbrief uit te sturen, statistieken
+                over de verkoop op vragen en nieuwe medicijnen bestellen. </i></p>
+
+        <table style="margin:15px">
+            <col width="900px" />
+
+            <tr>
+                <td>
+                    <div>
+                        <h3>Statistieken opvragen</h3>
+                        Note: we halen hier enkel de gegevens op waarmee statistieken gemaakt kunnen worden.
+                        We maken niet effectief statistieken. <br>
+
+
+                    </div>
+                </td>
+                <td>
+                    Antwoord <br>
+                    <textarea disabled id="statistiekenResponse"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div>
+                        <h3>Nieuwsbrief uitsturen</h3>
+                        Dit zal de nieuwbrief uitsturen naar alle klanten. Maak eerst een account aan met een bestaand
+                        emailadres om een mail te ontvangen! Actie kan uitgevoerd worden met dummy.
+                        <br>
+                        <form>
+                            <i>Geef hier de inhoud van de nieuwsbrief.</i> <br>
+                            <label for="content">Inhoud nieuwbrief:</label>
+                            <input type="text" id="content" name="content">
+                            <input type="submit" id="verzendNieuwsbrief">
+                        </form>
+
+                    </div>
+                </td>
+                <td>
+                    Antwoord <br>
+                    <textarea disabled id="nieuwsbriefResponse"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div>
+                        <h3>Nieuwe medicijnen aan de catalogus toevoegen</h3>
+                        Dit zal nieuwe medicijnen aan de catalogus toevoegen. (Pas op dit wilt niet zeggen dar er onmiddellijk voorraad is, daarvoor moet er een lading verwerkt worden.)
+                        <br>
+                        <form>
+                    
+                            <label for="catalogusNaam">Naam van nieuw medicijn:</label>
+                            <input type="text" id="catalogusNaam" name="catalogusNaam"> <br>
+
+                            <label for="beschrijving">Beschrijving:</label>
+                            <input type="text" id="beschrijving" name="beschrijving"> <br>
+
+                            <label for="voorschriftNoodzakelijk">Voorschrift :</label>
+                            <input type="checkbox" id="voorschriftNoodzakelijk" name="voorschriftNoodzakelijk"> <br>
+
+                            <i>Indien een medicijn niet in een koelcel bewaard moet worden vul hier dan een temperatuur hoger dan 15 in. </i> <br>
+                            <label for="gewensteTemperatuur">Gewenste bewaar temperatuur:</label>
+                            <input type="text" id="gewensteTemperatuur" name="gewensteTemperatuur"> <br>
+                            
+                            <i>De kritische waarde is de hoeveelheid die minimum gewenst is in de voorraad.</i> <br>
+                            <label for="kritischeWaarde">KritischeWaarde:</label>
+                            <input type="number" id="kritischeWaarde" name="kritischeWaarde"> <br>
+                            
+                            <label for="prijs">Prijs:</label>
+                            <input type="text" id="prijs" name="prijs">
+                            
+                            <input type="submit" id="voegToeAanCatalogus">
+                        </form>
+
+                    </div>
+                </td>
+                <td>
+                    Antwoord <br>
+                    <textarea disabled id="voegToeAanCatalogusResponse"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div>
+                        <h3>Medicijnen uit de catalogus verwijderen</h3>
+                        Dit zal medicijnen uit de catalogus verwijderen, bijgevolg zal het ook uit het magazijn verwijderd worden en bij het afval geplaatst worden. 
+                        <br>
+                        <form>
+                            <label for="teVerwijderenId">Id van te verwijderen medicijn:</label>
+                            <input type="number" id="teVerwijderenId" name="teVerwijderenId">
+
+                            <input type="submit" id="verwijderUitCatalogus">
+                        </form>
+
+                    </div>
+                </td>
+                <td>
+                    Antwoord <br>
+                    <textarea disabled id="verwijderUitCatalogusResponse"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div>
+                        <h3>Nieuwe medicijnen bestellen</h3>
+                        <form>
+                            <label for="medicijn">Medicijn:</label>
+                            <input type="text" id="medicijn" name="medicijn"> <br>
+                            <label for="aantal">Aantal:</label>
+                            <input type="text" id="aantal" name="aantal">
+                            <input type="submit" id="bestelMedicijnBtn">
+                        </form>
+
+                    </div>
+                </td>
+                <td>
+                    Antwoord <br>
+                    <textarea disabled id="bestelMedicijnResponse"></textarea>
+                </td>
+            </tr>
+
+
+
+        </table>
+
+    </div>
+    <div STYLE="border-style: dotted;">
+        <h2><i class="glyphicon glyphicon-user"></i> Koerier</h2>
+
+        <p><i class="glyphicon glyphicon-info-sign"></i><i>Druk op de onderstaande knop om de koerier de rolcontainer te
+                laten ophalen</i></p>
+        <button id="haalRolcontainerOp">Haal rolcoontainer op</button>
+        <br>
+        <textarea disabled id="rolcontainerOpgehaaldResponse"></textarea>
+    </div>
+    <div STYLE="border-style: dotted;">
+        <h2><i class="glyphicon glyphicon-user"></i> Transporteur</h2>
+        <p><i class="glyphicon glyphicon-info-sign"></i><i> De transporteur levert een lading nieuwe medicijnen aan. Hij
+                vermeldt van elk medicijn (op naam), hoeveel 'doosjes' met datum X zijn geleverd. Deze worden toegevoegd
+                aan de voorraad en
+                aan een koelcel indien noodzakelijk.
+            </i></p>
+        <button id="verwerkLading">Voeg deze lading toe aan de voorraad</button>
+
+        <table style="margin:15px">
+            <col width="900px" />
+            <tr>
+                <td>
+                    <textarea id="lading" style="height: 300px; width: 500px;">
+{
+    "Pijnstiller A":{
+        "2030-10-05":3,
+        "2073-05-21":3
+    },
+    "Pijnstiller B":{
+        "2050-12-30":4
+    }
+}
+                            </textarea>
+                </td>
+                <td>
+                    Antwoord <br>
+                    <textarea disabled id="verwerkLadingResponse"></textarea>
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+    <div STYLE="border-style: dotted;">
+        <h2><i class="glyphicon glyphicon-user"></i> Afvalophaaldienst</h2>
+        <p><i class="glyphicon glyphicon-info-sign"></i><i> Het is de bedoeling dat er via deze knop gemeld wordt
+                wanneer het afval opgehaald werd door de afvalophaaldienst. </i></p>
+        <button id="haalAfvalOpButton">Haal op!</button>
+        <br>
+        <textarea disabled id="afvalOpgehaaldResponse"></textarea>
+    </div>
+    <div STYLE="border-style: dotted;">
+        <h2><i class="glyphicon glyphicon-user"></i> Magazijnbeheerder</h2>
+        <p><i class="glyphicon glyphicon-info-sign"></i><i> </i></p>
+
+        <button id="geefOverzichtButton">Geef overzicht!</button>
+        <br>
+        <table style="margin:15px">
+            <col width="900px" />
+            <tr>
+                <td>
+                <td>
+                    Antwoord <br>
+                    <textarea disabled id="geefOverzichtResponse"></textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div STYLE="border-style: dotted;">
+        <h2><i class="glyphicon glyphicon-user"> </i> Boekhouder</h2>
+        <p><i class="glyphicon glyphicon-info-sign"></i>Er wordt een overzicht van de voorraad gevraagd.
+            Dit is in de vorm van een lijst met voor elk beschikbaar catalogus item in de voorraad
+            een entry die het id van het medicijn uit de catalogus en het aantal in de voorraad bevat.<i> De Boekhouder
+                kan de leverancier betalen </i></p>
+        <table style="margin:15px">
+            <col width="900px" />
+            <tr>
+                <td>
+                    <div>
+                        <h3>Leverancier betalen</h3>
+                        <form>
+                            <label for="leverancier">Leverancier:</label>
+                            <input type="text" id="leverancier" name="leverancier"> <br>
+                            <label for="bedrag">Bedrag:</label>
+                            <input type="text" id="bedrag" name="bedrag">
+                            <input type="submit" id="betaalLeverancierBtn">
+                        </form>
+
+                    </div>
+                </td>
+                <td>
+                    Antwoord <br>
+                    <textarea disabled id="betaalLeverancierResponse"></textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+<footer>Systeemontwerp project - 2020 - groep 6</footer>
+
+</html>

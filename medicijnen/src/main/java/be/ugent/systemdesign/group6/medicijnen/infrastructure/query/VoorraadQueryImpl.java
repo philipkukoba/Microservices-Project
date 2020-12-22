@@ -1,7 +1,7 @@
 package be.ugent.systemdesign.group6.medicijnen.infrastructure.query;
 
-import be.ugent.systemdesign.group6.medicijnen.application.query.ProductVoorraadQuery;
-import be.ugent.systemdesign.group6.medicijnen.application.query.ProductVoorraadReadModel;
+import be.ugent.systemdesign.group6.medicijnen.application.query.VoorraadQuery;
+import be.ugent.systemdesign.group6.medicijnen.application.query.VoorraadReadModel;
 import be.ugent.systemdesign.group6.medicijnen.infrastructure.Mapper;
 import be.ugent.systemdesign.group6.medicijnen.infrastructure.datamodel.MedicijnProductDataModel;
 import be.ugent.systemdesign.group6.medicijnen.infrastructure.repositories.MedicijnProductDataModelRepository;
@@ -15,13 +15,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class ProductVoorraadQueryImpl implements ProductVoorraadQuery {
+public class VoorraadQueryImpl implements VoorraadQuery {
 
     @Autowired
     private MedicijnProductDataModelRepository repo;
 
     @Override
-    public List<ProductVoorraadReadModel> geefCompleteVoorraad() {
+    public List<VoorraadReadModel> geefCompleteVoorraad() {
         // de volledige voorraad ophalen
         List<MedicijnProductDataModel> producten = repo.findAllByBestellingsIdNullAndVerkochtFalse();
 
@@ -30,11 +30,11 @@ public class ProductVoorraadQueryImpl implements ProductVoorraadQuery {
         producten.forEach(medicijnProductDataModel ->
                 productenPerCatalogusItemId.put(medicijnProductDataModel.getCatalogusItemId(), medicijnProductDataModel));
 
-        List<ProductVoorraadReadModel> readModels = new ArrayList<>();
+        List<VoorraadReadModel> readModels = new ArrayList<>();
 
         // readmodels construeren
         productenPerCatalogusItemId.keys().stream().distinct().collect(Collectors.toList()).forEach(id -> {
-            ProductVoorraadReadModel readModel = Mapper.mapToReadModel(id, productenPerCatalogusItemId.get(id).size());
+            VoorraadReadModel readModel = Mapper.mapToReadModel(id, productenPerCatalogusItemId.get(id).size());
             readModels.add(readModel);
         });
 

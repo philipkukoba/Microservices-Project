@@ -1,4 +1,4 @@
-package be.ugent.systemdesign.group6.verzendingsdienst.API;
+package be.ugent.systemdesign.group6.verzendingsdienst.API.messaging;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
@@ -44,6 +44,6 @@ public interface Channels {
     MessageChannel annuleerBestellingResponse();
 
     //testing
-    @Input(HAAL_ROLCONTAINER_OP_COMMAND)
-    SubscribableChannel haalRolContainerOp();
+    //@Input(HAAL_ROLCONTAINER_OP_COMMAND)
+    //SubscribableChannel haalRolContainerOp();
 }
