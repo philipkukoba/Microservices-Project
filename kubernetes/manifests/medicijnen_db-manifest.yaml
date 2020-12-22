@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: medicijnen-db
+  labels:
+    app: medicijnen-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: medicijnen-db
+  template:
+    metadata:
+      labels:
+        app: medicijnen-db
+    spec:
+      containers:
+        - name: medicijnen-db
+          image: postgres:13.1
+          env:
+            - name: POSTGRES_DB
+              value: "medicijnen"
+            - name: POSTGRES_USER
+              value: "admin"
+            - name: POSTGRES_PASSWORD
+              value: "admin"
+          ports:
+            - containerPort: 5432

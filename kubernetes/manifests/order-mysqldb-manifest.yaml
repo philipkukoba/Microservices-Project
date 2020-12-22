@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: magazijn_db
+  labels:
+    app: magazijn_db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: magazijn_db
+  template:
+    metadata:
+      labels:
+        app: magazijn_db
+    spec:
+      containers:
+        - name: magazijn_db
+          image: 'mysql:5.7'
+          args: ["--default-authentication-plugin=mysql_native_password"]
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "root"
+            - name: MYSQL_USER
+              value: "root"
+            - name: MYSQL_DATABASE
+              value: "Order"
+          ports:
+          - containerPort: 3306
+            targetPort: 3306
