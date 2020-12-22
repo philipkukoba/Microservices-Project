@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ticketdienst
+  labels:
+    app: ticketdienst
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ticketdienst
+  template:
+    metadata:
+      labels:
+        app: ticketdienst
+    spec:
+      containers:
+        - name: ticketdienst
+          image: brechtdbaer/ticketdienst:latest
+          imagePullPolicy: Always
+          args:
+            ["--broker", "bus.default.svc.cluster.local:9092"]
+          ports:
+            - containerPort: 3000
