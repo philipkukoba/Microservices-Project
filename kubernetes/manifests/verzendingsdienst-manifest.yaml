@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: verzendingsdienst-deployment
+  name: verzendingsdienst
   labels:
     app: verzendingsdienst
 spec:
@@ -16,15 +16,13 @@ spec:
       spec:
         containers: 
           - name: verzendingsdienst
-            image: pkukoba/verzendingsdienst
+            image: pkukoba/verzendingsdienst:latest
             env: 
               - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
                 value: "kafka:9092"
               - name: SPRING_DATASOURCE_URL
-                value: "jdbc:mysql://verzending_db:3306/pakketten"
+                value: "jdbc:mysql://pakketten.default.svc.cluster.local:3306/pakketten"
               - name: SPRING_DATASOURCE_USERNAME
                 value: "root"
               - name: SPRING_DATASOURCE_PASSWORD
                 value: "root"
-            # ports:
-            #  containerPort: ????

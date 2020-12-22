@@ -27,7 +27,6 @@ spec:
               value: "pakketten"
           ports:
           - containerPort: 3306
-            targetPort: 3306
 
 ---
 
@@ -39,4 +38,5 @@ spec:
   selector:
     app: pakketten
   ports:
-    -port: 3306
+    - port: 3306
+      targetPort: 3306
