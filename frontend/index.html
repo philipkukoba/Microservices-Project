@@ -104,13 +104,13 @@
                 <td>
                     <div>
                         <h3>Bestelling terugsturen</h3>
-                        <form id="bestellingTerugsturenKlantForm">
+                        <div>
                             <i>Geef hier het id van de bestelling die je wilt terugsturen. Dit mag een dummy
                                 zijn.</i><br>
                             <label for="bestellingsIdTerugsturenKlant">Bestellings id:</label>
                             <input type="text" id="bestellingsIdTerugsturenKlant" name="bestellingsIdTerugsturenKlant">
-                            <input type="submit">
-                        </form>
+                            <button id="stuurBestellingTerugKnop">Stuur terug</button>
+                            </div>
                     </div>
                 </td>
 
@@ -177,7 +177,7 @@
                 <td>
 
                     <h3>Ticket behandelen</h3>
-                    <form id="behandelTicketForm">
+                    <div>
                         Op deze manier kan een medewerker aangeven dat hij een open ticket zal behandelen. Het ticket
                         zal ook niet meer verschijnen bij het overzicht van open tickets. Bijgevolg zijn de andere
                         medewerkers ook op de hoogte.<br>
@@ -185,8 +185,8 @@
                         <i>Deze id wordt teruggegeven bij het openen van een ticket.</i> <br>
                         <label for="ticketId">Id van het ticket:</label>
                         <input type="int" id="ticketId" name="ticketId">
-                        <input type="submit">
-                    </form>
+                        <button id="behandelTicketId">Behandel ticket</button>
+                    </div>
                 </td>
                 <td>
                     Antwoord <br>
@@ -198,15 +198,15 @@
                 <td>
 
                     <h3>Ticket sluiten</h3>
-                    <form id="sluitTicketForm">
+                    <div>
                         Op deze manier kan een medewerker aangeven dat een probleem van een bepaald ticket opgelost
                         is.<br>
                         <br>
                         <i>Deze id wordt teruggegeven bij het openen van een ticket.</i> <br>
                         <label for="id">Id van het ticket:</label>
                         <input type="int" id="id" name="id">
-                        <input type="submit">
-                    </form>
+                        <button id="sluitTicketButton">Sluit ticket</button>
+                    </div>
                 </td>
                 <td>
                     Antwoord <br>
@@ -219,7 +219,7 @@
                     <div>
                         <h3>Bestelling plaatsen</h3>
                         Het is voor een medewerker ook mogelijk om een bestelling te plaatsen in naam van een klant.
-                        <form id="bestellingPlaatsenMedewerkerForm">
+                        <div>
                             <i>Dit kan ingevuld worden met een dummy id (geen mail zal verzonden worden) of met de id
                                 die teruggegeven wordt bij het aanmaken van een account.</i> <br>
                             <label for="klantenIdbestellingPlaatsenMedewerker">Id van de klant:</label>
@@ -238,8 +238,8 @@
                             <label for="medicijnenbestellingPlaatsenMedewerker">Medicijnen:</label>
                             <input type="text" id="medicijnenbestellingPlaatsenMedewerker"
                                 name="medicijnenbestellingPlaatsenMedewerker">
-                            <input type="submit">
-                        </form>
+                            <button id="bestellingPlaatsenMedewerkerButton">Plaats bestelling</button>
+                        </div>
                     </div>
 
                 </td>
@@ -255,15 +255,15 @@
                 <td>
                     <div>
                         <h3>Bestelling annuleren</h3>
-                        <form id="bestellingAnnulerenMedewerkerForm">
+                        <div>
                             <i>Geef hier het id van de bestelling die je wilt annuleren. Deze id krijgt men terug als
                                 response bij het plaatsen van de bestelling of kan men uit de databank van de
                                 bestellingsdienst halen. Indien een bestelling al verzonden is kan de klant deze niet
                                 meer annuleren en zal een gepaste foutboodschap getoond worden.</i><br>
                             <label for="bestellingsId">Bestellings id:</label>
                             <input type="text" id="bestellingsId" name="bestellingsId">
-                            <input type="submit">
-                        </form>
+                            <button id="bestellingAnnulerenTicket">Annuleer betelling</button>
+                        </div>
                     </div>
                 </td>
 
@@ -292,8 +292,8 @@
                 <td>
                     <div>
                         <h3>Statistieken opvragen</h3>
-                        Note: we halen hier enkel de gegevens op waarmee statistieken gemaakt kunnen worden.
-                        We maken niet effectief statistieken. <br>
+                        Note: Hier worden gegevens rond statistieken opgehaald.
+                         <br>
                         <button id="statistieken">Geef statistieken</button>
 
                     </div>
@@ -311,12 +311,12 @@
                         Dit zal de nieuwbrief uitsturen naar alle klanten. Maak eerst een account aan met een bestaand
                         emailadres om een mail te ontvangen! Actie kan uitgevoerd worden met dummy.
                         <br>
-                        <form>
+                        <div>
                             <i>Geef hier de inhoud van de nieuwsbrief.</i> <br>
                             <label for="content">Inhoud nieuwbrief:</label>
                             <input type="text" id="content" name="content">
-                            <input type="submit" id="verzendNieuwsbrief">
-                        </form>
+                            <button id="verzendNieuwsbrief">Stuur nieuwsbrief</button>
+                        </div>
 
                     </div>
                 </td>
@@ -332,7 +332,7 @@
                         <h3>Nieuwe medicijnen aan de catalogus toevoegen</h3>
                         Dit zal nieuwe medicijnen aan de catalogus toevoegen. (Pas op dit wilt niet zeggen dar er onmiddellijk voorraad is, daarvoor moet er een lading verwerkt worden.)
                         <br>
-                        <form>
+                        <div>
                     
                             <label for="catalogusNaam">Naam van nieuw medicijn:</label>
                             <input type="text" id="catalogusNaam" name="catalogusNaam"> <br>
@@ -340,8 +340,8 @@
                             <label for="beschrijving">Beschrijving:</label>
                             <input type="text" id="beschrijving" name="beschrijving"> <br>
 
-                            <label for="voorschriftNoodzakelijk">Voorschrift :</label>
-                            <input type="checkbox" id="voorschriftNoodzakelijk" name="voorschriftNoodzakelijk"> <br>
+                            <label for="voorschriftNoodzakelijk">Voorschrift : true of false</label>
+                            <input type="text" id="voorschriftNoodzakelijk" name="voorschriftNoodzakelijk"> <br>
 
                             <i>Indien een medicijn niet in een koelcel bewaard moet worden vul hier dan een temperatuur hoger dan 15 in. </i> <br>
                             <label for="gewensteTemperatuur">Gewenste bewaar temperatuur:</label>
@@ -354,8 +354,8 @@
                             <label for="prijs">Prijs:</label>
                             <input type="text" id="prijs" name="prijs">
                             
-                            <input type="submit" id="voegToeAanCatalogus">
-                        </form>
+                            <button id="voegToeAanCatalogus">Voeg toe</button>
+                        </div>
 
                     </div>
                 </td>
@@ -371,12 +371,11 @@
                         <h3>Medicijnen uit de catalogus verwijderen</h3>
                         Dit zal medicijnen uit de catalogus verwijderen, bijgevolg zal het ook uit het magazijn verwijderd worden en bij het afval geplaatst worden. 
                         <br>
-                        <form>
+                        <div>
                             <label for="teVerwijderenId">Id van te verwijderen medicijn:</label>
                             <input type="number" id="teVerwijderenId" name="teVerwijderenId">
-
-                            <input type="submit" id="verwijderUitCatalogus">
-                        </form>
+                            <button id="verwijderUitCatalogus">Verwijder</button>
+                        </div>
 
                     </div>
                 </td>
@@ -390,13 +389,13 @@
                 <td>
                     <div>
                         <h3>Nieuwe medicijnen bestellen</h3>
-                        <form>
+                        <div>
                             <label for="medicijn">Medicijn:</label>
                             <input type="text" id="medicijn" name="medicijn"> <br>
                             <label for="aantal">Aantal:</label>
                             <input type="text" id="aantal" name="aantal">
-                            <input type="submit" id="bestelMedicijnBtn">
-                        </form>
+                            <button id="bestelMedicijnBtn">Bestel bij</button>
+                        </div>
 
                     </div>
                 </td>
@@ -425,7 +424,7 @@
         <p><i class="glyphicon glyphicon-info-sign"></i><i> De transporteur levert een lading nieuwe medicijnen aan. Hij
                 vermeldt van elk medicijn (op naam), hoeveel 'doosjes' met datum X zijn geleverd. Deze worden toegevoegd
                 aan de voorraad en
-                aan een koelcel indien noodzakelijk.
+                aan een koelcel indien noodzakelijk. Let op: als je medicijnen toevoegt die binnen de 14 dagen vervallen, worden deze binnen de 5s uit de databank verwijderd.
             </i></p>
         <button id="verwerkLading">Voeg deze lading toe aan de voorraad</button>
 
@@ -491,13 +490,13 @@
                 <td>
                     <div>
                         <h3>Leverancier betalen</h3>
-                        <form>
+                        <div>
                             <label for="leverancier">Leverancier:</label>
                             <input type="text" id="leverancier" name="leverancier"> <br>
                             <label for="bedrag">Bedrag:</label>
                             <input type="text" id="bedrag" name="bedrag">
-                            <input type="submit" id="betaalLeverancierBtn">
-                        </form>
+                            <button id="betaalLeverancierBtn">Betaal</button>
+                        </div>
 
                     </div>
                 </td>
