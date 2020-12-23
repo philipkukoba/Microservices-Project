@@ -5,7 +5,7 @@ const plaatsBestellingURL = "http://localhost:8089/api/bestellingen/";
 const annuleerBestellingURL = "http://localhost:8089/api/bestellingen/annuleer/";
 //const MedicijnenURL;
 const voorraadOverzichtURL = "http://localhost:8089/api/voorraad/overzicht/"
-const orderURL = "http://http://localhost:8089/api/order/afval/haalAfvalOp/";
+const orderURL = "http://localhost:8089/api/order/afval/haalAfvalOp/";
 const ticketURL = "http://localhost:8089/api/ticket/";
 const statistiekenURL = 'http://localhost:8089/api/statistieken/';
 const boekhoudURL = "http://localhost:8089/api/boekhoud";
@@ -22,18 +22,18 @@ const catalogusURL = "http://localhost:8089/api/catalogus";
 
 let accountAanmaken = () => {
     fetch(accountAanmakenURL, {
-        mode: "no-cors",
         method: "POST",
         headers: {
-            'Content-Type': 'application/json;charset=utf-8'
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            "naam": document.getElementById("naam").value,
-            "email": document.getElementById("email").value,
+        body:
+            JSON.stringify({
+                "naam": document.getElementById("naam").value,
+            "email": document.getElementById("email").value
         })
     })
-        .then(response => {console.log(response); return response.text();})
-        .then(response => { console.log(response);
+        .then(response => response.json())
+        .then(json => { console.log(json);
                      document.getElementById("accountAanmakenResponse").innerText=response;
          })
         .catch(e => console.log(e));
@@ -46,30 +46,30 @@ document.getElementById("accountAanmakenForm").addEventListener("click", account
 let plaatsBestellingAlsKlant = () => {
     let medicijnenString = document.getElementById("medicijnen").value;
     let medicijnen = medicijnenString.split(" ");
-    medicijnenStr = '{';
-    for (i = 0; i < medicijnen.size() / 2; i++) {
-        medcijnenStr += '{ "' + medicijnen[i] + '":' + medicijnen[i + 1] + '},';
+    let medicijnenStr = '{';
+    for (i = 0; i < medicijnen.length / 2; i++) {
+        medicijnenStr += '{ "' + medicijnen[i] + '":' + medicijnen[i + 1] + '},';
     }
     medicijnenStr += '}';
 
     fetch(plaatsBestellingURL, {
-        mode: "no-cors",
         method: 'POST',
-        headers: { 'Content-Type': 'application/json;charset=utf-8' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             "klantenId": document.getElementById("klantenId").value,
             "thuisAdres": document.getElementById("thuisadres").value,
             "apotheekAdres": document.getElementById("apotheekadres").value,
             "medicijnen": medicijnenStr
         })
-    }).then(response => document.getElementById("").value(response.text()))
+    })
+    .then(response => response.text())
+    .then(response => document.getElementById("bestellingPlaatsenKlantResponse").innerText=response)
         .catch(e => console.log(e));
 };
 
 
 let toonStats = () => {
     fetch(statistiekenURL, {
-        mode: "no-cors",
         method: "GET"
     }).then((res) => document.getElementById("statistiekenResponse").value = res.json());
 }
@@ -80,28 +80,26 @@ document.getElementById("statistieken").addEventListener("click", toonStats);
 // ################## BESTELLING ANULLEREN ##################
 
 let annuleerBestelling = () => {
-    let id = document.getElementById("bestellingsIdAnnulerenKlant").text;
+    let id = document.getElementById("bestellingsIdAnnulerenKlant").value;
     fetch(annuleerBestellingURL + id, {
-        mode: "no-cors",
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json;charset=utf-8'
+            'Content-Type': 'application/json'
         }
-    }).then((res) => { document.getElementById("bestellingAnnulerenKlantResponse").value = res.json(); })
+    }).then((res) => { document.getElementById("bestellingAnnulerenKlantResponse").innerText = res.text(); })
         .catch(e => console.log(e));
 }
 
-document.getElementById("bestellingAnnulerenKlantForm").addEventListener("submit", annuleerBestelling);
+document.getElementById("bestellingAnnulerenKlantButton").addEventListener("click", annuleerBestelling);
 
 // ################## MEDICIJNEN ##################
 
 let geefOverzicht = () => {
     fetch(voorraadOverzichtURL, {
-        mode: "no-cors",
         method: 'GET'
         //wrs geen headers en body nodig 
     })
-        .then(res => res.json())
+        .then(res => {console.log(res); return res.json();})
         .then(json => {
             let resultString = "";
             json.forEach(el => {
@@ -109,8 +107,8 @@ let geefOverzicht = () => {
                 resultString += "Id: " + el.Id + "\n";
                 resultString += "aantal: " + el.aantal + "\n";
                 resultString += "\n";
-            });
-            document.getElementById("geefOverzichtResponse").value(resultString);
+            }); console.log(resultString);
+            document.getElementById("geefOverzichtResponse").innerText=resultString;
         })
         .catch(e => console.log(e));
 }
@@ -133,19 +131,19 @@ document.getElementById("haalAfvalOpButton").addEventListener("click", haalAfVal
 // ################## TICKET ##################
 
 let plaatsTicket = () => {
-    fetch(ticketURL, {
-        mode: "no-cors",
+    fetch(ticketURL + "open", {
+        mode: 'no-cors',
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json;charset=utf-8'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            "klantenId": document.getElementById("klantenIdOpenTicket").value,
-            "bestellingsId": document.getElementById("bestellingsIdOpenTicket").value,
-            "probleem": document.getElementById("probleemOpenTicket").value
+            "klantenId": "" + document.getElementById("klantenIdOpenTicket").value,
+            "bestellingsId": ""+document.getElementById("bestellingsIdOpenTicket").value,
+            "probleem": ""+document.getElementById("probleemOpenTicket").value
         })
-    })
-        .then(response => { document.getElementById("openTicketResponse").text = response.text(); })
+    }).then(response => {console.log(response); return response.text();})
+        .then(text => { console.log(text); document.getElementById("openTicketResponse").text = text; })
         .catch(e => console.log(e))
 };
 
@@ -187,10 +185,9 @@ let betaalLeverancier = () => {
 // TODO body maken
 let verwerkLading = () => { 
     fetch(verwerkLadingURL, {
-        mode: "no-cors",
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json;charset=utf-8'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(document.getElementById('lading').innerText)
     }).then(res => {

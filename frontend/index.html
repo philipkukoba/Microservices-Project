@@ -50,7 +50,7 @@
                 <td>
                     <div>
                         <h3>Bestelling plaatsen</h3>
-                        <form id="bestellingPlaatsenKlantForm">
+                        <div>
                             <i>Dit kan ingevuld worden met een dummy id (geen mail zal verzonden worden) of met de id
                                 die teruggegeven wordt bij het aanmaken van een account.</i> <br>
                             <label for="klantenId">Id van de klant:</label>
@@ -65,8 +65,8 @@
                                 Magazijnbeheerder)</i> <br>
                             <label for="medicijnen">Medicijnen:</label>
                             <input type="text" id="medicijnen" name="medicijnen">
-                            <input id="plaatsBestellingKlantKnop" type="submit">
-                        </form>
+                            <button id="plaatsBestellingKlantKnop">Bestel</button>
+                            </div>
                     </div>
 
                 </td>
@@ -81,16 +81,16 @@
             <tr>
                 <td>
                     <h3>Bestelling annuleren</h3>
-                    <form id="bestellingAnnulerenKlantForm">
+                    <div>
                         <i>Geef hier het id van de bestelling die je wilt annuleren. Deze id krijgt men terug als
                             response bij het plaatsen van de bestelling of kan men uit de databank van de
                             bestellingsdienst halen. Indien een bestelling al verzonden is kan de klant deze niet meer
                             annuleren en zal een gepaste foutboodschap getoond worden.</i><br>
                         <label for="bestellingsIdAnnulerenKlant">Bestellings id:</label>
                         <input type="text" id="bestellingsIdAnnulerenKlant" name="bestellingsIdAnnulerenKlant">
-                        <input type="submit">
+                        <button id="bestellingAnnulerenKlantButton">Annuleer</button>
 
-                    </form>
+                    </div>
                 </td>
 
                 <td>
@@ -155,7 +155,7 @@
                 <td>
 
                     <h3>Ticket openen</h3>
-                    <form id="openTicketForm">
+                    <div>
                         Al deze data mag dummy zijn.<br>
                         <label for="klantenIdOpenTicket">Id van de klant:</label>
                         <input type="text" id="klantenIdOpenTicket" name="klantenIdOpenTicket"> <br>
@@ -164,7 +164,7 @@
                         <label for="probleemOpenTicket">Probleem omschrijving:</label>
                         <input type="text" id="probleemOpenTicket" name="probleemOpenTicket">
                         <input type="submit" id="submitOpenTicket">
-                    </form>
+                    </div>
 
                 </td>
                 <td>

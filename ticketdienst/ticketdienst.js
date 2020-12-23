@@ -114,7 +114,8 @@ app.post('/api/ticket/open', function (req, res) {
     console.log(req.body.klantenId, req.body.bestellingsId, req.body.probleem);
     nSQL("tickets").query("upsert", { "klantenId": req.body.klantenId, "bestellingsId": req.body.bestellingsId, "probleem": req.body.probleem, "status": Status.OPEN }).exec().then((rows) => {
         console.log(rows);
-        res.send(JSON.stringify({ "ticketId": rows[0].ticketId }));
+        //res.send(JSON.stringify({ "ticketId": rows[0].ticketId }));
+        res.send("ticketId is : " + rows[0].ticketId);
         res.end();
     });
 });
