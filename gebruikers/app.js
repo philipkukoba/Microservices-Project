@@ -22,6 +22,19 @@ nSQL().createDatabase({
 // om JSON van POST body te verwerken
 app.use(express.json());
 
+app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', ['*']);
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.append('Access-Control-Allow-Headers', 'Content-Type');
+    
+    if(req.method === 'OPTIONS') {
+        res.send(200);
+    } else {
+        next();
+    }
+});
+
+
 app.post('/api/gebruikers/maakaccount', function (req, res) {
     const body = req.body;
 
