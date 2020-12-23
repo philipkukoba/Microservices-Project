@@ -176,6 +176,7 @@ services:
       - koelcelmonitor
       - ticketdienst
       - boekhoudsdienst
+      - verzendingsdienst
     depends_on:
       - bestellingen
       - medicijnen
@@ -184,5 +185,6 @@ services:
       - koelcelmonitor
       - ticketdienst
       - boekhoudsdienst
+      - verzendingsdienst
     ports:
       - 8089:8089
