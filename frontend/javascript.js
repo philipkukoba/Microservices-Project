@@ -21,7 +21,7 @@ const catalogusURL = "http://localhost:8089/api/catalogus";
 // ################## ACCOUNT AANMAKEN ##################
 
 let accountAanmaken = () => {
-    fetch("http://localhost:8080/" + accountAanmakenURL, {
+    fetch(accountAanmakenURL, {
         mode: "no-cors",
         method: "POST",
         headers: {
@@ -32,7 +32,7 @@ let accountAanmaken = () => {
             "email": document.getElementById("email").value,
         })
     })
-        .then(response => {console.log(response); response.text();})
+        .then(response => {console.log(response); return response.text();})
         .then(response => { console.log(response);
                      document.getElementById("accountAanmakenResponse").innerText=response;
          })
