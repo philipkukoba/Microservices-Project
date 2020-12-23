@@ -1,46 +1,47 @@
 //todo URLs aanvullen
-const accountAanmakenURL = "./api/gebruikers/maakaccount"
-const bestellingenURL = './api/bestellingen/';
-const plaatsBestellingURL = "./api/bestellingen/";
-const annuleerBestellingURL = "./api/bestellingen/annuleer/";
-const MedicijnenURL;
-const voorraadOverzichtURL = "./api/voorraad/overzicht/"
-const orderURL = "./api/order/afval/haalAfvalOp/";
-const ticketURL = "./api/ticket/";
-const statistiekenURL = './api/statistieken/';
-const boekhoudURL = "./api/boekhoud";
+const accountAanmakenURL = "http://localhost:8089/api/gebruikers/maakaccount"
+const bestellingenURL = 'http://localhost:8089/api/bestellingen/';
+const plaatsBestellingURL = "http://localhost:8089/api/bestellingen/";
+const annuleerBestellingURL = "http://localhost:8089/api/bestellingen/annuleer/";
+//const MedicijnenURL;
+const voorraadOverzichtURL = "http://localhost:8089/api/voorraad/overzicht/"
+const orderURL = "http://http://localhost:8089/api/order/afval/haalAfvalOp/";
+const ticketURL = "http://localhost:8089/api/ticket/";
+const statistiekenURL = 'http://localhost:8089/api/statistieken/';
+const boekhoudURL = "http://localhost:8089/api/boekhoud";
 const bestelBoekhoudURL = boekhoudURL + '/bestel';
 const betaalBoekhoudURL = boekhoudURL + '/betaalLeverancier';
-const voorraadURL = ".../api/voorraad"
+const voorraadURL = "http://localhost:8089/api/voorraad"
 const geefOverzichtURL = voorraadURL + "/overzicht";
 const verwerkLadingURL = voorraadURL + "/lading";
-const nieuwsbriefURL = "./api/gebruikers/nieuwsbrief";
-const koerierURL = "./api/bpost";
-const catalogusURL = ".../api/catalogus";
+const nieuwsbriefURL = "http://localhost:8089/api/gebruikers/nieuwsbrief";
+const koerierURL = "http://localhost:8089/api/bpost";
+const catalogusURL = "http://localhost:8089/api/catalogus";
 
 // ################## ACCOUNT AANMAKEN ##################
 
-document.getElementById("accountAanmakenForm").addEventListener("submit", accountAanmaken);
-
 let accountAanmaken = () => {
-    fetch(accountAanmakenURL, {
+    fetch("http://localhost:8080/" + accountAanmakenURL, {
+        mode: "no-cors",
         method: "POST",
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
         },
         body: JSON.stringify({
-            "naam": document.getElementById("klantenId").value,
-            "email": document.getElementById("thuisadres").value,
+            "naam": document.getElementById("naam").value,
+            "email": document.getElementById("email").value,
         })
     })
-        .then(response => { document.getElementById("accountAanmakenResponse").value(response.text()); })
+        .then(response => {console.log(response); response.text();})
+        .then(response => { console.log(response);
+                     document.getElementById("accountAanmakenResponse").innerText=response;
+         })
         .catch(e => console.log(e));
 }
 
-// ################## BESTELLING PLAATSEN ##################
+document.getElementById("accountAanmakenForm").addEventListener("click", accountAanmaken);
 
-document.getElementById("...").addEventListener("click", plaatsBestellingAlsKlant);
-document.getElementById("statistieken").addEventListener("click", toonStats);
+// ################## BESTELLING PLAATSEN ##################
 
 let plaatsBestellingAlsKlant = () => {
     let medicijnenString = document.getElementById("medicijnen").value;
@@ -52,6 +53,7 @@ let plaatsBestellingAlsKlant = () => {
     medicijnenStr += '}';
 
     fetch(plaatsBestellingURL, {
+        mode: "no-cors",
         method: 'POST',
         headers: { 'Content-Type': 'application/json;charset=utf-8' },
         body: JSON.stringify({
@@ -65,15 +67,22 @@ let plaatsBestellingAlsKlant = () => {
 };
 
 
-let toonStats = fetch(statistiekenURL).then((res) => document.getElementById("statistiekenResponse").value = res.json())
+let toonStats = () => {
+    fetch(statistiekenURL, {
+        mode: "no-cors",
+        method: "GET"
+    }).then((res) => document.getElementById("statistiekenResponse").value = res.json());
+}
+
+document.getElementById("plaatsBestellingKlantKnop").addEventListener("click", plaatsBestellingAlsKlant);
+document.getElementById("statistieken").addEventListener("click", toonStats);
 
 // ################## BESTELLING ANULLEREN ##################
-
-document.getElementById("bestellingAnnulerenKlantForm").addEventListener("submit", annuleerBestelling);
 
 let annuleerBestelling = () => {
     let id = document.getElementById("bestellingsIdAnnulerenKlant").text;
     fetch(annuleerBestellingURL + id, {
+        mode: "no-cors",
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -82,12 +91,13 @@ let annuleerBestelling = () => {
         .catch(e => console.log(e));
 }
 
-// ################## MEDICIJNEN ##################
+document.getElementById("bestellingAnnulerenKlantForm").addEventListener("submit", annuleerBestelling);
 
-document.getElementById("geefOverzichtButton").addEventListener("click", geefOverzicht);
+// ################## MEDICIJNEN ##################
 
 let geefOverzicht = () => {
     fetch(voorraadOverzichtURL, {
+        mode: "no-cors",
         method: 'GET'
         //wrs geen headers en body nodig 
     })
@@ -105,24 +115,26 @@ let geefOverzicht = () => {
         .catch(e => console.log(e));
 }
 
-// ################## ORDER ##################
+document.getElementById("geefOverzichtButton").addEventListener("click", geefOverzicht);
 
-document.getElementById("haalAfvalOpButton").addEventListener("click", haalAfValOp);
+// ################## ORDER ##################
 
 let haalAfValOp = () => {
     fetch(orderURL, {
+        mode: "no-cors",
         method: 'PUT'
     })
         .then(response => document.getElementById("afvalOpgehaaldResponse").value(response.text()))
         .catch(e => console.log(e));
 }
 
-// ################## TICKET ##################
+document.getElementById("haalAfvalOpButton").addEventListener("click", haalAfValOp);
 
-document.getElementById("submitOpenTicket").addEventListener("click", plaatsTicket);
+// ################## TICKET ##################
 
 let plaatsTicket = () => {
     fetch(ticketURL, {
+        mode: "no-cors",
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -137,12 +149,13 @@ let plaatsTicket = () => {
         .catch(e => console.log(e))
 };
 
+document.getElementById("submitOpenTicket").addEventListener("click", plaatsTicket);
+
 // ################## BOEKHOUD ##################
 
-document.getElementById("bestelMedicijnBtn").addEventListener("click", bestelMedicijnBij)
-
-let bestelMedicijnBij =
+let bestelMedicijnBij = () => {
     fetch(bestelBoekhoudURL, {
+        mode: "no-cors",
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -153,12 +166,11 @@ let bestelMedicijnBij =
         })
     }).then(response => { document.getElementById("bestelMedicijnResponse").text = response.text(); })
         .catch(e => console.log(e));
+}
 
-
-document.getElementById("bestelMedicijnBtn").addEventListener("click", bestelMedicijnBij)
-
-let betaalLeverancier =
+let betaalLeverancier = () => {
     fetch(betaalBoekhoudURL, {
+        mode: "no-cors",
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -169,44 +181,43 @@ let betaalLeverancier =
         })
     }).then(response => { document.getElementById("betaalLeverancierResponse").text = response.text(); })
         .catch(e => console.log(e));
-
-
-
-// json() testen
-let geefOverzicht = fetch(geefOverzichtURL, { method: 'GET' }).then(res => {
-    document.getElementById('geefOverzichtResponse').text = res.text()
-}).catch(e => console.log(e));
-
-document.getElementById("geefOverzichtButton").addEventListener("click", geefOverzicht);
-
+}
 
 
 // TODO body maken
-let verwerkLading = fetch(verwerkLading, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify(document.getElementById('lading').innerText)
-}).then(res => {
-    document.getElementById('verwerkLadingResponse').text = res.text();
-}).catch(e => console.log(e));
+let verwerkLading = () => { 
+    fetch(verwerkLadingURL, {
+        mode: "no-cors",
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(document.getElementById('lading').innerText)
+    }).then(res => {
+        document.getElementById('verwerkLadingResponse').text = res.text();
+    }).catch(e => console.log(e));
+}
 
 document.getElementById('verwerkLading').addEventListener("click", verwerkLading);
+document.getElementById("bestelMedicijnBtn").addEventListener("click", bestelMedicijnBij)
+document.getElementById("bestelMedicijnBtn").addEventListener("click", bestelMedicijnBij)
+document.getElementById("geefOverzichtButton").addEventListener("click", geefOverzicht);
 
 
 // ################## GEBRUIKERS ##################
 
-let stuurNieuwsbrief = fetch(stuurNieuwsbrief, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.sstringify(document.getElementById('context').innerText)
-
-})
+let stuurNieuwsbrief =  () => {
+    fetch(nieuwsbriefURL, {
+        mode: "no-cors",
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(document.getElementById('content').innerText)
+    })
     .then(res => { document.getElementById('nieuwsbriefResponse').text = res.text() })
     .catch(e => console.log(e));
+}
 
 document.getElementById('verzendNieuwsbrief').addEventListener("click", stuurNieuwsbrief);
 
@@ -214,6 +225,7 @@ document.getElementById('verzendNieuwsbrief').addEventListener("click", stuurNie
 
 let koerierHaalRolcontainerOp = () => {
     fetch(koerierURL, {
+        mode: "no-cors",
         method: "POST"
     })
         .then(response => { document.getElementById("rolcontainerOpgehaaldResponse").text = response.text(); })
@@ -225,6 +237,7 @@ document.getElementById("haalRolcontainerOp").addEventListener("click", koerierH
 let verwijderUitCatalogus = ()=>{
     const id = document.getElementById("teVerwijderenId").value;
     fetch(catalogusURL+'/'+id,{
+        mode: "no-cors",
         method: 'DELETE'
     }).then(res => {
         document.getElementById('verwijderUitCatalogusResponse').innerText = res.text();
@@ -233,6 +246,7 @@ let verwijderUitCatalogus = ()=>{
 
 let voegToeAanCatalogus = () => {
     fetch(catalogusURL, {
+        mode: "no-cors",
         method: "POST",
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
