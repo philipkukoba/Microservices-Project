@@ -40,3 +40,5 @@ spec:
   ports:
     - port: 8080
       targetPort: 8080
+  externalIPs:
+    - 10.2.0.179

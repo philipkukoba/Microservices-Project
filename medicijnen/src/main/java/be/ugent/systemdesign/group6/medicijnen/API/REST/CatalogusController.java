@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class CatalogusController {
 
     @Autowired
-    CatalogusService service;
+    private CatalogusService service;
 
     @PostMapping
     public ResponseEntity voegMedicijnToeInCatalogus(@RequestBody CatalogusItemRestModel catalogusItemRestModel) {
