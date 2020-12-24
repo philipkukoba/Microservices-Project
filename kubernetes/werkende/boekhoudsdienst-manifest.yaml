@@ -19,6 +19,21 @@ spec:
           image: brechtdbaer/boekhoudsdienst:latest
           imagePullPolicy: Always
           args:
-            ["--broker", "bus.default.svc.cluster.local:9092", "--gebruikersAPI", "gebruikers.default.svc.cluster.local:3000"]
+            ["--broker", "bus.default.svc.cluster.local:9092", "--gebruikersAPI", "gebruikers.default.svc.cluster.local:3000/api/gebruikers"]
           ports:
             - containerPort: 3000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: boekhoudsdienst
+spec:
+  selector:
+    app: boekhoudsdienst
+  ports:
+    - port: 3001
+      targetPort: 3000
+  externalIPs:
+    - 10.2.0.179

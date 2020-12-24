@@ -186,5 +186,14 @@ services:
       - ticketdienst
       - boekhoudsdienst
       - verzendingsdienst
+    environment:
+      - MEDICIJNEN=medicijnen:8080
+      - ORDER=order:2222
+      - GEBRUIKERS=gebruikers:3000
+      - BESTELLINGEN=bestellingen:8080
+      - KOELCELMONITOR=koelcelmonitor:8000
+      - TICKETDIENST=ticketdienst:3000
+      - BOEKHOUDSDIENST=boekhoudsdienst:3000
+      - VERZENDINGSDIENST=verzendingsdienst:8080
     ports:
       - 8089:8089
