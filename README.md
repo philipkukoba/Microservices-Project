@@ -16,15 +16,17 @@ voor dat de line endings bij de `mvnw` bestanden in de root directories van deze
 mappen op LF staat. Dit kan met visual studio code.
 
 # Gebreken
-De gateway werkt niet op kubernetes. Om de services toch te kunnen testen hebben we de services hun poort laten 'open staan'.
-Om de frontend te doen werken met de gateway (via docker) maken we gebruik van een CORS proxy. 
-Deze is toegevoegd aan docker.
+De gateway werkt niet op kubernetes, maar wel op docker. We hebben hiervoor reeds contact opgenomen met Stef Van Havermaet. Daaruit bleek dat we dit achterwege mogen laten en zal er rekening mee gehouden worden. Bijgevolg werkt dus de frontend ook niet met kubernetes.
+
+De reply channel bij een commando werkt niet. De reply channel wordt wel meegegeven maar het mechanisme werkt enkel als we een vooraf afgesproken channel meegeven. 
+
+Op de frontend traden enkele problemen op in verband met CORS aangezien we op elke service all origins toelaten, hebben we dit dan maar eenvoudigweg
+opgelost door een CORS proxy te gebruiken aangezien dit niet de kern van de opdracht was.
 
 # Testen op frontend en docker
 Er is een rubriek aangemaakt per actor. Per actor zijn de systeemoperaties uitgewerkt op de frontend. Extra info per operatie is ook weergegeven op de frontend.
 
 # Testen op kubernetes cluster
-
 Op de kubernetes cluster is er geen gateway, requests moeten dus rechtstreeks naar de juiste service gestuurd worden. Hiervoor zullen we curl gebruiken.
 
 ## Gebruikers service
@@ -115,5 +117,13 @@ Indien de gewensteTemperatuur minder dan 16 graden is, zal het in een koelcel be
 ## Verzendingsdienst service
 
 ## Orderdienst service
+Afval ophalen 
+`curl -X PUT 10.2.0.179:2222/api/order/afval/haalAfvalOp/`
+
 
 ## Boekhoudsdienst service
+bestelNieuwMedicijn
+`curl -X POST -H 'Content-Type: application/json' -d '{"medicijn":"medicijn", "aantal":5}' 10.2.0.179:3001/api/boekhoud/bestel`
+
+betaalLeverancier
+`curl -X POST -H 'Content-Type: application/json' -d '{"leverancier":"leverancier", "bedrag":10}' 10.2.0.179:3001/api/boekhoud/betaalLeverancier`

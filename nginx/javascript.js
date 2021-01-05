@@ -1,5 +1,5 @@
 //todo URLs aanvullen
-const BASE_URL = "http://localhost:8080/http://localhost:8089";
+const BASE_URL = "http://localhost:8080/http://gateway:8089";
 const accountAanmakenURL = BASE_URL + "/api/gebruikers/maakaccount"
 const bestellingenURL = BASE_URL + "/api/bestellingen/";
 const annuleerBestellingURL = BASE_URL + "/api/bestellingen/annuleer/";
