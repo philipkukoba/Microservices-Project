@@ -21,6 +21,7 @@ Om de frontend te doen werken met de gateway (via docker) maken we gebruik van e
 Deze is toegevoegd aan docker.
 
 # Testen op frontend en docker
+Er is een rubriek aangemaakt per actor. Per actor zijn de systeemoperaties uitgewerkt op de frontend. Extra info per operatie is ook weergegeven op de frontend.
 
 # Testen op kubernetes cluster
 
