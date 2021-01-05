@@ -61,13 +61,56 @@ Hierbij wordt geen betaling gesimuleerd omdat er vanuit gegaan wordt dat een tic
 
 ### Bestelling annuleren
 
-
+`curl -X PUT 10.2.0.179:8080/api/bestellingen/annuleer/{id}`
 
 ### Statistieken opvragen
 
+`curl 10.2.0.179:8080/api/statistieken`
+
 ## Ticketdienst service
 
+### Ticket openen
+
+`curl -X POST -H 'Content-Type: application/json' -d '{"klantenId": "klantenId", "bestellingsId": "bestellingsId", "probleem": "beschrijving probleem"}' 10.2.0.179:3002/api/ticket/open`
+
+### Ticket behandelen
+
+Let op, ticketid is een integer.
+
+`curl -X POST -H 'Content-Type: application/json' -d '{"id": ticketId}' 10.2.0.179:3002/api/ticket/behandel`
+
+### Ticket sluiten
+
+Let op, ticketid is een integer.
+
+`curl -X POST -H 'Content-Type: application/json' -d '{"id": ticketId}' 10.2.0.179:3002/api/ticket/sluit`
+
+### Tickets opvragen
+
+Dit commando geeft alle openstaande tickets terug
+
+`curl 10.2.0.179:3002/api/ticket`
+
 ## Medicijnen service
+
+### Overzicht van voorraad opvragen
+
+`curl 10.2.0.179:8081/api/voorraad/overzicht`
+
+### Nieuw medicijn aan de catalogus toevoegen
+
+De waarde voor voorschriftNoodzakelijk moet 'true' of 'false' zijn.
+Indien de gewensteTemperatuur minder dan 16 graden is, zal het in een koelcel bewaard worden.
+
+`curl -X POST -H 'Content-Type: application/json' -d '{"naam": "naam", "beschrijving": "beschrijving", "kritischeWaarde": "200", "voorschriftNoodzakelijk": "true", "prijs": "35","gewensteTemperatuur": "20"}' 10.2.0.179:8081/api/catalogus`
+
+### Medicijn uit de catalogus verwijderen
+
+`curl -X DELETE 10.2.0.179:8081/api/catalogus/{id}`
+
+### Nieuwe medicijnen bestellen
+
+### Toegekomen lading toevoegen aan de voorraad
 
 ## Verzendingsdienst service
 
