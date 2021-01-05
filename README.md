@@ -20,4 +20,4 @@ De gateway werkt niet op kubernetes.
 Om de frontend te doen werken met de gateway (via docker) maken we gebruik van een CORS proxy. 
 Deze is toegevoegd aan docker.
 
-# Hoe alles testen. 
+# Hoe alles testen
