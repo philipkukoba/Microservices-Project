@@ -112,7 +112,7 @@ Indien de gewensteTemperatuur minder dan 16 graden is, zal het in een koelcel be
 
 ### Toegekomen lading toevoegen aan de voorraad
 
-`curl 10.2.0.179:8081/api/voorraad/lading -H 'Content-Type: application/json' --data-binary $'{\n "Pijnstiller A":{\n "2030-10-05":3,\n "2073-05-21":3\n },\n "Pijnstiller B":{\n "2050-12-30":4\n }\n}\n ' --compressed`
+`curl -X POST -H 'Content-Type: application/json' -d '{"naam":{"2030-10-05":"3", "2073-05-21":"3" }}' 10.2.0.179:8081/api/voorraad/lading`
 
 ## Verzendingsdienst service
 
