@@ -76,3 +76,9 @@ Hierbij wordt geen betaling gesimuleerd omdat er vanuit gegaan wordt dat een tic
 ## Orderdienst service
 
 ## Boekhoudsdienst service
+bestelNieuwMedicijn
+
+
+
+betaalLeverancier
+`curl -X POST -H 'Content-Type: application/json' -d '{"leverancier":"leverancier", "bedrag":10}' 10.2.0.179:8080/api/boekhoud/betaalLeverancier`
