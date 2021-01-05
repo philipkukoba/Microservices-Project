@@ -1,8 +1,8 @@
 # Volledig uitgewerkte projecten volgens de normen
-- Bestellingen
-- Medicijnen
-- Order
-- Verzendingsdienst
+- Bestellingen (De Baer Brecht)
+- Medicijnen (Vaneeckhoutte Gauthier)
+- Order (Callebaut Paulien)
+- Verzendingsdienst (Kukoba Philip)
 
 # JARs compileren
 Om de jars te compileren, is er een script `make-jars.sh` voorzien. Dat kan je terugvinden
