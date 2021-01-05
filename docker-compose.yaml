@@ -88,7 +88,7 @@ services:
       - SPRING_DATA_MONGODB_URI=mongodb://admin:admin@bestellingen_db/bestellingen?authSource=admin
     restart: on-failure
   koelcelmonitor:
-    build: ./koelcelMonitor # vervangen door images
+    build: ./koelcelMonitor
     container_name: koelcelmonitor
     command: --broker kafka:9092
     depends_on:
@@ -197,3 +197,18 @@ services:
       - VERZENDINGSDIENST=verzendingsdienst:8080
     ports:
       - 8089:8089
+  cors_proxy:
+    build: ./cors_proxy
+    links:
+      - gateway
+    ports:
+      - 8080:8080
+  nginx:
+    build: ./nginx
+    links:
+      - gateway
+    depends_on:
+      - gateway
+      - cors_proxy
+    ports:
+      - 80:80
