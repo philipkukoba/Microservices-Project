@@ -14,3 +14,10 @@ elk afzonderlijk project steeds op LF te plaatsen.
 Indien je problemen ervaart bij het bouwen van Java applicaties, zorg er dan
 voor dat de line endings bij de `mvnw` bestanden in de root directories van deze
 mappen op LF staat. Dit kan met visual studio code.
+
+# Gebreken
+De gateway werkt niet op kubernetes. 
+Om de frontend te doen werken met de gateway (via docker) maken we gebruik van een CORS proxy. 
+Deze is toegevoegd aan docker.
+
+# Hoe alles testen. 
