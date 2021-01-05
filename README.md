@@ -77,6 +77,14 @@ Hierbij wordt geen betaling gesimuleerd omdat er vanuit gegaan wordt dat een tic
 
 
 ## Orderdienst service
+Afval ophalen 
+`curl -X PUT 10.2.0.179:2222/api/order/afval/haalAfvalOp/`
+
 
 
 ## Boekhoudsdienst service
+bestelNieuwMedicijn
+`curl -X POST -H 'Content-Type: application/json' -d '{"medicijn":"medicijn", "aantal":5}' 10.2.0.179:3001/api/boekhoud/bestel`
+
+betaalLeverancier
+`curl -X POST -H 'Content-Type: application/json' -d '{"leverancier":"leverancier", "bedrag":10}' 10.2.0.179:3001/api/boekhoud/betaalLeverancier`
