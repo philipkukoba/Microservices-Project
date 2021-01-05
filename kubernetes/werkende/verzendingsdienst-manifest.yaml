@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -86,5 +86,3 @@ spec:
               value: "root"
             - name: SPRING_DATASOURCE_PASSWORD
               value: "root"
->>>>>>> 934943e475e3dc6fe09e0419e213872bb699e1e4
->>>>>>> c95a9f040c09d0c9c4bde3dc808d5a16ee6526a1
