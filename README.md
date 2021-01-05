@@ -110,20 +110,30 @@ Indien de gewensteTemperatuur minder dan 16 graden is, zal het in een koelcel be
 
 `curl -X DELETE 10.2.0.179:8081/api/catalogus/{id}`
 
-### Nieuwe medicijnen bestellen
-
 ### Toegekomen lading toevoegen aan de voorraad
+
+`curl 10.2.0.179:8081/api/voorraad/lading -H 'Content-Type: application/json' --data-binary $'{\n "Pijnstiller A":{\n "2030-10-05":3,\n "2073-05-21":3\n },\n "Pijnstiller B":{\n "2050-12-30":4\n }\n}\n ' --compressed`
 
 ## Verzendingsdienst service
 
+### Rolcontainer ophalen
+
+Pas als de rolcontainers opgehaald worden, is de bestelling verzonden.
+
+`curl -X POST 10.2.0.179:8082/api/bpost`
+
 ## Orderdienst service
-Afval ophalen 
+
+### Afval ophalen
+
 `curl -X PUT 10.2.0.179:2222/api/order/afval/haalAfvalOp/`
 
-
 ## Boekhoudsdienst service
-bestelNieuwMedicijn
-`curl -X POST -H 'Content-Type: application/json' -d '{"medicijn":"medicijn", "aantal":5}' 10.2.0.179:3001/api/boekhoud/bestel`
 
-betaalLeverancier
+### Bestel nieuw medicijn
+
+`curl -X POST -H 'Content-Type: application/json' -d '{"medicijn":"medicijnId", "aantal":5}' 10.2.0.179:3001/api/boekhoud/bestel`
+
+### Betaal leverancier
+
 `curl -X POST -H 'Content-Type: application/json' -d '{"leverancier":"leverancier", "bedrag":10}' 10.2.0.179:3001/api/boekhoud/betaalLeverancier`
