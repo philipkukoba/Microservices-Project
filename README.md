@@ -20,4 +20,40 @@ De gateway werkt niet op kubernetes. Om de services toch te kunnen testen hebben
 Om de frontend te doen werken met de gateway (via docker) maken we gebruik van een CORS proxy. 
 Deze is toegevoegd aan docker.
 
-# Hoe alles testen
+# Testen op frontend en docker
+
+# Testen op kubernetes cluster
+
+Op de kubernetes cluster is er geen gateway, requests moeten dus rechtstreeks naar de juiste service gestuurd worden. Hiervoor zullen we curl gebruiken.
+
+## Gebruikers service
+
+### Account aanmaken
+
+`curl -X POST -H 'Content-Type: application/json' -d '{"naam": "naam", "email": "email"}' 10.2.0.179:3000/api/gebruikers/maakaccount`
+
+Na het uitvoeren van dit commando wordt de gebruiker weergegeven in JSON formaat samen met zijn id.
+
+### Nieuwsbrief sturen
+
+`curl -X POST -H 'Content-Type: application/json' -d '{"content": "inhoudNieuwsbrief"}' 10.2.0.179:3000/api/gebruikers/nieuwsbrief`
+
+Deze request geeft de emails terug waarnaar de nieuwsbrief verstuurd is.
+
+## Bestellingen service
+
+### Bestelling plaatsen als klant
+
+### Bestelling plaatsen als ticketdienstmedewerker
+
+Hierbij wordt geen betaling gesimuleerd omdat er vanuit gegaan wordt dat een ticketdienstmedewerker een bestelling zou plaatsen wanneer er een fout is gebeurd en er dus niet opnieuw betaald moet worden.
+
+## Ticketdienst service
+
+## Medicijnen service
+
+## Verzendingsdienst service
+
+## Orderdienst service
+
+## Boekhoudsdienst service
