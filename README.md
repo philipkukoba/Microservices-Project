@@ -23,11 +23,15 @@ De reply channel bij een commando werkt niet. De reply channel wordt wel meegege
 Op de frontend traden enkele problemen op in verband met CORS aangezien we op elke service all origins toelaten, hebben we dit dan maar eenvoudigweg
 opgelost door een CORS proxy te gebruiken aangezien dit niet de kern van de opdracht was.
 
-# Testen op frontend en docker
+# Testen op frontend (en docker)
+De frontend staat niet op de cluster aangezien daarvoor alle applicaties moeten samen komen op de ene poort die je door ssh kan forwarden wat niet mogelijk is aangezien de gateway daar niet werkt.
+
+De frontend kan je bereiken op localhost:80.
+
 Er is een rubriek aangemaakt per actor. Per actor zijn de systeemoperaties uitgewerkt op de frontend. Extra info per operatie is ook weergegeven op de frontend.
 
 # Testen op kubernetes cluster
-Op de kubernetes cluster is er geen gateway, requests moeten dus rechtstreeks naar de juiste service gestuurd worden. Hiervoor zullen we curl gebruiken.
+Op de kubernetes cluster is er geen gateway, requests moeten dus rechtstreeks naar de juiste service gestuurd worden. Hiervoor zullen we curl gebruiken. Hieronder vind je de commandos die je op de cluster kan uitvoeren.
 
 ## Gebruikers service
 
