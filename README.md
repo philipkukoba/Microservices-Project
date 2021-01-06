@@ -1,8 +1,8 @@
 # Volledig uitgewerkte projecten volgens de normen
-- Bestellingen: Brecht De Baer
-- Medicijnen: Gauthier Vaneeckhoutte
-- Order: Paulien Callebaut
-- Verzendingsdienst: Philip Kukoba
+- Bestellingen (De Baer Brecht)
+- Medicijnen (Vaneeckhoutte Gauthier)
+- Order (Callebaut Paulien)
+- Verzendingsdienst (Kukoba Philip)
 
 # JARs compileren
 Om de jars te compileren, is er een script `make-jars.sh` voorzien. Dat kan je terugvinden
@@ -23,11 +23,15 @@ De reply channel bij een commando werkt niet. De reply channel wordt wel meegege
 Op de frontend traden enkele problemen op in verband met CORS aangezien we op elke service all origins toelaten, hebben we dit dan maar eenvoudigweg
 opgelost door een CORS proxy te gebruiken aangezien dit niet de kern van de opdracht was.
 
-# Testen op frontend en docker
+# Testen op frontend (en docker)
+De frontend staat niet op de cluster aangezien daarvoor alle applicaties moeten samen komen op de ene poort die je door ssh kan forwarden wat niet mogelijk is aangezien de gateway daar niet werkt.
+
+De frontend kan je bereiken op localhost:80.
+
 Er is een rubriek aangemaakt per actor. Per actor zijn de systeemoperaties uitgewerkt op de frontend. Extra info per operatie is ook weergegeven op de frontend.
 
 # Testen op kubernetes cluster
-Op de kubernetes cluster is er geen gateway, requests moeten dus rechtstreeks naar de juiste service gestuurd worden. Hiervoor zullen we curl gebruiken.
+Op de kubernetes cluster is er geen gateway, requests moeten dus rechtstreeks naar de juiste service gestuurd worden. Hiervoor zullen we curl gebruiken. Hieronder vind je de commandos die je op de cluster kan uitvoeren.
 
 ## Gebruikers service
 
@@ -63,28 +67,78 @@ Hierbij wordt geen betaling gesimuleerd omdat er vanuit gegaan wordt dat een tic
 
 ### Bestelling annuleren
 
+`curl -X PUT 10.2.0.179:8080/api/bestellingen/annuleer/{id}`
 
 ### Statistieken opvragen
 
+`curl 10.2.0.179:8080/api/statistieken`
 
 ## Ticketdienst service
 
+### Ticket openen
+
+`curl -X POST -H 'Content-Type: application/json' -d '{"klantenId": "klantenId", "bestellingsId": "bestellingsId", "probleem": "beschrijving probleem"}' 10.2.0.179:3002/api/ticket/open`
+
+### Ticket behandelen
+
+Let op, ticketid is een integer.
+
+`curl -X POST -H 'Content-Type: application/json' -d '{"id": ticketId}' 10.2.0.179:3002/api/ticket/behandel`
+
+### Ticket sluiten
+
+Let op, ticketid is een integer.
+
+`curl -X POST -H 'Content-Type: application/json' -d '{"id": ticketId}' 10.2.0.179:3002/api/ticket/sluit`
+
+### Tickets opvragen
+
+Dit commando geeft alle openstaande tickets terug
+
+`curl 10.2.0.179:3002/api/ticket`
 
 ## Medicijnen service
 
+### Overzicht van voorraad opvragen
+
+`curl 10.2.0.179:8081/api/voorraad/overzicht`
+
+### Nieuw medicijn aan de catalogus toevoegen
+
+De waarde voor voorschriftNoodzakelijk moet 'true' of 'false' zijn.
+Indien de gewensteTemperatuur minder dan 16 graden is, zal het in een koelcel bewaard worden.
+
+`curl -X POST -H 'Content-Type: application/json' -d '{"naam": "naam", "beschrijving": "beschrijving", "kritischeWaarde": "200", "voorschriftNoodzakelijk": "true", "prijs": "35","gewensteTemperatuur": "20"}' 10.2.0.179:8081/api/catalogus`
+
+### Medicijn uit de catalogus verwijderen
+
+`curl -X DELETE 10.2.0.179:8081/api/catalogus/{id}`
+
+### Toegekomen lading toevoegen aan de voorraad
+
+`curl -X POST -H 'Content-Type: application/json' -d '{"naam":{"2030-10-05":"3", "2073-05-21":"3" }}' 10.2.0.179:8081/api/voorraad/lading`
 
 ## Verzendingsdienst service
 
+### Rolcontainer ophalen
+
+Pas als de rolcontainers opgehaald worden, is de bestelling verzonden.
+
+`curl -X POST 10.2.0.179:8082/api/bpost`
 
 ## Orderdienst service
-### Afval ophalen 
+
+### Afval ophalen
+
 `curl -X PUT 10.2.0.179:2222/api/order/afval/haalAfvalOp/`
 
 
-
 ## Boekhoudsdienst service
-### bestelNieuwMedicijn
-`curl -X POST -H 'Content-Type: application/json' -d '{"medicijn":"medicijn", "aantal":5}' 10.2.0.179:3001/api/boekhoud/bestel`
 
-#### betaalLeverancier
+### Bestel nieuw medicijn
+
+`curl -X POST -H 'Content-Type: application/json' -d '{"medicijn":"medicijnId", "aantal":5}' 10.2.0.179:3001/api/boekhoud/bestel`
+
+### Betaal leverancier
+
 `curl -X POST -H 'Content-Type: application/json' -d '{"leverancier":"leverancier", "bedrag":10}' 10.2.0.179:3001/api/boekhoud/betaalLeverancier`

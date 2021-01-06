@@ -122,7 +122,7 @@ let behandelTicket = () => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            "id": ""+document.getElementById("ticketId").value
+            "id": document.getElementById("ticketId").value
         })
     }).then(response => response.text())
     .then(text => document.getElementById("behandelTicketResponse").innerText=text)
