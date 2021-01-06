@@ -16,7 +16,7 @@ voor dat de line endings bij de `mvnw` bestanden in de root directories van deze
 mappen op LF staat. Dit kan met visual studio code.
 
 # Gebreken
-De gateway werkt niet op kubernetes, maar wel op docker. We hebben hiervoor reeds contact opgenomen met Stef Van Havermaet. Daaruit bleek dat we dit achterwege mogen laten en zal er rekening mee gehouden worden. Bijgevolg werkt dus de frontend ook niet met kubernetes.
+De gateway werkt niet op kubernetes, maar wel op docker. We hebben hiervoor reeds contact opgenomen met Van Havermaet Stef. Daaruit bleek dat we dit achterwege mogen laten en zal er rekening mee gehouden worden. Bijgevolg werkt dus de frontend ook niet met kubernetes.
 
 De reply channel bij een commando werkt niet. De reply channel wordt wel meegegeven maar het mechanisme werkt enkel als we een vooraf afgesproken channel meegeven. 
 
