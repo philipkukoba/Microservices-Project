@@ -26,7 +26,7 @@ opgelost door een CORS proxy te gebruiken aangezien dit niet de kern van de opdr
 # Testen op frontend (en docker)
 De frontend staat niet op de cluster aangezien daarvoor alle applicaties moeten samen komen op de ene poort die je door ssh kan forwarden wat niet mogelijk is aangezien de gateway daar niet werkt.
 
-De frontend kan je bereiken op localhost:80.
+De frontend kan je bereiken op localhost:80 nadat je het volledige project laat runnen door middel van 'docker-compose'.
 
 Er is een rubriek aangemaakt per actor. Per actor zijn de systeemoperaties uitgewerkt op de frontend. Extra info per operatie is ook weergegeven op de frontend.
 
