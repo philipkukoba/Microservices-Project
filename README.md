@@ -2,7 +2,7 @@
 
 Extended microservices group project for an (imaginary) medicine shop. 
 
-- Large microservices ( `./Verzendingsdienst` (my work), `./bestellingen`, `./orderservice`, `./medicijnen`) written in Java Spring Boot
+- Large microservices ( `./Verzendingsdienst`, `./bestellingen`, `./orderservice`, `./medicijnen`) written in Java Spring Boot
 - Small microservices written in NodeJS 
 - Gateway written in Java Spring Boot
 - Small front-end for testing (`./nginx`)
